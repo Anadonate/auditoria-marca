@@ -168,6 +168,10 @@ body { font-size: 16px; line-height: 1.65; }
   .start-privacy{font-size:14px}
 }
 
+
+/* Enforce same readable size for privacy and field-help copy despite generic intro paragraph rules. */
+.intro .start-privacy{font-size:14px!important;line-height:1.6!important;color:var(--muted);max-width:58ch;margin:12px 0 0}
+@media(max-width:720px){.intro .start-privacy{font-size:14px!important;line-height:1.6!important}}
 </style>
 </head>
 <body>
