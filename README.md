@@ -2,6 +2,20 @@
 
 Prototipo independiente del proyecto `diagnostico-marca`. Este repositorio no modifica el diagnóstico anterior.
 
+## Identidad visual
+
+La interfaz y el PDF utilizan una paleta alineada con la identidad visual de Ana Donate:
+
+- Carbón `#29272A`: encabezados, bloques principales y botones primarios.
+- Marfil `#F5F2ED`: fondo general y lectura del formulario.
+- Blanco cálido `#FFFEFC`: tarjetas y superficies.
+- Terracota `#C57A52`: detalles, progreso, selección y símbolos.
+- Terracota oscuro `#96563B`: acentos de texto y botones que necesitan mayor contraste.
+- Salvia grisácea `#9AA397`: indicadores y visualizaciones.
+- Gris cálido `#716D6D`: texto secundario.
+
+La tipografía explicativa se ha ampliado y la navegación mueve el foco al encabezado de la etapa activa. Los controles tienen áreas táctiles más cómodas, se conserva la preferencia de movimiento reducido y el formulario no debe provocar desplazamiento horizontal en móvil.
+
 ## Qué incluye
 
 - Cuestionario guiado de 10 preguntas cerradas, agrupadas en cinco etapas.
