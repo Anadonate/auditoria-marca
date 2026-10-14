@@ -9,7 +9,7 @@ Las preguntas que alimentan una dimensión utilizan una escala base:
 - C: 30 puntos — debilidad relevante.
 - D: 0 puntos — ausencia de definición, cuando esa opción realmente describe una carencia.
 
-La respuesta Q7-D ("No lo hemos evaluado o no sabría decirlo") significa falta de evidencia, no una debilidad confirmada. En ese caso debe tratarse como respuesta no concluyente y no como prueba automática de falta de diferenciación. Q8-D también indica falta de certeza y debe interpretarse con cautela.
+Las opciones D de Q7 y Q8 describen una carencia explícita: no tener elementos propios de diferenciación o no haber definido la impresión que se quiere generar. Así pueden puntuarse sin confundir una falta de información con una debilidad de marca.
 
 ## Dimensiones y pesos
 
@@ -21,7 +21,7 @@ La respuesta Q7-D ("No lo hemos evaluado o no sabría decirlo") significa falta 
 | Coherencia visual | Q5 y Q6 | 25 % |
 | Diferenciación y personalidad | Q7 y Q8 | 15 % |
 
-Cada dimensión se obtiene promediando las puntuaciones de sus preguntas. El índice global es la media ponderada de las cinco dimensiones y se expresa sobre 100. Q9 sirve para detectar la prioridad percibida y Q10 para aportar contexto; no se suman al índice.
+Cada dimensión se obtiene promediando las puntuaciones de sus preguntas. El índice global parte de la media ponderada de las cinco dimensiones y se expresa sobre 100. Para evitar que una carencia severa quede oculta por la media, se aplican límites explícitos: si alguna dimensión queda por debajo de 20, el índice global no puede superar 54; si alguna dimensión queda por debajo de 40, no puede superar 64; en los demás casos se conserva la media ponderada. Q9 sirve para detectar la prioridad percibida y Q10 para aportar contexto; no se suman al índice.
 
 ## Prioridad de perfiles
 
