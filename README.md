@@ -9,13 +9,13 @@ La interfaz y el PDF utilizan una paleta alineada con la identidad visual de Ana
 - Carbón `#29272A`: encabezados, bloques principales y botones primarios.
 - Marfil `#F5F2ED`: fondo general y lectura del formulario.
 - Blanco cálido `#FFFEFC`: tarjetas y superficies.
-- Rosa EA `#EA5A77`: progreso, selección, acentos y detalles gráficos.
+- Rosa EA `#EA5A77`: progreso, selección, acentos y detalles gráficos; también marca acciones principales.
 - Verde EA `#46B382`: estados interactivos, contornos e indicadores gráficos.
 - Dorado EA `#D2A158`: barras de dimensión, detalles y elementos decorativos.
 - El marfil de fondo `#F5F2ED` y el carbón `#29272A` se mantienen. El dorado se reserva para elementos gráficos; los textos pequeños se muestran en carbón para preservar el contraste.
 - Gris cálido `#716D6D`: texto secundario.
 
-La cabecera inicial y el campo de nombre solo aparecen antes de comenzar; al iniciar, la cabecera desaparece y el cuestionario pasa a primer plano. La tipografía explicativa se ha ampliado y la navegación mueve el foco al encabezado de la etapa activa. Los controles tienen áreas táctiles más cómodas, se conserva la preferencia de movimiento reducido y el formulario no debe provocar desplazamiento horizontal en móvil.
+La cabecera inicial y el campo de nombre solo aparecen antes de comenzar; al iniciar, la cabecera desaparece y el cuestionario pasa a primer plano. La tipografía explicativa se ha ampliado y la navegación mueve el foco al encabezado de la etapa activa. Los estados hover de las respuestas usan el dorado EA, y los símbolos flor, diana y cursor sustituyen los puntos decorativos en la web y el informe. Los controles tienen áreas táctiles más cómodas, se conserva la preferencia de movimiento reducido y el formulario no debe provocar desplazamiento horizontal en móvil.
 
 ## Qué incluye
 
