@@ -14,6 +14,18 @@ Estos escenarios son regresiones mínimas para comprobar que las reglas de perfi
 
 ## Verificaciones funcionales
 
+## Formato del informe y PDF
+
+- [x] El informe web usa la paleta EA y jerarquía tipográfica ampliada.
+- [x] El resultado incluye un gráfico radial SVG con cinco ejes, cinco marcadores con iconos de marca y una leyenda numérica.
+- [x] Las tarjetas y recomendaciones conservan contraste adecuado en escritorio y móvil.
+- [x] La portada PDF incorpora marca gráfica y una «X» dorada de baja opacidad.
+- [x] Las cinco páginas A4 tienen iconos de marca en los encabezados interiores y colores consistentes para la puntuación.
+- [x] Prueba automatizada: diagnóstico completo, tres recomendaciones, PDF descargable de cinco páginas, sin errores JavaScript.
+- [x] Prueba móvil a 390 px: sin desbordamiento horizontal.
+- [x] Verificación de límites de texto PDF: el contenido de las cinco páginas se mantiene dentro de la zona imprimible.
+
+
 - [x] El código JavaScript pasa `node --check`.
 - [x] Los cinco perfiles se activan en escenarios diseñados para ellos.
 - [x] Cada escenario de resultado muestra tres recomendaciones.
