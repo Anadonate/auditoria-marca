@@ -369,6 +369,28 @@ body { font-size: 16px; line-height: 1.65; }
   .cta{padding:23px 20px}
 }
 
+
+/* Brand symbol sizing and color roles inside the final report. */
+.brand-glyph{width:22px;height:22px;max-width:100%;display:inline-block;flex-shrink:0;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle}
+.glyph-flower{stroke:#D2A158}
+.glyph-target{stroke:#EA5A77}
+.glyph-cursor{stroke:#46B382}
+.dim-head span:first-child{display:flex;align-items:center;gap:8px;min-width:0}
+.radar-point{fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.radar-point.glyph-flower{stroke:#D2A158}
+.radar-point.glyph-target{stroke:#EA5A77}
+.radar-point.glyph-cursor{stroke:#46B382}
+.evidence{list-style:none;padding:0}
+.evidence li{display:grid;grid-template-columns:22px 1fr;align-items:start;gap:9px}
+.evidence li .brand-glyph{width:19px;height:19px;margin-top:2px}
+.evidence-heading{font-size:14px;display:block;margin-top:16px;color:#29272A}
+.evidence-heading:first-of-type{margin-top:0}
+.roadmap-intro{font-size:15px;line-height:1.7;color:#716D6D;max-width:68ch;margin:0 0 12px}
+.result-hero-brand .result-eyebrow{color:#EA5A77}
+.result-brand-icons .glyph-flower{stroke:#D2A158}
+.result-brand-icons .glyph-target{stroke:#EA5A77}
+.result-brand-icons .glyph-cursor{stroke:#46B382}
+
 </style>
 </head>
 <body>
@@ -606,11 +628,11 @@ function fill(c){pdf.setFillColor(c[0],c[1],c[2]);}function draw(c){pdf.setDrawC
 function wrap(str,x,y,max,fontSize=10,color=ink,bold=false,lineH=5){pdf.setFont('helvetica',bold?'bold':'normal');pdf.setFontSize(fontSize);text(color);const lines=pdf.splitTextToSize(String(str),max);pdf.text(lines,x,y);return y+lines.length*lineH;}
 function section(title,y){fill(copper);pdf.roundedRect(L,y-4,2.5,6,1,1,'F');pdf.setFont('helvetica','bold');pdf.setFontSize(10);text(forest);pdf.text(title.toUpperCase(),L+6,y);return y+9;}
 function footer(page){draw([217,210,200]);pdf.line(L,280,R,280);pdf.setFont('helvetica','bold');pdf.setFontSize(8);text(forest);pdf.text('ANA DONATE  /  Diseño gráfico & Branding',L,287);pdf.setFont('helvetica','normal');text(muted);pdf.text('AUDITORÍA DE MARCA VISUAL  ·  '+page+' / 5',R,287,{align:'right'});}
-function pageTitle(eyebrow,title,sub){pdf.setFont('helvetica','bold');pdf.setFontSize(8);text(copper);pdf.text(eyebrow.toUpperCase(),L,22);pdf.setFont('helvetica','bold');pdf.setFontSize(23);text(forest);let lines=pdf.splitTextToSize(title,170);pdf.text(lines,L,34);let y=34+lines.length*9;if(sub)y=wrap(sub,L,y+1,170,10,muted,false,5.2);return y+6;}
+function pageTitle(eyebrow,title,sub){addBrandIcon('flower',165,10,5.5);addBrandIcon('target',173,10,5.5);addBrandIcon('cursor',181,10,5.5);pdf.setFont('helvetica','bold');pdf.setFontSize(9);text(copper);pdf.text(eyebrow.toUpperCase(),L,22);pdf.setFont('helvetica','bold');pdf.setFontSize(23);text(forest);let lines=pdf.splitTextToSize(title,170);pdf.text(lines,L,34);let y=34+lines.length*9;if(sub)y=wrap(sub,L,y+1,170,10,muted,false,5.2);return y+6;}
 function roundedBox(x,y,w,h,color=paper){fill(color);pdf.roundedRect(x,y,w,h,3,3,'F');}
-function makeBrandIconPng(kind,color){
+function makeBrandIconPng(kind,color,opacity=1){
 const canvas=document.createElement('canvas');canvas.width=128;canvas.height=128;
-const ctx=canvas.getContext('2d');ctx.clearRect(0,0,128,128);ctx.strokeStyle=color;ctx.lineWidth=7;ctx.lineCap='round';ctx.lineJoin='round';
+const ctx=canvas.getContext('2d');ctx.clearRect(0,0,128,128);ctx.globalAlpha=opacity;ctx.strokeStyle=color;ctx.lineWidth=7;ctx.lineCap='round';ctx.lineJoin='round';
 if(kind==='flower'){
 ctx.beginPath();ctx.moveTo(64,60);
 ctx.bezierCurveTo(55,34,39,18,19,20);ctx.bezierCurveTo(17,40,34,55,60,64);
@@ -630,7 +652,8 @@ return canvas.toDataURL('image/png');
 const brandIconPng={
 flower:makeBrandIconPng('flower','#D2A158'),
 target:makeBrandIconPng('target','#EA5A77'),
-cursor:makeBrandIconPng('cursor','#46B382')
+cursor:makeBrandIconPng('cursor','#46B382'),
+flowerWatermark:makeBrandIconPng('flower','#D2A158',.2)
 };
 function addBrandIcon(kind,x,y,size){pdf.addImage(brandIconPng[kind],'PNG',x,y,size,size);}
 const glyphCycle=['flower','target','cursor'];
@@ -639,7 +662,7 @@ function safe(s){return String(s||'').replace(/\s+/g,' ').trim();}
 const company=safe(d.company)||'Tu empresa';
 const date=d.date.toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'});
 // Page 1: executive summary
-fill(forest);pdf.rect(0,0,W,H,'F');addBrandIcon('flower',153,28,10);addBrandIcon('target',166,28,10);addBrandIcon('cursor',179,28,10);
+fill(forest);pdf.rect(0,0,W,H,'F');addBrandIcon('flowerWatermark',142,75,86);addBrandIcon('flower',153,28,10);addBrandIcon('target',166,28,10);addBrandIcon('cursor',179,28,10);
 pdf.setFont('helvetica','bold');pdf.setFontSize(9);text([226,163,126]);pdf.text('ANA DONATE  /  DISEÑO GRÁFICO & BRANDING',L,25);
 pdf.setFont('helvetica','bold');pdf.setFontSize(26);text(cream);pdf.text('Auditoría de',L,60);pdf.text('marca visual',L,71);
 pdf.setFont('helvetica','normal');pdf.setFontSize(11);text([226,222,215]);pdf.text('Un diagnóstico orientativo para entender tu punto de partida y',L,85);pdf.text('priorizar mejoras de identidad visual.',L,91);
@@ -653,7 +676,7 @@ pdf.setFont('helvetica','normal');pdf.setFontSize(8);text([226,222,215]);pdf.tex
 // Page 2: dimensions + diagnosis
 pdf.addPage();fill(cream);pdf.rect(0,0,W,H,'F');let y=pageTitle('01 / Estado de la marca','Lectura del diagnóstico','Las puntuaciones describen las respuestas del cuestionario. No sustituyen la revisión de la identidad real.');
 y=section('Dimensiones evaluadas',y+2);
-dimensionDefs.forEach(def=>{const n=d.dimensions[def.id];pdf.setFont('helvetica','bold');pdf.setFontSize(10);text(ink);pdf.text(def.label,L,y);pdf.setFontSize(10);text(forest);pdf.text(n+'/100',R,y,{align:'right'});fill(paper);pdf.roundedRect(L,y+3,174,3,1.5,1.5,'F');fill(n<40?red:n<60?copper:sage);pdf.roundedRect(L,y+3,174*n/100,3,1.5,1.5,'F');y+=15;});
+dimensionDefs.forEach(def=>{const n=d.dimensions[def.id];pdf.setFont('helvetica','bold');pdf.setFontSize(10);text(ink);pdf.text(def.label,L,y);pdf.setFontSize(10);text(forest);pdf.text(n+'/100',R,y,{align:'right'});fill(paper);pdf.roundedRect(L,y+3,174,3,1.5,1.5,'F');fill(n<40?copper:n<75?sage:green);pdf.roundedRect(L,y+3,174*n/100,3,1.5,1.5,'F');y+=15;});
 y=section('Qué significa tu perfil',y+4);y=wrap(p.lead,L,y,174,11,forest,true,5.5);y+=3;y=wrap(p.focus,L,y,174,10,ink,false,5.1);y+=5;roundedBox(L,y,174,27,[252,231,236]);y=wrap(p.closing,L+6,y+8,162,10,forest,true,5);y+=9;
 y=section('Evidencias en tus respuestas',y);
 const evidence=[];
@@ -703,7 +726,7 @@ pdf.setFont('helvetica','normal');pdf.setFontSize(8.5);text(muted);pdf.text('Lec
 footer('3');
 // Page 4: prioritized action plan
 pdf.addPage();fill(cream);pdf.rect(0,0,W,H,'F');y=pageTitle('02 / Plan de acción','Tus próximos tres pasos','Acciones ordenadas a partir de las dimensiones más débiles y de tus respuestas.');
-d.recommendations.forEach((r,i)=>{const boxY=y;roundedBox(L,boxY,174,51,[234,230,223]);fill(forest);pdf.roundedRect(L+6,boxY+7,10,10,2,2,'F');pdf.setFont('helvetica','bold');pdf.setFontSize(9);text(cream);pdf.text(String(i+1),L+11,boxY+14,{align:'center'});pdf.setFont('helvetica','bold');pdf.setFontSize(10.5);text(forest);const titleLines=pdf.splitTextToSize(r.title,145);pdf.text(titleLines,L+22,boxY+13);let yy=boxY+13+titleLines.length*4.5;yy=wrap(r.action,L+22,yy+2,144,9.2,ink,false,4.6);wrap('Por qué importa: '+r.why,L+22,yy+2,144,9,muted,false,4.5);y=boxY+56;});
+d.recommendations.forEach((r,i)=>{const boxY=y;roundedBox(L,boxY,174,51,[234,230,223]);fill(copper);pdf.roundedRect(L+6,boxY+7,10,10,2,2,'F');pdf.setFont('helvetica','bold');pdf.setFontSize(9);text(forest);pdf.text(String(i+1),L+11,boxY+14,{align:'center'});pdf.setFont('helvetica','bold');pdf.setFontSize(10.5);text(forest);const titleLines=pdf.splitTextToSize(r.title,145);pdf.text(titleLines,L+22,boxY+13);let yy=boxY+13+titleLines.length*4.5;yy=wrap(r.action,L+22,yy+2,144,9.2,ink,false,4.6);wrap('Por qué importa: '+r.why,L+22,yy+2,144,9,muted,false,4.5);y=boxY+56;});
 y=section('La prioridad que has señalado',y+1);y=wrap(d.priority,L,y,174,10,ink,true,5);
 footer('4');
 // Page 5: decision context and professional limitations
