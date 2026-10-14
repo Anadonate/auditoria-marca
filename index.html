@@ -332,11 +332,38 @@ function section(title,y){fill(copper);pdf.roundedRect(L,y-4,2.5,6,1,1,'F');pdf.
 function footer(page){draw([217,210,200]);pdf.line(L,280,R,280);pdf.setFont('helvetica','bold');pdf.setFontSize(8);text(forest);pdf.text('ANA DONATE  /  Diseño gráfico & Branding',L,287);pdf.setFont('helvetica','normal');text(muted);pdf.text('AUDITORÍA DE MARCA VISUAL  ·  '+page+' / 5',R,287,{align:'right'});}
 function pageTitle(eyebrow,title,sub){pdf.setFont('helvetica','bold');pdf.setFontSize(8);text(copper);pdf.text(eyebrow.toUpperCase(),L,22);pdf.setFont('helvetica','bold');pdf.setFontSize(23);text(forest);let lines=pdf.splitTextToSize(title,170);pdf.text(lines,L,34);let y=34+lines.length*9;if(sub)y=wrap(sub,L,y+1,170,10,muted,false,5.2);return y+6;}
 function roundedBox(x,y,w,h,color=paper){fill(color);pdf.roundedRect(x,y,w,h,3,3,'F');}
+function makeBrandIconPng(kind,color){
+const canvas=document.createElement('canvas');canvas.width=128;canvas.height=128;
+const ctx=canvas.getContext('2d');ctx.clearRect(0,0,128,128);ctx.strokeStyle=color;ctx.lineWidth=7;ctx.lineCap='round';ctx.lineJoin='round';
+if(kind==='flower'){
+ctx.beginPath();ctx.moveTo(64,60);
+ctx.bezierCurveTo(55,34,39,18,19,20);ctx.bezierCurveTo(17,40,34,55,60,64);
+ctx.bezierCurveTo(34,73,17,88,20,108);ctx.bezierCurveTo(40,110,55,94,64,68);
+ctx.bezierCurveTo(73,94,88,110,108,108);ctx.bezierCurveTo(111,88,94,73,68,64);
+ctx.bezierCurveTo(94,55,111,40,108,20);ctx.bezierCurveTo(88,18,73,34,64,60);ctx.stroke();
+}else if(kind==='target'){
+ctx.beginPath();ctx.arc(59,70,43,Math.PI*.70,Math.PI*2.13);ctx.stroke();
+ctx.beginPath();ctx.arc(59,70,28,Math.PI*.68,Math.PI*2.13);ctx.stroke();
+ctx.beginPath();ctx.arc(59,70,13,Math.PI*.62,Math.PI*2.15);ctx.stroke();
+ctx.beginPath();ctx.moveTo(58,70);ctx.lineTo(102,22);ctx.moveTo(84,23);ctx.lineTo(102,22);ctx.lineTo(100,40);ctx.stroke();
+}else{
+ctx.beginPath();ctx.moveTo(23,14);ctx.lineTo(105,65);ctx.lineTo(73,70);ctx.lineTo(88,103);ctx.lineTo(68,113);ctx.lineTo(52,80);ctx.lineTo(31,101);ctx.closePath();ctx.stroke();
+}
+return canvas.toDataURL('image/png');
+}
+const brandIconPng={
+flower:makeBrandIconPng('flower','#D2A158'),
+target:makeBrandIconPng('target','#EA5A77'),
+cursor:makeBrandIconPng('cursor','#46B382')
+};
+function addBrandIcon(kind,x,y,size){pdf.addImage(brandIconPng[kind],'PNG',x,y,size,size);}
+const glyphCycle=['flower','target','cursor'];
+
 function safe(s){return String(s||'').replace(/\s+/g,' ').trim();}
 const company=safe(d.company)||'Tu empresa';
 const date=d.date.toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'});
 // Page 1: executive summary
-fill(forest);pdf.rect(0,0,W,H,'F');fill(copper);pdf.circle(179,37,19,'F');fill(green);pdf.circle(179,37,13,'F');
+fill(forest);pdf.rect(0,0,W,H,'F');addBrandIcon('flower',153,28,10);addBrandIcon('target',166,28,10);addBrandIcon('cursor',179,28,10);
 pdf.setFont('helvetica','bold');pdf.setFontSize(9);text([226,163,126]);pdf.text('ANA DONATE  /  DISEÑO GRÁFICO & BRANDING',L,25);
 pdf.setFont('helvetica','bold');pdf.setFontSize(26);text(cream);pdf.text('Auditoría de',L,60);pdf.text('marca visual',L,71);
 pdf.setFont('helvetica','normal');pdf.setFontSize(11);text([226,222,215]);pdf.text('Un diagnóstico orientativo para entender tu punto de partida y',L,85);pdf.text('priorizar mejoras de identidad visual.',L,91);
@@ -357,7 +384,7 @@ const evidence=[];
 const qMap={q1:'Fundamentos visuales',q2:'Reglas de marca',q3:'Alineación con el negocio',q4:'Definición del público',q5:'Coherencia entre canales',q6:'Aplicación de recursos',q7:'Diferenciación',q8:'Personalidad visual',q9:'Prioridad declarada',q10:'Proceso de decisión'};
 ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10'].forEach(id=>{const q=steps.flatMap(s=>s.questions).find(x=>x.id===id);const opt=q.options.find(o=>o[0]===d.answers[id]);if((['q3','q5','q7','q8','q1','q2'].includes(id)&&['c','d'].includes(d.answers[id]))||(['q4','q6','q10'].includes(id)&&['c','d'].includes(d.answers[id]))||id==='q9'){evidence.push(qMap[id]+': '+(opt?opt[1]:''));}});
 if(!evidence.length)evidence.push('Las respuestas muestran una base relativamente sólida. Contrasta esta percepción con materiales reales y opiniones de clientes.');
-evidence.slice(0,5).forEach(e=>{fill(copper);pdf.circle(L+1.5,y-1.2,1,'F');y=wrap(e,L+6,y,166,9.2,ink,false,4.6)+2;});
+evidence.slice(0,5).forEach((e,i)=>{addBrandIcon(glyphCycle[i%glyphCycle.length],L,y-3.5,4.5);y=wrap(e,L+7,y,165,9.2,ink,false,4.6)+2;});
 footer('2');
 // Page 3: radial profile of the five evaluated dimensions
 pdf.addPage();fill(cream);pdf.rect(0,0,W,H,'F');
@@ -383,7 +410,7 @@ fill([224,244,235]);draw(green);pdf.setLineWidth(1.15);radarLine(dataPoints,'FD'
 // Re-draw the grid and axes subtly over the filled area so the scale remains legible.
 draw([217,210,200]);pdf.setLineWidth(.22);[20,40,60,80,100].forEach(v=>{radarLine(radarRing(v),'S',true);});
 chartAngles.forEach(a=>{const rad=a*Math.PI/180;pdf.line(chartCx,chartCy,chartCx+Math.cos(rad)*chartR,chartCy+Math.sin(rad)*chartR);});
-dataPoints.forEach(pt=>{fill(copper);draw(cream);pdf.circle(pt.x,pt.y,1.8,'FD');});
+dataPoints.forEach((pt,i)=>{addBrandIcon(glyphCycle[i%glyphCycle.length],pt.x-2,pt.y-2,4);});
 pdf.setFont('helvetica','normal');pdf.setFontSize(8.5);text(muted);
 [20,40,60,80,100].forEach(v=>pdf.text(String(v),chartCx+2,chartCy-chartR*v/100+2));
 const axisLabels=[
@@ -395,7 +422,7 @@ const axisLabels=[
 ];
 axisLabels.forEach(item=>{pdf.setFont('helvetica','bold');pdf.setFontSize(8.5);text(forest);const lines=pdf.splitTextToSize(item.label,item.w);pdf.text(lines,item.x,item.y,{align:item.align});});
 y=224;y=section('Puntuación por dimensión',y);
-chartDims.forEach((def,i)=>{const col=i<3?0:1;const row=col===0?i:i-3;const x=col===0?L:108;const yy=y+row*13;fill(copper);pdf.circle(x+1.5,yy-1,1.2,'F');pdf.setFont('helvetica','normal');pdf.setFontSize(9);text(ink);pdf.text(def.label,x+6,yy);pdf.setFont('helvetica','bold');text(forest);pdf.setFontSize(9);pdf.text(values[i]+'/100',x+(col===0?78:82),yy,{align:'right'});});
+chartDims.forEach((def,i)=>{const col=i<3?0:1;const row=col===0?i:i-3;const x=col===0?L:108;const yy=y+row*13;addBrandIcon(glyphCycle[i%glyphCycle.length],x,yy-4,4.2);pdf.setFont('helvetica','normal');pdf.setFontSize(9);text(ink);pdf.text(def.label,x+7,yy);pdf.setFont('helvetica','bold');text(forest);pdf.setFontSize(9);pdf.text(values[i]+'/100',x+(col===0?78:82),yy,{align:'right'});});
 pdf.setFont('helvetica','normal');pdf.setFontSize(8.5);text(muted);pdf.text('Lectura orientativa basada en tus respuestas, no en una inspección directa de los materiales.',L,270);
 footer('3');
 // Page 4: prioritized action plan
@@ -413,7 +440,7 @@ const checks=[
 'Revisar a los competidores para evaluar la diferenciación dentro del sector.',
 'Validar las prioridades con los objetivos y recursos actuales de la empresa.'
 ];
-checks.forEach((item,i)=>{fill(copper);pdf.circle(L+1.5,y-1.2,1,'F');y=wrap(item,L+6,y,168,9.5,ink,false,4.8)+3;});
+checks.forEach((item,i)=>{addBrandIcon(glyphCycle[i%glyphCycle.length],L,y-3.5,4.5);y=wrap(item,L+7,y,167,9.5,ink,false,4.8)+3;});
 y+=4;roundedBox(L,y,174,48,forest);pdf.setFont('helvetica','bold');pdf.setFontSize(10.5);text(cream);pdf.text('Del diagnóstico a un sistema de marca',L+7,y+10);wrap('Una revisión profesional permite convertir estas hipótesis en decisiones visuales y estratégicas ajustadas a la realidad de la empresa. El informe es un punto de partida, no una auditoría completa.',L+7,y+18,160,9.2,[227,224,218],false,4.8);
 footer('5');
 const fileCompany=(company.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'mi-marca');
