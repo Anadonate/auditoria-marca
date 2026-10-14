@@ -51,6 +51,18 @@ Estos escenarios son regresiones mínimas para comprobar que las reglas de perfi
 - [x] El botón «Comenzar auditoría» mantiene buena visibilidad cuando está desactivado (borde rosa y texto claro) y cuando está activo (fondo rosa y texto carbón).
 - [x] Navegador automatizado sobre la URL pública: comprobados los colores calculados y descarga de PDF de cinco páginas A4.
 
+
+## Simplificación del informe: puntuaciones y fortalezas
+
+- [x] Los porcentajes de las cinco dimensiones aparecen una sola vez en la tarjeta de dimensiones.
+- [x] Se elimina la segunda leyenda con barras y puntuaciones del gráfico radial.
+- [x] El lateral del gráfico radial muestra «Fortalezas y atención», «Qué destaca en tus respuestas», «Fortalezas declaradas» y «Áreas a revisar».
+- [x] Se retira el panel duplicado de fortalezas de la parte inferior.
+- [x] Se eliminan los iconos repetidos junto a las dimensiones, en las listas y en los vértices del gráfico.
+- [x] El PDF sigue en cinco páginas A4; la página del gráfico coloca fortalezas y áreas de revisión junto al gráfico sin repetir las puntuaciones numéricas.
+- [x] Pruebas de escritorio y móvil: cinco dimensiones, tres recomendaciones, sin desbordamiento horizontal ni errores JavaScript.
+
+
 ## Flujo de inicio personalizado
 
 - [x] La cabecera de marca y la pantalla introductoria solo aparecen antes de iniciar la auditoría.
