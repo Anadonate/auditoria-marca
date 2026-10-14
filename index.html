@@ -227,6 +227,39 @@ body { font-size: 16px; line-height: 1.65; }
   .intro .field-help,.intro .start-privacy{font-size:14px!important;line-height:1.6!important}
 }
 
+
+/* Clean EA primary CTA: rose by default, white on hover, no visible border. */
+#startAudit.btn-start{
+  background:#EA5A77!important;
+  color:#29272A!important;
+  border:0!important;
+  box-shadow:0 4px 0 rgba(41,39,42,.12)!important;
+  transition:background-color .18s ease,color .18s ease,box-shadow .18s ease,transform .18s ease;
+}
+#startAudit.btn-start:disabled{
+  background:#FFE6EC!important;
+  color:#29272A!important;
+  border:0!important;
+  opacity:1!important;
+  box-shadow:none!important;
+  cursor:not-allowed;
+}
+#startAudit.btn-start:not(:disabled):hover{
+  background:#FFFEFC!important;
+  color:#29272A!important;
+  border:0!important;
+  box-shadow:0 5px 16px rgba(41,39,42,.12)!important;
+  transform:translateY(-1px);
+}
+#startAudit.btn-start:focus-visible{
+  outline:3px solid #D2A158;
+  outline-offset:4px;
+}
+@media(prefers-reduced-motion:reduce){
+  #startAudit.btn-start{transition:none}
+  #startAudit.btn-start:not(:disabled):hover{transform:none}
+}
+
 </style>
 </head>
 <body>
@@ -244,7 +277,7 @@ body { font-size: 16px; line-height: 1.65; }
 <div class="field"><label for="company">Nombre de la empresa</label><input id="company" name="company" maxlength="90" placeholder="Ej. Estudio Norte" autocomplete="organization" aria-describedby="companyHelp" required><span class="field-help" id="companyHelp">El nombre aparecerá en la portada de tu informe personalizado.</span></div>
 </div>
 </div>
-<div class="start-actions"><p class="start-validation" id="companyError" role="status" hidden>Escribe el nombre de la empresa para empezar.</p><button class="btn btn-main btn-start" id="startAudit" type="button" disabled style="background:#FFE6EC;color:#29272A;border:2px solid #EA5A77;opacity:1">Comenzar auditoría <span aria-hidden="true">→</span></button><p class="start-privacy">La información se procesa en tu navegador. Tus respuestas no se envían a un servidor.</p></div>
+<div class="start-actions"><p class="start-validation" id="companyError" role="status" hidden>Escribe el nombre de la empresa para empezar.</p><button class="btn btn-main btn-start" id="startAudit" type="button" disabled style="background:#FFE6EC;color:#29272A;border:0;opacity:1">Comenzar auditoría <span aria-hidden="true">→</span></button><p class="start-privacy">La información se procesa en tu navegador. Tus respuestas no se envían a un servidor.</p></div>
 </section>
 <div id="quizProgress" hidden><div class="progress-meta"><span id="stepMeta">ETAPA 1 DE 5</span><strong id="stepPercent">20 %</strong></div><div class="progressline" role="progressbar" aria-label="Progreso del cuestionario" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20"><div id="stepProgress"></div></div></div>
 <section id="questionnaire" hidden>
@@ -547,7 +580,7 @@ const fileCompany=(company.toLowerCase().normalize('NFD').replace(/[\u0300-\u036
 pdf.save('auditoria-de-marca-'+fileCompany+'.pdf');
 }catch(e){console.error(e);alert('No se pudo generar el PDF. Inténtalo de nuevo; si persiste, recarga la página.');}finally{btn.disabled=false;btn.textContent=old;}
 }
-function syncStartButton(){const company=document.getElementById('company');const btn=document.getElementById('startAudit');const ready=Boolean(company.value.trim());btn.disabled=!ready;btn.style.backgroundColor=ready?'#EA5A77':'#FFE6EC';btn.style.color='#29272A';btn.style.border='2px solid #EA5A77';btn.style.opacity='1';btn.style.boxShadow=ready?'0 4px 0 rgba(0,0,0,.18)':'none';btn.style.cursor=ready?'pointer':'not-allowed';}
+function syncStartButton(){const company=document.getElementById('company');const btn=document.getElementById('startAudit');const ready=Boolean(company.value.trim());btn.disabled=!ready;btn.style.backgroundColor=ready?'#EA5A77':'#FFE6EC';btn.style.color='#29272A';btn.style.border='0';btn.style.opacity='1';btn.style.boxShadow=ready?'0 4px 0 rgba(0,0,0,.18)':'none';btn.style.cursor=ready?'pointer':'not-allowed';}
 document.getElementById('company').addEventListener('input',()=>{syncStartButton();document.getElementById('companyError').hidden=true;});
 syncStartButton();
 document.getElementById('startAudit').addEventListener('click',startAudit);
