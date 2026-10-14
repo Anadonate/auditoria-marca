@@ -13,10 +13,109 @@
 :root{--ink:#292b28;--forest:#20332e;--forest2:#304740;--cream:#f7f3eb;--paper:#eee7d9;--line:#d9cfbb;--copper:#c97943;--copper-dark:#9e592f;--sage:#7b927d;--sage-light:#dbe3d7;--muted:#716f66;--red:#9f5042;--white:#fffdf8;--radius:18px;--shadow:0 15px 45px rgba(32,51,46,.07)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:Archivo,Arial,sans-serif;-webkit-font-smoothing:antialiased}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid var(--copper);outline-offset:3px}h1,h2,h3,h4{font-family:"Archivo Expanded",Archivo,sans-serif;letter-spacing:-.035em;margin:0;color:var(--forest)}p{line-height:1.65}.topline{height:5px;background:var(--paper)}.topline span{display:block;height:100%;width:0;background:var(--copper);transition:width .25s}.sitehead{max-width:1120px;margin:auto;padding:23px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{font-size:13px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;display:flex;align-items:center;gap:10px;color:var(--forest)}.brand-dot{width:11px;height:11px;border-radius:50%;background:var(--copper);display:inline-block}.headnote{color:var(--muted);font-size:12px}.container{width:min(100% - 36px,900px);margin:25px auto 100px}.intro{background:var(--forest);color:var(--cream);border-radius:26px;padding:clamp(28px,5vw,58px);position:relative;overflow:hidden;box-shadow:var(--shadow)}.intro:after{content:"";position:absolute;width:280px;height:280px;border-radius:50%;border:1px solid rgba(247,243,235,.12);right:-80px;bottom:-160px;box-shadow:0 0 0 28px rgba(247,243,235,.025),0 0 0 58px rgba(247,243,235,.025)}.eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--copper);display:block;margin-bottom:17px}.intro h1{color:var(--cream);font-size:clamp(32px,5.8vw,57px);line-height:1.08;max-width:690px}.intro p{color:#d6dfd5;max-width:620px;margin:22px 0 0;font-size:16px}.intro-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-top:30px;position:relative;z-index:1}.meta-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:550px;width:100%}.field label{display:block;font-size:12px;font-weight:700;margin-bottom:7px;color:#e9e5d9}.field input{width:100%;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.25);border-radius:9px;padding:12px 13px;color:white;min-width:0}.field input::placeholder{color:#c3cbc0}.start-note{font-size:11px;color:#c3cbc0;white-space:nowrap}.progress-meta{display:flex;justify-content:space-between;align-items:center;gap:15px;margin:30px 2px 12px;color:var(--muted);font-size:12px;font-weight:700}.progress-meta strong{color:var(--forest)}.progressline{height:4px;background:var(--line);border-radius:9px;overflow:hidden}.progressline div{height:100%;background:var(--copper);width:20%;transition:width .25s}.step-card{margin-top:20px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(24px,4.4vw,44px);box-shadow:var(--shadow)}.step-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--copper-dark);font-weight:800;margin-bottom:14px}.step-card h2{font-size:clamp(24px,4vw,35px);line-height:1.15;max-width:700px}.step-desc{color:var(--muted);margin:12px 0 30px;max-width:650px;font-size:14px}.question{padding:23px 0;border-top:1px solid var(--line)}.question:first-of-type{border-top:0}.question h3{font-family:Archivo,Arial,sans-serif;font-size:16px;letter-spacing:-.015em;line-height:1.45;color:var(--ink);margin-bottom:7px}.question .hint{font-size:12px;color:var(--muted);margin:0 0 14px}.options{display:grid;gap:9px}.option{display:flex;align-items:flex-start;gap:12px;border:1px solid var(--line);border-radius:11px;padding:13px 15px;background:#fbf8f1;cursor:pointer;transition:border-color .15s,background .15s}.option:hover{border-color:var(--sage)}.option:has(input:checked){border-color:var(--copper);background:#f5e8db;box-shadow:inset 0 0 0 1px var(--copper)}.option input{margin:3px 0 0;accent-color:var(--copper);flex-shrink:0;width:16px;height:16px}.option span{font-size:13.5px;line-height:1.5}.letter{display:inline-grid;place-items:center;background:var(--paper);color:var(--forest);font-size:11px;font-weight:800;border-radius:5px;width:22px;height:22px;flex-shrink:0;margin-top:-3px}.nav{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:25px}.btn{border:0;border-radius:100px;padding:14px 22px;font-size:13px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:9px;transition:transform .15s,background .15s}.btn:hover{transform:translateY(-1px)}.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}.btn-main{background:var(--forest);color:var(--cream)}.btn-main:hover{background:var(--forest2)}.btn-quiet{background:transparent;color:var(--muted)}.btn-copper{background:var(--copper);color:#fff}.smallnote{font-size:11px;color:var(--muted);line-height:1.6;margin-top:20px}.screen[hidden]{display:none}.results{display:none}.results.show{display:block}.result-hero{background:var(--forest);border-radius:24px;padding:clamp(27px,5vw,48px);color:var(--cream);position:relative;overflow:hidden}.result-hero h1{font-size:clamp(29px,5vw,48px);line-height:1.12;color:var(--cream);max-width:730px}.result-hero p{color:#d4ded4;max-width:670px}.profile-chip{display:inline-flex;border:1px solid rgba(255,255,255,.26);border-radius:999px;padding:8px 12px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:#f1b98f;margin-bottom:18px}.result-top{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;margin-top:20px}.panel{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:25px}.section-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.11em;font-weight:800;color:var(--copper-dark);margin-bottom:11px}.score-big{font-family:"Archivo Expanded",Archivo,sans-serif;font-size:55px;color:var(--forest);letter-spacing:-.05em}.score-caption{font-size:12px;color:var(--muted)}.scorebar{height:7px;border-radius:20px;background:var(--paper);overflow:hidden;margin:18px 0 8px}.scorebar span{display:block;height:100%;background:var(--sage);border-radius:20px}.score-qualifier{font-size:12px;font-weight:700;color:var(--forest)}.panel h2{font-size:22px;line-height:1.25;margin-bottom:13px}.dim-row{margin-top:17px}.dim-head{display:flex;justify-content:space-between;gap:12px;font-size:12px;font-weight:700}.dim-head span:first-child{color:var(--ink)}.dim-head span:last-child{color:var(--forest)}.dim-bar{height:5px;background:var(--paper);border-radius:10px;margin-top:7px;overflow:hidden}.dim-bar span{height:100%;display:block;background:var(--sage)}.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.callout{background:#f0e4c3;border:1px solid #dbc98f;border-radius:14px;padding:20px;line-height:1.65;color:var(--forest);font-size:14px}.evidence{margin:0;padding-left:18px}.evidence li{margin:10px 0;font-size:13px;line-height:1.55}.rec{padding:16px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:28px 1fr;gap:12px}.rec:first-child{border-top:0}.rec-num{width:28px;height:28px;border-radius:8px;background:var(--forest);color:var(--cream);display:grid;place-items:center;font-size:12px;font-weight:800}.rec h3{font-family:Archivo,Arial,sans-serif;letter-spacing:0;font-size:14px;margin:0 0 5px}.rec p{font-size:12.5px;color:var(--muted);line-height:1.6;margin:0}.why{font-size:12px;color:var(--ink);margin-top:7px;line-height:1.55}.cta{background:var(--forest);color:var(--cream);border-radius:22px;padding:28px;margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}.cta h2{color:var(--cream);font-size:22px}.cta p{color:#d4ded4;font-size:12.5px;max-width:540px;margin:8px 0 0}.restart{margin-top:20px;text-align:center}.restart button{text-decoration:underline;text-underline-offset:3px}.disclaimer{margin-top:18px;color:var(--muted);font-size:11px;line-height:1.6}.footer{max-width:1120px;margin:0 auto;padding:0 28px 30px;color:var(--muted);font-size:11px;display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:20px}.footer strong{color:var(--forest)}.error{font-size:12px;color:var(--red);margin-top:12px}
 @media(max-width:720px){.sitehead{padding:18px}.headnote{display:none}.container{width:min(100% - 24px,900px);margin-top:10px}.intro-bottom{align-items:stretch;flex-direction:column}.start-note{white-space:normal}.result-top,.content-grid{grid-template-columns:1fr}.footer{padding-left:18px;padding-right:18px;flex-direction:column}.nav .btn{padding:13px 16px}.option span{font-size:13px}.meta-fields{grid-template-columns:1fr}.intro{padding:27px 22px}.step-card{padding:23px 19px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* UX/UI reading and interaction pass — accessible sizing, rhythm and focus */
+:root { --focus-ring: #b96b35; --body-copy: 16px; }
+html { scroll-padding-top: 18px; }
+body { font-size: 16px; line-height: 1.65; }
+.skip-link { position:absolute; left:16px; top:-60px; z-index:1000; padding:12px 16px; border-radius:8px; color:var(--white); background:var(--forest); font-size:15px; font-weight:700; }
+.skip-link:focus { top:12px; outline:3px solid var(--copper); outline-offset:3px; }
+.sitehead { padding-top:20px; padding-bottom:20px; }
+.brand { font-size:14px; }
+.headnote { font-size:13px; }
+.container { max-width:880px; }
+.intro .eyebrow { color:#f1b98f; font-size:12px; letter-spacing:.1em; }
+.intro h1 { line-height:1.12; max-width:17ch; }
+.intro p { font-size:18px; line-height:1.7; max-width:62ch; }
+.field label { font-size:14px; line-height:1.45; }
+.field input { font-size:16px; line-height:1.4; min-height:48px; }
+.field input::placeholder { color:#d3d9d0; opacity:1; }
+.start-note { font-size:13px; line-height:1.65; white-space:normal; max-width:25ch; }
+.progress-meta { font-size:14px; line-height:1.45; margin-bottom:14px; }
+.progressline { height:6px; }
+.step-card { scroll-margin-top:16px; padding:clamp(26px,4.5vw,46px); }
+.step-label { font-size:12px; margin-bottom:16px; }
+.step-card h2 { font-size:clamp(27px,3.8vw,36px); line-height:1.2; }
+.step-card h2:focus, .result-hero h1:focus { outline:none; }
+.step-desc { font-size:17px; line-height:1.7; max-width:65ch; margin:14px 0 28px; color:#5f6059; }
+.question { padding:26px 0; }
+.question h3 { font-size:18px; line-height:1.45; margin-bottom:9px; }
+.question .hint { font-size:15px; line-height:1.65; max-width:68ch; margin-bottom:16px; color:#62635c; }
+.options { gap:10px; }
+.option { min-height:56px; padding:15px 16px; gap:13px; }
+.option span:not(.letter) { font-size:16px; line-height:1.55; }
+.option .letter { width:25px; height:25px; font-size:12px; }
+.nav { margin-top:30px; }
+.btn { min-height:48px; padding:14px 22px; font-size:15px; line-height:1.3; }
+.btn-quiet { color:#55574f; }
+.btn-copper { background:var(--copper-dark); color:#fff; }
+.btn-copper:hover { background:#814523; }
+.smallnote { font-size:13px; line-height:1.65; }
+.error { font-size:14px; line-height:1.5; }
+.result-hero { scroll-margin-top:18px; }
+.result-hero h1 { line-height:1.18; }
+.result-hero p { font-size:17px; line-height:1.7; }
+.profile-chip { font-size:12px; }
+.panel { padding:clamp(22px,3vw,28px); }
+.section-kicker { font-size:11px; line-height:1.45; letter-spacing:.09em; }
+.score-caption { font-size:14px; line-height:1.65; }
+.score-qualifier { font-size:14px; }
+.dim-head { font-size:13.5px; line-height:1.5; }
+.panel p { font-size:16px; line-height:1.7; }
+.callout { font-size:16px; line-height:1.7; }
+.evidence li { font-size:15px; line-height:1.65; }
+.rec { padding:20px 0; gap:14px; }
+.rec h3 { font-size:16px; line-height:1.45; }
+.rec p { font-size:15px; line-height:1.7; }
+.why { font-size:14px; line-height:1.7; }
+.cta { padding:clamp(23px,4vw,32px); }
+.cta h2 { font-size:clamp(22px,3vw,27px); line-height:1.25; }
+.cta p { font-size:16px; line-height:1.7; }
+.disclaimer { font-size:13px; line-height:1.7; }
+.footer { font-size:12.5px; line-height:1.6; }
+@media (max-width:720px) {
+  .sitehead { padding:16px 18px; }
+  .brand { font-size:12px; gap:8px; }
+  .container { width:min(100% - 24px, 900px); margin-top:10px; }
+  .intro { padding:28px 22px; border-radius:20px; }
+  .intro h1 { font-size:clamp(30px,8vw,40px); max-width:19ch; }
+  .intro p { font-size:17px; line-height:1.7; margin-top:18px; }
+  .meta-fields { grid-template-columns:1fr; gap:14px; }
+  .start-note { max-width:none; font-size:13px; }
+  .step-card { padding:24px 19px; }
+  .step-card h2 { font-size:28px; }
+  .step-desc { font-size:16.5px; line-height:1.7; margin-bottom:24px; }
+  .question { padding:23px 0; }
+  .question h3 { font-size:17px; }
+  .question .hint { font-size:15px; line-height:1.65; }
+  .option { padding:14px 13px; gap:11px; }
+  .option span:not(.letter) { font-size:15.5px; }
+  .nav { align-items:stretch; }
+  .nav .btn { min-height:48px; padding:12px 14px; font-size:14px; }
+  .panel { padding:21px 18px; }
+  .result-hero { padding:28px 22px; }
+  .result-hero h1 { font-size:clamp(28px,7.5vw,38px); }
+  .result-hero p { font-size:16px; }
+  .score-big { font-size:48px; }
+  .panel p, .callout, .cta p { font-size:15.5px; }
+  .dim-head { font-size:12.5px; }
+  .rec p { font-size:15px; }
+  .why { font-size:14px; }
+  .footer { padding:18px 18px 28px; }
+}
+@media (max-width:360px) {
+  .nav .btn { font-size:13px; padding:11px 10px; }
+  .dim-head { gap:7px; font-size:12px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .topline span, .progressline div, .option, .btn { transition:none; }
+}
+
 </style>
 </head>
 <body>
-<div class="topline"><span id="topProgress"></span></div>
+<a class="skip-link" href="#questionnaire">Saltar al cuestionario</a>
+<div class="topline" aria-hidden="true"><span id="topProgress"></span></div>
 <header class="sitehead"><div class="brand"><span class="brand-dot"></span>Ana Donate <span style="font-weight:500;color:var(--muted)">/ Auditoría de marca</span></div><div class="headnote">Diagnóstico orientativo · 3 minutos</div></header>
 <main class="container">
 <section class="intro" id="intro">
@@ -31,11 +130,11 @@
 <div class="start-note">No hay respuestas correctas o incorrectas.<br>El resultado se basa en tus respuestas.</div>
 </div>
 </section>
-<div class="progress-meta"><span id="stepMeta">ETAPA 1 DE 5</span><strong id="stepPercent">20 %</strong></div><div class="progressline"><div id="stepProgress"></div></div>
-<section id="questionnaire" aria-live="polite">
+<div class="progress-meta"><span id="stepMeta">ETAPA 1 DE 5</span><strong id="stepPercent">20 %</strong></div><div class="progressline" role="progressbar" aria-label="Progreso del cuestionario" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20"><div id="stepProgress"></div></div>
+<section id="questionnaire">
 <div id="stepScreen" class="step-card"></div>
 </section>
-<section id="results" class="results" aria-live="polite"></section>
+<section id="results" class="results"></section>
 <p class="smallnote" id="privacyNote">Las respuestas se procesan en tu navegador para generar el resultado y el PDF. Esta versión no envía tus respuestas a un servidor.</p>
 </main>
 <footer class="footer"><div><strong>ANA DONATE</strong> — Diseño gráfico &amp; Branding</div><div>Auditoría de marca visual · Herramienta orientativa</div></footer>
@@ -91,9 +190,9 @@ function renderStep(){
 const s=steps[currentStep];const answered=s.questions.every(q=>answers[q.id]);const totalAnswered=Object.keys(answers).length;
 document.getElementById('stepMeta').textContent='ETAPA '+(currentStep+1)+' DE '+steps.length;
 document.getElementById('stepPercent').textContent=Math.round((currentStep+1)/steps.length*100)+' %';
-document.getElementById('stepProgress').style.width=((currentStep+1)/steps.length*100)+'%';
+document.getElementById('stepProgress').style.width=((currentStep+1)/steps.length*100)+'%';document.querySelector('.progressline').setAttribute('aria-valuenow',String(Math.round((currentStep+1)/steps.length*100)));
 document.getElementById('topProgress').style.width=(totalAnswered/10*100)+'%';
-let html='<div class="step-label">PARADA '+(currentStep+1)+' / '+steps.length+'</div><h2>'+escapeHTML(s.title)+'</h2><p class="step-desc">'+escapeHTML(s.desc)+'</p>';
+let html='<div class="step-label">PARADA '+(currentStep+1)+' / '+steps.length+'</div><h2 tabindex="-1">'+escapeHTML(s.title)+'</h2><p class="step-desc">'+escapeHTML(s.desc)+'</p>';
 s.questions.forEach((q,qi)=>{
 html+='<div class="question"><h3 id="'+q.id+'-label">'+escapeHTML(q.text)+'</h3><p class="hint">'+escapeHTML(q.hint)+'</p><div class="options" role="radiogroup" aria-labelledby="'+q.id+'-label">';
 q.options.forEach(o=>{html+='<label class="option"><input type="radio" name="'+q.id+'" value="'+o[0]+'" '+(answers[q.id]===o[0]?'checked':'')+'><span class="letter">'+o[0].toUpperCase()+'</span><span>'+escapeHTML(o[1])+'</span></label>';});
@@ -102,9 +201,10 @@ html+='</div></div>';
 html+='<div class="nav"><button class="btn btn-quiet" id="prevBtn" '+(currentStep===0?'disabled':'')+'>← Anterior</button><button class="btn btn-main" id="nextBtn" '+(!answered?'disabled':'')+'>'+(currentStep===steps.length-1?'Ver mi diagnóstico':'Siguiente etapa')+' →</button></div><div class="error" id="stepError" role="status"></div>';
 stepScreen.innerHTML=html;
 stepScreen.querySelectorAll('input[type=radio]').forEach(input=>input.addEventListener('change',()=>{answers[input.name]=input.value;const allDone=s.questions.every(q=>answers[q.id]);document.getElementById('nextBtn').disabled=!allDone;document.getElementById('topProgress').style.width=(Object.keys(answers).length/10*100)+'%';}));
-document.getElementById('prevBtn').addEventListener('click',()=>{if(currentStep>0){currentStep--;renderStep();window.scrollTo({top:0,behavior:'smooth'});}});
-document.getElementById('nextBtn').addEventListener('click',()=>{if(!s.questions.every(q=>answers[q.id])){document.getElementById('stepError').textContent='Responde a las dos preguntas para continuar.';return;}if(currentStep<steps.length-1){currentStep++;renderStep();window.scrollTo({top:0,behavior:'smooth'});}else{showResults();}});
+document.getElementById('prevBtn').addEventListener('click',()=>{if(currentStep>0){currentStep--;renderStep();focusStep();}});
+document.getElementById('nextBtn').addEventListener('click',()=>{if(!s.questions.every(q=>answers[q.id])){document.getElementById('stepError').textContent='Responde a las dos preguntas para continuar.';return;}if(currentStep<steps.length-1){currentStep++;renderStep();focusStep();}else{showResults();}});
 }
+function focusStep(){const heading=stepScreen.querySelector('h2');if(heading)heading.focus({preventScroll:true});stepScreen.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}
 function answerScore(id){return scoreMap[answers[id]]===undefined?0:scoreMap[answers[id]];}
 function calculate(){
 const dimensions={};
@@ -182,10 +282,10 @@ while(unique.length<3){const next=Object.keys(recommendationBank).find(key=>!uni
 return unique.map((key,i)=>{const r=recommendationBank[key];const dimension=key==='presence'?'coherence':key;const value=dimensions[dimension];const proof=r.proof.map(id=>{const q=steps.flatMap(s=>s.questions).find(x=>x.id===id);const opt=q.options.find(o=>o[0]===answers[id]);return q.text+' — '+(opt?opt[1]:'');}).join(' ');return {...r,key,priority:i+1,proof,level:value===undefined?'Oportunidad':value<50?'Prioridad alta':value<75?'A mejorar':'Optimización'};});
 }
 function showResults(){
-diagnosis=calculate();document.getElementById('questionnaire').hidden=true;document.getElementById('privacyNote').hidden=true;document.getElementById('results').classList.add('show');document.getElementById('stepMeta').textContent='DIAGNÓSTICO COMPLETADO';document.getElementById('stepPercent').textContent='100 %';document.getElementById('stepProgress').style.width='100%';document.getElementById('topProgress').style.width='100%';renderResults(diagnosis);window.scrollTo({top:0,behavior:'smooth'});
+diagnosis=calculate();document.getElementById('intro').hidden=true;document.getElementById('questionnaire').hidden=true;document.getElementById('privacyNote').hidden=true;document.getElementById('results').classList.add('show');document.getElementById('stepMeta').textContent='DIAGNÓSTICO COMPLETADO';document.getElementById('stepPercent').textContent='100 %';document.getElementById('stepProgress').style.width='100%';document.querySelector('.progressline').setAttribute('aria-valuenow','100');document.getElementById('topProgress').style.width='100%';renderResults(diagnosis);const resultHeading=document.querySelector('#results h1');if(resultHeading)resultHeading.focus({preventScroll:true});document.getElementById('results').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
 }
 function renderResults(d){
-const p=d.profile;const company=d.company?'<span style="color:#f1b98f">'+escapeHTML(d.company)+'</span>, ':'';let html='<div class="result-hero"><span class="profile-chip">'+escapeHTML(p.name)+'</span><h1>'+company+escapeHTML(p.lead)+'</h1><p>'+escapeHTML(d.reason)+'</p></div>';
+const p=d.profile;const company=d.company?'<span style="color:#f1b98f">'+escapeHTML(d.company)+'</span>, ':'';let html='<div class="result-hero"><span class="profile-chip">'+escapeHTML(p.name)+'</span><h1 tabindex="-1">'+company+escapeHTML(p.lead)+'</h1><p>'+escapeHTML(d.reason)+'</p></div>';
 html+='<div class="result-top"><section class="panel"><div class="section-kicker">Índice de desarrollo de marca</div><div class="score-big">'+d.global+'<span style="font-size:22px">/100</span></div><div class="score-caption">Media ponderada ajustada para que una dimensión crítica no quede oculta por una nota global alta.</div><div class="scorebar"><span style="width:'+d.global+'%"></span></div><div class="score-qualifier">'+scoreLabel(d.global)+'</div><p class="smallnote">No es una auditoría visual directa ni una comparación con competidores. Refleja el estado declarado en tus respuestas.</p></section><section class="panel"><div class="section-kicker">Las cinco dimensiones</div>';
 dimensionDefs.forEach(def=>{let n=d.dimensions[def.id];html+='<div class="dim-row"><div class="dim-head"><span>'+escapeHTML(def.label)+'</span><span>'+n+'/100 · '+levelLabel(n)+'</span></div><div class="dim-bar"><span style="width:'+n+'%"></span></div></div>';});
 html+='</section></div>';
@@ -199,7 +299,7 @@ document.getElementById('results').innerHTML=html;document.getElementById('pdfBt
 }
 function scoreLabel(n){return n>=80?'Base sólida':n>=60?'En desarrollo':n>=40?'Necesita atención':'Prioridad de mejora';}
 function levelLabel(n){return n>=80?'Sólida':n>=60?'En desarrollo':n>=40?'A revisar':'Prioridad';}
-function restart(){Object.keys(answers).forEach(k=>delete answers[k]);currentStep=0;diagnosis=null;document.getElementById('results').classList.remove('show');document.getElementById('results').innerHTML='';document.getElementById('questionnaire').hidden=false;document.getElementById('privacyNote').hidden=false;renderStep();window.scrollTo({top:0,behavior:'smooth'});}
+function restart(){Object.keys(answers).forEach(k=>delete answers[k]);currentStep=0;diagnosis=null;document.getElementById('intro').hidden=false;document.getElementById('results').classList.remove('show');document.getElementById('results').innerHTML='';document.getElementById('questionnaire').hidden=false;document.getElementById('privacyNote').hidden=false;renderStep();document.getElementById('intro').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});document.getElementById('company').focus({preventScroll:true});}
 function downloadPDF(){
 if(!diagnosis||!window.jspdf){alert('No ha sido posible preparar el informe. Actualiza la página e inténtalo de nuevo.');return;}
 const btn=document.getElementById('pdfBtn');const old=btn.textContent;btn.disabled=true;btn.textContent='Generando informe…';
