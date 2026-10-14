@@ -27,12 +27,16 @@ Estos escenarios son regresiones mínimas para comprobar que las reglas de perfi
 
 - [x] Carbón `#29272A` sustituye al verde oscuro en los bloques y botones principales.
 - [x] Fondo marfil `#F5F2ED` aplicado al fondo general y blanco cálido `#FFFEFC` a las tarjetas.
-- [x] Rosa EA `#EA5A77` aplicado a acentos, progreso, selección y botones secundarios.
+- [x] Rosa EA `#EA5A77` aplicado a acentos, progreso, selección y botón principal.
 - [x] Verde EA `#46B382` aplicado a estados interactivos y al contorno del gráfico radial.
 - [x] Dorado EA `#D2A158` aplicado a barras de dimensión y detalles gráficos.
 - [x] Fondo marfil `#F5F2ED` y carbón `#29272A` conservados.
 - [x] Los textos pequeños se mantienen en carbón o gris legible, no en dorado claro.
 - [x] PDF adaptado a la misma paleta.
+- [x] Los círculos decorativos se sustituyen por los iconos de la marca en cabecera, portada y listas del PDF.
+- [x] Los puntos de datos del gráfico radial usan los símbolos de la marca.
+- [x] El estado hover y foco de las opciones usa dorado, no verde.
+- [x] El botón «Comenzar auditoría» mantiene buena visibilidad cuando está desactivado (borde rosa y texto claro) y cuando está activo (fondo rosa y texto carbón).
 - [x] Navegador automatizado sobre la URL pública: comprobados los colores calculados y descarga de PDF de cinco páginas A4.
 
 ## Flujo de inicio personalizado
