@@ -154,7 +154,7 @@ body { font-size: 16px; line-height: 1.65; }
 </div>
 <div class="start-note">No hay respuestas correctas o incorrectas.<br>El diagnóstico se basa en tus respuestas.</div>
 </div>
-<div class="start-actions"><p class="start-validation" id="companyError" role="status" hidden>Escribe el nombre de la empresa para empezar.</p><button class="btn btn-main btn-start" id="startAudit" type="button" disabled>Comenzar auditoría <span aria-hidden="true">→</span></button><p class="start-privacy">La información se procesa en tu navegador. Tus respuestas no se envían a un servidor.</p></div>
+<div class="start-actions"><p class="start-validation" id="companyError" role="status" hidden>Escribe el nombre de la empresa para empezar.</p><button class="btn btn-main btn-start" id="startAudit" type="button" disabled style="background:transparent;color:#FFFEFC;border:2px solid #EA5A77;opacity:1">Comenzar auditoría <span aria-hidden="true">→</span></button><p class="start-privacy">La información se procesa en tu navegador. Tus respuestas no se envían a un servidor.</p></div>
 </section>
 <div id="quizProgress" hidden><div class="progress-meta"><span id="stepMeta">ETAPA 1 DE 5</span><strong id="stepPercent">20 %</strong></div><div class="progressline" role="progressbar" aria-label="Progreso del cuestionario" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20"><div id="stepProgress"></div></div></div>
 <section id="questionnaire" hidden>
@@ -329,7 +329,7 @@ document.getElementById('results').innerHTML=html;document.getElementById('pdfBt
 function scoreLabel(n){return n>=80?'Base sólida':n>=60?'En desarrollo':n>=40?'Necesita atención':'Prioridad de mejora';}
 function levelLabel(n){return n>=80?'Sólida':n>=60?'En desarrollo':n>=40?'A revisar':'Prioridad';}
 function startAudit(){const company=document.getElementById('company');const err=document.getElementById('companyError');if(!company.value.trim()){err.hidden=false;document.getElementById('startAudit').disabled=true;company.focus();return;}err.hidden=true;document.getElementById('sitehead').hidden=true;document.getElementById('intro').hidden=true;document.getElementById('quizProgress').hidden=false;document.getElementById('questionnaire').hidden=false;document.getElementById('privacyNote').hidden=false;renderStep();focusStep();}
-function restart(){Object.keys(answers).forEach(k=>delete answers[k]);currentStep=0;diagnosis=null;document.getElementById('sitehead').hidden=false;document.getElementById('intro').hidden=false;document.getElementById('quizProgress').hidden=true;document.getElementById('results').classList.remove('show');document.getElementById('results').innerHTML='';document.getElementById('questionnaire').hidden=true;document.getElementById('privacyNote').hidden=true;renderStep();document.getElementById('intro').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});document.getElementById('company').focus({preventScroll:true});document.getElementById('startAudit').disabled=!document.getElementById('company').value.trim();}
+function restart(){Object.keys(answers).forEach(k=>delete answers[k]);currentStep=0;diagnosis=null;document.getElementById('sitehead').hidden=false;document.getElementById('intro').hidden=false;document.getElementById('quizProgress').hidden=true;document.getElementById('results').classList.remove('show');document.getElementById('results').innerHTML='';document.getElementById('questionnaire').hidden=true;document.getElementById('privacyNote').hidden=true;renderStep();document.getElementById('intro').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});document.getElementById('company').focus({preventScroll:true});syncStartButton();}
 function downloadPDF(){
 if(!diagnosis||!window.jspdf){alert('No ha sido posible preparar el informe. Actualiza la página e inténtalo de nuevo.');return;}
 const btn=document.getElementById('pdfBtn');const old=btn.textContent;btn.disabled=true;btn.textContent='Generando informe…';
@@ -457,7 +457,9 @@ const fileCompany=(company.toLowerCase().normalize('NFD').replace(/[\u0300-\u036
 pdf.save('auditoria-de-marca-'+fileCompany+'.pdf');
 }catch(e){console.error(e);alert('No se pudo generar el PDF. Inténtalo de nuevo; si persiste, recarga la página.');}finally{btn.disabled=false;btn.textContent=old;}
 }
-document.getElementById('company').addEventListener('input',()=>{document.getElementById('startAudit').disabled=!document.getElementById('company').value.trim();document.getElementById('companyError').hidden=true;});
+function syncStartButton(){const company=document.getElementById('company');const btn=document.getElementById('startAudit');const ready=Boolean(company.value.trim());btn.disabled=!ready;btn.style.backgroundColor=ready?'#EA5A77':'transparent';btn.style.color=ready?'#211F22':'#FFFEFC';btn.style.border='2px solid #EA5A77';btn.style.opacity='1';btn.style.boxShadow=ready?'0 4px 0 rgba(0,0,0,.18)':'none';btn.style.cursor=ready?'pointer':'not-allowed';}
+document.getElementById('company').addEventListener('input',()=>{syncStartButton();document.getElementById('companyError').hidden=true;});
+syncStartButton();
 document.getElementById('startAudit').addEventListener('click',startAudit);
 renderStep();
 })();
