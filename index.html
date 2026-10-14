@@ -136,6 +136,33 @@ body { font-size: 16px; line-height: 1.65; }
 .section-kicker { color:var(--ink); }
 .btn-copper { background:var(--copper); color:var(--forest); border:1px solid var(--copper); }
 .option:hover:not(:has(input:checked)),.option:focus-within:not(:has(input:checked)) { border-color:var(--sage); background:#FAF2DD; box-shadow:inset 0 0 0 1px var(--sage); }
+
+/* Initial screen: lighter, calmer and clearer brand presentation. */
+.intro{background:var(--white);color:var(--ink);border:1px solid var(--line);box-shadow:0 18px 48px rgba(41,39,42,.07)}
+.intro h1{color:var(--forest);max-width:700px}
+.intro p{color:var(--muted);font-size:18px;line-height:1.7;max-width:62ch;margin-top:18px}
+.intro-mark{opacity:.9;right:clamp(22px,4vw,42px);bottom:clamp(22px,4vw,40px);gap:14px}
+.intro-mark svg{width:46px;height:46px;stroke-width:2.7}
+.intro-mark .brand-flower{stroke:#D2A158}
+.intro-mark .brand-target{stroke:#EA5A77}
+.intro-mark .brand-cursor{stroke:#46B382}
+.field label{color:var(--ink);font-size:15px}
+.field input{background:#FFFEFC;color:var(--ink);border:1px solid #CFC7BD;font-size:16px;min-height:48px}
+.field input::placeholder{color:#716D6D}
+.field-help,.start-privacy{font-size:14px;line-height:1.6;color:var(--muted)}
+.start-privacy{max-width:58ch;margin:12px 0 0}
+.start-validation{color:#9A4056}
+#startAudit.btn-start:disabled{background:#FFE6EC!important;color:#29272A!important;border:2px solid #EA5A77!important;opacity:1!important;box-shadow:none!important;cursor:not-allowed}
+#startAudit.btn-start:disabled:hover{background:#FFE6EC!important;transform:none}
+#startAudit.btn-start:not(:disabled){background:#EA5A77!important;color:#29272A!important;border:2px solid #EA5A77!important;opacity:1!important}
+@media(max-width:720px){
+  .intro{padding:27px 22px}
+  .intro p{font-size:17px;line-height:1.7}
+  .intro-mark{opacity:.9;right:18px;bottom:18px}
+  .intro-mark svg{width:34px;height:34px}
+  .start-privacy{font-size:14px}
+}
+
 </style>
 </head>
 <body>
@@ -147,14 +174,13 @@ body { font-size: 16px; line-height: 1.65; }
 <div class="intro-mark" aria-hidden="true"><svg class="brand-flower" viewBox="0 0 64 64"><path d="M32 30 C28 17 20 8 10 10 C8 21 17 29 30 32 C17 35 8 43 10 54 C21 56 29 47 32 34 C35 47 43 56 54 54 C56 43 47 35 34 32 C47 29 56 21 54 10 C44 8 36 17 32 30Z"/></svg><svg class="brand-target" viewBox="0 0 64 64"><path d="M43 12 A24 24 0 1 0 55 32"/><path d="M42 25 A12 12 0 1 0 44 36"/><path d="M32 32 L56 8 M45 8 L56 8 L56 19"/></svg><svg class="brand-cursor" viewBox="0 0 64 64"><path d="M12 7 L54 34 L36 38 L43 54 L33 58 L25 42 L13 53 Z"/></svg></div>
 <span class="eyebrow">Diseño gráfico &amp; Branding</span>
 <h1>Tu marca tiene una historia. ¿La está contando bien?</h1>
-<p>Responde a unas preguntas breves y descubre qué está funcionando, qué puede mejorar y por dónde conviene empezar. Recibirás un informe personalizado con los resultados y próximos pasos.</p>
+<p>Responde a 10 preguntas y descubre cómo mejorar tu marca. Al final recibirás un informe personalizado con tus resultados y recomendaciones.</p>
 <div class="intro-bottom">
 <div class="meta-fields">
 <div class="field"><label for="company">Nombre de la empresa</label><input id="company" name="company" maxlength="90" placeholder="Ej. Estudio Norte" autocomplete="organization" aria-describedby="companyHelp" required><span class="field-help" id="companyHelp">El nombre aparecerá en la portada de tu informe personalizado.</span></div>
 </div>
-<div class="start-note">No hay respuestas correctas o incorrectas.<br>El diagnóstico se basa en tus respuestas.</div>
 </div>
-<div class="start-actions"><p class="start-validation" id="companyError" role="status" hidden>Escribe el nombre de la empresa para empezar.</p><button class="btn btn-main btn-start" id="startAudit" type="button" disabled style="background:transparent;color:#FFFEFC;border:2px solid #EA5A77;opacity:1">Comenzar auditoría <span aria-hidden="true">→</span></button><p class="start-privacy">La información se procesa en tu navegador. Tus respuestas no se envían a un servidor.</p></div>
+<div class="start-actions"><p class="start-validation" id="companyError" role="status" hidden>Escribe el nombre de la empresa para empezar.</p><button class="btn btn-main btn-start" id="startAudit" type="button" disabled style="background:#FFE6EC;color:#29272A;border:2px solid #EA5A77;opacity:1">Comenzar auditoría <span aria-hidden="true">→</span></button><p class="start-privacy">La información se procesa en tu navegador. Tus respuestas no se envían a un servidor.</p></div>
 </section>
 <div id="quizProgress" hidden><div class="progress-meta"><span id="stepMeta">ETAPA 1 DE 5</span><strong id="stepPercent">20 %</strong></div><div class="progressline" role="progressbar" aria-label="Progreso del cuestionario" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20"><div id="stepProgress"></div></div></div>
 <section id="questionnaire" hidden>
@@ -457,7 +483,7 @@ const fileCompany=(company.toLowerCase().normalize('NFD').replace(/[\u0300-\u036
 pdf.save('auditoria-de-marca-'+fileCompany+'.pdf');
 }catch(e){console.error(e);alert('No se pudo generar el PDF. Inténtalo de nuevo; si persiste, recarga la página.');}finally{btn.disabled=false;btn.textContent=old;}
 }
-function syncStartButton(){const company=document.getElementById('company');const btn=document.getElementById('startAudit');const ready=Boolean(company.value.trim());btn.disabled=!ready;btn.style.backgroundColor=ready?'#EA5A77':'transparent';btn.style.color=ready?'#211F22':'#FFFEFC';btn.style.border='2px solid #EA5A77';btn.style.opacity='1';btn.style.boxShadow=ready?'0 4px 0 rgba(0,0,0,.18)':'none';btn.style.cursor=ready?'pointer':'not-allowed';}
+function syncStartButton(){const company=document.getElementById('company');const btn=document.getElementById('startAudit');const ready=Boolean(company.value.trim());btn.disabled=!ready;btn.style.backgroundColor=ready?'#EA5A77':'#FFE6EC';btn.style.color='#29272A';btn.style.border='2px solid #EA5A77';btn.style.opacity='1';btn.style.boxShadow=ready?'0 4px 0 rgba(0,0,0,.18)':'none';btn.style.cursor=ready?'pointer':'not-allowed';}
 document.getElementById('company').addEventListener('input',()=>{syncStartButton();document.getElementById('companyError').hidden=true;});
 syncStartButton();
 document.getElementById('startAudit').addEventListener('click',startAudit);
