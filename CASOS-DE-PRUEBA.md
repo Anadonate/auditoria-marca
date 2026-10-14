@@ -27,8 +27,11 @@ Estos escenarios son regresiones mínimas para comprobar que las reglas de perfi
 
 - [x] Carbón `#29272A` sustituye al verde oscuro en los bloques y botones principales.
 - [x] Fondo marfil `#F5F2ED` aplicado al fondo general y blanco cálido `#FFFEFC` a las tarjetas.
-- [x] Terracota `#C57A52` y terracota oscuro `#96563B` aplicados a acentos, progresión, selección y CTA.
-- [x] Salvia grisácea `#9AA397` reservada para indicadores y gráficos.
+- [x] Rosa EA `#EA5A77` aplicado a acentos, progreso, selección y botones secundarios.
+- [x] Verde EA `#46B382` aplicado a estados interactivos y al contorno del gráfico radial.
+- [x] Dorado EA `#D2A158` aplicado a barras de dimensión y detalles gráficos.
+- [x] Fondo marfil `#F5F2ED` y carbón `#29272A` conservados.
+- [x] Los textos pequeños se mantienen en carbón o gris legible, no en dorado claro.
 - [x] PDF adaptado a la misma paleta.
 - [x] Navegador automatizado sobre la URL pública: comprobados los colores calculados y descarga de PDF de cinco páginas A4.
 
