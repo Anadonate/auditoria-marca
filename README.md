@@ -14,12 +14,12 @@ La interfaz y el PDF utilizan una paleta alineada con la identidad visual de Ana
 - Salvia grisácea `#9AA397`: indicadores y visualizaciones.
 - Gris cálido `#716D6D`: texto secundario.
 
-La tipografía explicativa se ha ampliado y la navegación mueve el foco al encabezado de la etapa activa. Los controles tienen áreas táctiles más cómodas, se conserva la preferencia de movimiento reducido y el formulario no debe provocar desplazamiento horizontal en móvil.
+La cabecera inicial y el campo de nombre solo aparecen antes de comenzar; al iniciar, la cabecera desaparece y el cuestionario pasa a primer plano. La tipografía explicativa se ha ampliado y la navegación mueve el foco al encabezado de la etapa activa. Los controles tienen áreas táctiles más cómodas, se conserva la preferencia de movimiento reducido y el formulario no debe provocar desplazamiento horizontal en móvil.
 
 ## Qué incluye
 
-- Cuestionario guiado de 10 preguntas cerradas, agrupadas en cinco etapas.
-- Nombre de empresa y sector opcionales para personalizar el informe.
+- Cuestionario guiado de 10 preguntas cerradas, agrupadas en cinco etapas; el cuestionario permanece oculto hasta pulsar «Comenzar auditoría».
+- Pantalla de inicio independiente con nombre de empresa obligatorio para personalizar la portada del informe; se ha eliminado el campo de sector.
 - Cinco dimensiones con un índice ponderado de desarrollo de marca.
 - Asignación explicada a uno de cinco perfiles: Marca en construcción, Marca dispersa, Marca funcional, Marca consolidada o Marca desalineada.
 - Tres recomendaciones derivadas de las dimensiones y respuestas seleccionadas.
