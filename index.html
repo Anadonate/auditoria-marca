@@ -36,7 +36,8 @@ body { font-size: 16px; line-height: 1.65; }
 .step-card { scroll-margin-top:16px; padding:clamp(26px,4.5vw,46px); }
 .step-label { font-size:12px; margin-bottom:16px; }
 .step-card h2 { font-size:clamp(27px,3.8vw,36px); line-height:1.2; }
-.step-card h2:focus, .result-hero h1:focus { outline:none; }
+.step-card h2:focus:not(:focus-visible), .result-hero h1:focus:not(:focus-visible) { outline:none; }
+.step-card h2:focus-visible, .result-hero h1:focus-visible { outline:3px solid var(--focus-ring); outline-offset:7px; border-radius:3px; }
 .step-desc { font-size:17px; line-height:1.7; max-width:65ch; margin:14px 0 28px; color:#5f6059; }
 .question { padding:26px 0; }
 .question h3 { font-size:18px; line-height:1.45; margin-bottom:9px; }
@@ -62,6 +63,7 @@ body { font-size: 16px; line-height: 1.65; }
 .score-qualifier { font-size:14px; }
 .dim-head { font-size:13.5px; line-height:1.5; }
 .panel p { font-size:16px; line-height:1.7; }
+.panel p.smallnote { font-size:13px; line-height:1.65; }
 .callout { font-size:16px; line-height:1.7; }
 .evidence li { font-size:15px; line-height:1.65; }
 .rec { padding:20px 0; gap:14px; }
@@ -192,7 +194,7 @@ document.getElementById('stepMeta').textContent='ETAPA '+(currentStep+1)+' DE '+
 document.getElementById('stepPercent').textContent=Math.round((currentStep+1)/steps.length*100)+' %';
 document.getElementById('stepProgress').style.width=((currentStep+1)/steps.length*100)+'%';document.querySelector('.progressline').setAttribute('aria-valuenow',String(Math.round((currentStep+1)/steps.length*100)));
 document.getElementById('topProgress').style.width=(totalAnswered/10*100)+'%';
-let html='<div class="step-label">PARADA '+(currentStep+1)+' / '+steps.length+'</div><h2 tabindex="-1">'+escapeHTML(s.title)+'</h2><p class="step-desc">'+escapeHTML(s.desc)+'</p>';
+let html='<div class="step-label">ETAPA '+(currentStep+1)+' / '+steps.length+'</div><h2 tabindex="-1">'+escapeHTML(s.title)+'</h2><p class="step-desc">'+escapeHTML(s.desc)+'</p>';
 s.questions.forEach((q,qi)=>{
 html+='<div class="question"><h3 id="'+q.id+'-label">'+escapeHTML(q.text)+'</h3><p class="hint">'+escapeHTML(q.hint)+'</p><div class="options" role="radiogroup" aria-labelledby="'+q.id+'-label">';
 q.options.forEach(o=>{html+='<label class="option"><input type="radio" name="'+q.id+'" value="'+o[0]+'" '+(answers[q.id]===o[0]?'checked':'')+'><span class="letter">'+o[0].toUpperCase()+'</span><span>'+escapeHTML(o[1])+'</span></label>';});
