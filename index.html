@@ -123,8 +123,14 @@ const candidates=[
 {key:'dispersed',value:dimensions.coherence,rank:2},
 {key:'functional',value:dimensions.difference,rank:3}
 ].sort((a,b)=>a.value-b.value||a.rank-b.rank);
-profileKey=candidates[0].key;
-reason='Este perfil refleja el área más débil entre las dimensiones evaluadas. La puntuación por sí sola no sustituye una revisión de los materiales reales.';
+const minimum=candidates[0].value;
+const tied=candidates.filter(item=>item.value<=minimum+1);
+const priorityTieBreak={a:'construction',b:'dispersed',c:'functional',d:'construction',e:'functional'};
+const preferred=priorityTieBreak[answers.q9];
+profileKey=tied.length>1&&tied.some(item=>item.key===preferred)?preferred:candidates[0].key;
+reason=tied.length>1
+?'Las dimensiones principales tienen resultados similares. El perfil usa tu prioridad declarada como criterio secundario, sin sustituir las puntuaciones.'
+:'Este perfil refleja el área más débil entre las dimensiones evaluadas. La puntuación por sí sola no sustituye una revisión de los materiales reales.';
 }
 const profile=profileCopy[profileKey];
 const strengths=[];const gaps=[];
