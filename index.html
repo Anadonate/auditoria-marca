@@ -60,9 +60,9 @@ const steps=[
 ['a','Siguen criterios reconocibles y se adaptan a cada formato.'],['b','Hay una línea general, pero no siempre se mantiene.'],['c','Se eligen según cada publicación o necesidad puntual.'],['d','No tenemos criterios definidos para estos elementos.']]}]},
 {title:'Personalidad y diferenciación',desc:'Además de verse coherente, una marca necesita transmitir algo propio y relevante para sus clientes.',questions:[
 {id:'q7',text:'Si ocultáramos el nombre y el logotipo, ¿sería fácil distinguir tu marca de otras de tu sector?',hint:'No se trata solo de tener un logo original, sino de construir códigos visuales reconocibles.',options:[
-['a','Sí, tenemos códigos visuales y una personalidad reconocibles.'],['b','En parte, pero compartimos muchos códigos con otras marcas.'],['c','Sería difícil; nuestra imagen se parece a la de muchos competidores.'],['d','No lo hemos evaluado o no sabría decirlo.']]},
+['a','Sí, tenemos códigos visuales y una personalidad reconocibles.'],['b','En parte, pero compartimos muchos códigos con otras marcas.'],['c','Sería difícil; nuestra imagen se parece a la de muchos competidores.'],['d','No hemos definido elementos propios que nos ayuden a diferenciarnos de otras marcas.']]},
 {id:'q8',text:'¿Qué transmite actualmente tu identidad visual?',hint:'Piensa en la impresión que recibe alguien que todavía no conoce tu empresa.',options:[
-['a','La personalidad y los valores que queremos asociar a la marca.'],['b','Algunos de nuestros valores, aunque no de forma consistente.'],['c','Una imagen correcta, pero bastante genérica.'],['d','No tenemos claro qué impresión genera.']]}]},
+['a','La personalidad y los valores que queremos asociar a la marca.'],['b','Algunos de nuestros valores, aunque no de forma consistente.'],['c','Una imagen correcta, pero bastante genérica.'],['d','No hemos definido qué impresión queremos generar.']]}]},
 {title:'La prioridad para tu marca',desc:'Dos últimas preguntas nos ayudan a adaptar la devolución a lo que más te importa y a las decisiones que han llevado a la situación actual.',questions:[
 {id:'q9',text:'¿Qué te gustaría mejorar principalmente de tu marca?',hint:'Elige la prioridad que más te preocupa ahora. Esta respuesta personaliza el informe, pero no determina por sí sola el diagnóstico.',options:[
 ['a','Actualizar la imagen para que represente mejor el negocio actual.'],['b','Conseguir más coherencia en todos los canales.'],['c','Diferenciarnos y tener una personalidad más propia.'],['d','Definir mejor los fundamentos y las reglas de nuestra identidad.'],['e','Ampliar la presencia de una marca que ya funciona bien.']]},
@@ -105,11 +105,11 @@ stepScreen.querySelectorAll('input[type=radio]').forEach(input=>input.addEventLi
 document.getElementById('prevBtn').addEventListener('click',()=>{if(currentStep>0){currentStep--;renderStep();window.scrollTo({top:0,behavior:'smooth'});}});
 document.getElementById('nextBtn').addEventListener('click',()=>{if(!s.questions.every(q=>answers[q.id])){document.getElementById('stepError').textContent='Responde a las dos preguntas para continuar.';return;}if(currentStep<steps.length-1){currentStep++;renderStep();window.scrollTo({top:0,behavior:'smooth'});}else{showResults();}});
 }
-function answerScore(id){if(id==='q7'&&answers[id]==='d')return 50;if(id==='q8'&&answers[id]==='d')return 45;return scoreMap[answers[id]]===undefined?0:scoreMap[answers[id]];}
+function answerScore(id){return scoreMap[answers[id]]===undefined?0:scoreMap[answers[id]];}
 function calculate(){
 const dimensions={};
 dimensionDefs.forEach(d=>{const values=d.qs.map(answerScore);dimensions[d.id]=Math.round(values.reduce((a,b)=>a+b,0)/values.length);});
-const global=Math.round(dimensionDefs.reduce((sum,d)=>sum+dimensions[d.id]*d.weight/100,0));
+const weightedScore=Math.round(dimensionDefs.reduce((sum,d)=>sum+dimensions[d.id]*d.weight/100,0));\nconst lowestDimension=Math.min(...Object.values(dimensions));\n// Safety caps stop a severe weakness from being hidden by the weighted average.\nlet global=weightedScore;if(lowestDimension<20)global=Math.min(global,54);else if(lowestDimension<40)global=Math.min(global,64);
 const q3=answers.q3,q1=answers.q1,q2=answers.q2,q5=answers.q5,q6=answers.q6,q7=answers.q7,q8=answers.q8;
 let profileKey,reason;
 if(q3==='c'||q3==='d'){profileKey='misaligned';reason='Has indicado que la identidad no ha acompañado la evolución del negocio.';}
