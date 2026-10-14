@@ -138,6 +138,11 @@ body { font-size: 16px; line-height: 1.65; }
 .option:hover:not(:has(input:checked)),.option:focus-within:not(:has(input:checked)) { border-color:var(--sage); background:#FAF2DD; box-shadow:inset 0 0 0 1px var(--sage); }
 
 /* Initial screen: lighter, calmer and clearer brand presentation. */
+
+/* Keep the privacy note exactly the same size as the company field help, even inside .intro p. */
+.intro .start-privacy{font-size:14px;line-height:1.6;color:var(--muted);max-width:58ch;margin:12px 0 0}
+@media(max-width:720px){.intro .start-privacy{font-size:14px}}
+
 .intro{background:var(--white);color:var(--ink);border:1px solid var(--line);box-shadow:0 18px 48px rgba(41,39,42,.07)}
 .intro h1{color:var(--forest);max-width:700px}
 .intro p{color:var(--muted);font-size:18px;line-height:1.7;max-width:62ch;margin-top:18px}
