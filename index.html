@@ -587,7 +587,7 @@ svg+='<title>Perfil visual de la marca</title><desc>Comparación de sistema de i
 [20,40,60,80,100].forEach(v=>{svg+='<polygon class="radar-grid" points="'+ring(v)+'"/>';});
 angles.forEach((a,i)=>{const p=point(i,100);svg+='<line class="radar-axis" x1="'+cx+'" y1="'+cy+'" x2="'+p.x.toFixed(1)+'" y2="'+p.y.toFixed(1)+'"/>';});
 svg+='<polygon class="radar-data" points="'+points.map(p=>p.x.toFixed(1)+','+p.y.toFixed(1)).join(' ')+'"/>';
-points.forEach((p,i)=>{const kind=['flower','target','cursor'][i%3];svg+='<g transform="translate('+(p.x-5.5).toFixed(1)+' '+(p.y-5.5).toFixed(1)+') scale(.172)">'+brandIconSvg(kind).replace('<svg class="brand-glyph glyph-'+kind+'" viewBox="0 0 64 64" aria-hidden="true">','').replace('</svg>','')+'</g>';});
+points.forEach((p,i)=>{const kind=['flower','target','cursor'][i%3];svg+='<g class="radar-point glyph-'+kind+'" transform="translate('+(p.x-5.5).toFixed(1)+' '+(p.y-5.5).toFixed(1)+') scale(.172)">'+brandIconSvg(kind).replace('<svg class="brand-glyph glyph-'+kind+'" viewBox="0 0 64 64" aria-hidden="true">','').replace('</svg>','')+'</g>';});
 svg+='<text class="radar-scale" x="'+(cx+3)+'" y="'+(cy-r+10)+'">100</text><text class="radar-scale" x="'+(cx+3)+'" y="'+(cy-r*.8+10)+'">80</text><text class="radar-scale" x="'+(cx+3)+'" y="'+(cy-r*.6+10)+'">60</text><text class="radar-scale" x="'+(cx+3)+'" y="'+(cy-r*.4+10)+'">40</text><text class="radar-scale" x="'+(cx+3)+'" y="'+(cy-r*.2+10)+'">20</text>';
 svg+='</svg>';return svg;
 }
