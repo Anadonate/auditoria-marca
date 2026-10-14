@@ -173,6 +173,7 @@ const steps=[
 {id:'q10',text:'¿Cómo se tomaron las principales decisiones visuales de tu marca?',hint:'No es una valoración de las personas que participaron, sino del proceso y los criterios utilizados.',options:[
 ['a','Partieron de una estrategia y unos criterios definidos.'],['b','Combinamos decisiones estratégicas con soluciones prácticas.'],['c','Muchas decisiones se tomaron por rapidez, presupuesto o falta de alternativas.'],['d','No conocemos bien el criterio que hay detrás de las decisiones actuales.']]}]}
 ];
+const questionScreens=steps.flatMap((section,sectionIndex)=>section.questions.map((question,questionIndex)=>({...question,sectionTitle:section.title,sectionDesc:section.desc,sectionIndex,questionIndex})));
 const scoreMap={a:100,b:65,c:30,d:0};
 const dimensionDefs=[
 {id:'system',label:'Sistema de identidad',short:'Sistema',weight:25,qs:['q1','q2'],meaning:'mide si existen fundamentos visuales y reglas que permitan aplicar la identidad.'},
@@ -192,22 +193,24 @@ const answers={};let currentStep=0;let diagnosis=null;
 const stepScreen=document.getElementById('stepScreen');
 function escapeHTML(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function renderStep(){
-const s=steps[currentStep];const answered=s.questions.every(q=>answers[q.id]);const totalAnswered=Object.keys(answers).length;
-document.getElementById('stepMeta').textContent='ETAPA '+(currentStep+1)+' DE '+steps.length;
-document.getElementById('stepPercent').textContent=Math.round((currentStep+1)/steps.length*100)+' %';
-document.getElementById('stepProgress').style.width=((currentStep+1)/steps.length*100)+'%';document.querySelector('.progressline').setAttribute('aria-valuenow',String(Math.round((currentStep+1)/steps.length*100)));
-document.getElementById('topProgress').style.width=(totalAnswered/10*100)+'%';
-let html='<div class="step-label">ETAPA '+(currentStep+1)+' / '+steps.length+'</div><h2 tabindex="-1">'+escapeHTML(s.title)+'</h2><p class="step-desc">'+escapeHTML(s.desc)+'</p>';
-s.questions.forEach((q,qi)=>{
+const q=questionScreens[currentStep];
+const answered=Boolean(answers[q.id]);
+const totalAnswered=Object.keys(answers).length;
+const progress=Math.round((currentStep+1)/questionScreens.length*100);
+document.getElementById('stepMeta').textContent='SECCIÓN '+(q.sectionIndex+1)+' DE '+steps.length+' · PREGUNTA '+(currentStep+1)+' DE '+questionScreens.length;
+document.getElementById('stepPercent').textContent=progress+' %';
+document.getElementById('stepProgress').style.width=progress+'%';
+document.querySelector('.progressline').setAttribute('aria-valuenow',String(progress));
+document.getElementById('topProgress').style.width=(totalAnswered/questionScreens.length*100)+'%';
+let html='<div class="step-label">PREGUNTA '+(currentStep+1)+' DE '+questionScreens.length+' · SECCIÓN '+(q.sectionIndex+1)+' DE '+steps.length+'</div><h2 tabindex="-1">'+escapeHTML(q.sectionTitle)+'</h2><p class="step-desc">'+escapeHTML(q.sectionDesc)+'</p>';
 html+='<div class="question"><h3 id="'+q.id+'-label">'+escapeHTML(q.text)+'</h3><p class="hint">'+escapeHTML(q.hint)+'</p><div class="options" role="radiogroup" aria-labelledby="'+q.id+'-label">';
 q.options.forEach(o=>{html+='<label class="option"><input type="radio" name="'+q.id+'" value="'+o[0]+'" '+(answers[q.id]===o[0]?'checked':'')+'><span class="letter">'+o[0].toUpperCase()+'</span><span>'+escapeHTML(o[1])+'</span></label>';});
 html+='</div></div>';
-});
-html+='<div class="nav"><button class="btn btn-quiet" id="prevBtn" '+(currentStep===0?'disabled':'')+'>← Anterior</button><button class="btn btn-main" id="nextBtn" '+(!answered?'disabled':'')+'>'+(currentStep===steps.length-1?'Ver mi diagnóstico':'Siguiente etapa')+' →</button></div><div class="error" id="stepError" role="status"></div>';
+html+='<div class="nav"><button class="btn btn-quiet" id="prevBtn" '+(currentStep===0?'disabled':'')+'>← Anterior</button><button class="btn btn-main" id="nextBtn" '+(!answered?'disabled':'')+'>'+(currentStep===questionScreens.length-1?'Ver mi diagnóstico':'Siguiente pregunta')+' →</button></div><div class="error" id="stepError" role="status"></div>';
 stepScreen.innerHTML=html;
-stepScreen.querySelectorAll('input[type=radio]').forEach(input=>input.addEventListener('change',()=>{answers[input.name]=input.value;const allDone=s.questions.every(q=>answers[q.id]);document.getElementById('nextBtn').disabled=!allDone;document.getElementById('topProgress').style.width=(Object.keys(answers).length/10*100)+'%';}));
+stepScreen.querySelectorAll('input[type=radio]').forEach(input=>input.addEventListener('change',()=>{answers[input.name]=input.value;document.getElementById('nextBtn').disabled=!Boolean(answers[q.id]);document.getElementById('topProgress').style.width=(Object.keys(answers).length/questionScreens.length*100)+'%';}));
 document.getElementById('prevBtn').addEventListener('click',()=>{if(currentStep>0){currentStep--;renderStep();focusStep();}});
-document.getElementById('nextBtn').addEventListener('click',()=>{if(!s.questions.every(q=>answers[q.id])){document.getElementById('stepError').textContent='Responde a las dos preguntas para continuar.';return;}if(currentStep<steps.length-1){currentStep++;renderStep();focusStep();}else{showResults();}});
+document.getElementById('nextBtn').addEventListener('click',()=>{if(!answers[q.id]){document.getElementById('stepError').textContent='Selecciona una respuesta para continuar.';return;}if(currentStep<questionScreens.length-1){currentStep++;renderStep();focusStep();}else{showResults();}});
 }
 function focusStep(){const heading=stepScreen.querySelector('h2');if(heading)heading.focus({preventScroll:true});stepScreen.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}
 function answerScore(id){return scoreMap[answers[id]]===undefined?0:scoreMap[answers[id]];}
