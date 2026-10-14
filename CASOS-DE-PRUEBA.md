@@ -17,11 +17,20 @@ Estos escenarios son regresiones mínimas para comprobar que las reglas de perfi
 - [x] El código JavaScript pasa `node --check`.
 - [x] Los cinco perfiles se activan en escenarios diseñados para ellos.
 - [x] Cada escenario de resultado muestra tres recomendaciones.
-- [ ] Verificar después del último cambio que la descarga genere un PDF de cinco páginas A4 y que el gráfico radial se visualice correctamente.
+- [x] La web pública genera un PDF de cinco páginas A4 con el gráfico radial de cinco dimensiones.
 - [x] Navegación de escritorio y flujo completo en móvil verificados con navegador automatizado.
 - [x] No se registraron errores JavaScript durante estas pruebas.
-- [ ] Activar GitHub Pages y comprobar la URL pública una vez publicada.
+- [x] GitHub Pages está publicado y la URL pública se ha probado directamente.
 - [ ] Revisar el diseño visual del PDF y validarlo con empresas reales antes del lanzamiento comercial.
+
+## Revisión de paleta visual
+
+- [x] Carbón `#29272A` sustituye al verde oscuro en los bloques y botones principales.
+- [x] Fondo marfil `#F5F2ED` aplicado al fondo general y blanco cálido `#FFFEFC` a las tarjetas.
+- [x] Terracota `#C57A52` y terracota oscuro `#96563B` aplicados a acentos, progresión, selección y CTA.
+- [x] Salvia grisácea `#9AA397` reservada para indicadores y gráficos.
+- [x] PDF adaptado a la misma paleta.
+- [x] Navegador automatizado sobre la URL pública: comprobados los colores calculados y descarga de PDF de cinco páginas A4.
 
 ## Revisión UX/UI de legibilidad y navegación
 
