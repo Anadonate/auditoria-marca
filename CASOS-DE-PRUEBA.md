@@ -32,6 +32,15 @@ Estos escenarios son regresiones mínimas para comprobar que las reglas de perfi
 - [x] PDF adaptado a la misma paleta.
 - [x] Navegador automatizado sobre la URL pública: comprobados los colores calculados y descarga de PDF de cinco páginas A4.
 
+## Flujo de inicio personalizado
+
+- [x] La cabecera de marca y la pantalla introductoria solo aparecen antes de iniciar la auditoría.
+- [x] El nombre de empresa es el único campo de inicio y se utiliza en el resultado y la portada del PDF.
+- [x] El campo de sector o actividad se ha eliminado.
+- [x] El botón «Comenzar auditoría» permanece desactivado hasta que se introduce un nombre de empresa.
+- [x] El cuestionario y la barra de progreso permanecen ocultos hasta pulsar «Comenzar auditoría».
+- [x] Al terminar, el informe muestra el nombre de la empresa; al reiniciar, se vuelve a la portada y se conserva el nombre introducido.
+
 ## Revisión UX/UI de legibilidad y navegación
 
 - [x] Texto explicativo de etapa: 17 px en escritorio y 16,5 px en móvil.
