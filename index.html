@@ -112,14 +112,14 @@ dimensionDefs.forEach(d=>{const values=d.qs.map(answerScore);dimensions[d.id]=Ma
 const weightedScore=Math.round(dimensionDefs.reduce((sum,d)=>sum+dimensions[d.id]*d.weight/100,0));
 const lowestDimension=Math.min(...Object.values(dimensions));
 // Safety caps stop a severe weakness from being hidden by the weighted average.
-let global=weightedScore;if(lowestDimension<20)global=Math.min(global,54);else if(lowestDimension<40)global=Math.min(global,64);
+let global=weightedScore;if(lowestDimension<20)global=Math.min(global,54);else if(lowestDimension<40)global=Math.min(global,64);else if(lowestDimension<60)global=Math.min(global,74);
 const q3=answers.q3,q1=answers.q1,q2=answers.q2,q5=answers.q5,q6=answers.q6,q7=answers.q7,q8=answers.q8;
 let profileKey,reason;
 if(q3==='c'||q3==='d'){profileKey='misaligned';reason='Has indicado que la identidad no ha acompañado la evolución del negocio.';}
 else if(dimensions.system<50 || (['c','d'].includes(q1)&&['c','d'].includes(q2)) || dimensions.strategy<30){profileKey='construction';reason='Las respuestas apuntan a que conviene reforzar las bases y los criterios de marca.';}
 else if(dimensions.coherence<55 || q5==='d' || (q5==='c'&&q6==='c')){profileKey='dispersed';reason='Las respuestas señalan inconsistencias en cómo se aplica la identidad.';}
 else if(dimensions.difference<55 || q7==='c' || q8==='c'){profileKey='functional';reason='La diferenciación o la personalidad visual aparecen como áreas prioritarias.';}
-else if(global>78 && Object.values(dimensions).every(v=>v>=60) && q3==='a'){profileKey='consolidated';reason='La puntuación general y las dimensiones críticas indican una base sólida sin alertas principales.';}
+else if(global>78 && Object.values(dimensions).every(v=>v>=60) && q3!=='c' && q3!=='d'){profileKey='consolidated';reason='La puntuación general y las dimensiones críticas indican una base sólida sin alertas principales.';}
 else{
 const candidates=[
 {key:'construction',value:Math.min(dimensions.system,dimensions.strategy),rank:1},
