@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Auditoría orientativa de marca visual creada por Ana Donate. Descubre fortalezas, áreas de mejora y próximos pasos para tu marca.">
+<title>Auditoría de Marca Visual · Ana Donate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Archivo+Expanded:wght@700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root{--ink:#292b28;--forest:#20332e;--forest2:#304740;--cream:#f7f3eb;--paper:#eee7d9;--line:#d9cfbb;--copper:#c97943;--copper-dark:#9e592f;--sage:#7b927d;--sage-light:#dbe3d7;--muted:#716f66;--red:#9f5042;--white:#fffdf8;--radius:18px;--shadow:0 15px 45px rgba(32,51,46,.07)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:Archivo,Arial,sans-serif;-webkit-font-smoothing:antialiased}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid var(--copper);outline-offset:3px}h1,h2,h3,h4{font-family:"Archivo Expanded",Archivo,sans-serif;letter-spacing:-.035em;margin:0;color:var(--forest)}p{line-height:1.65}.topline{height:5px;background:var(--paper)}.topline span{display:block;height:100%;width:0;background:var(--copper);transition:width .25s}.sitehead{max-width:1120px;margin:auto;padding:23px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{font-size:13px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;display:flex;align-items:center;gap:10px;color:var(--forest)}.brand-dot{width:11px;height:11px;border-radius:50%;background:var(--copper);display:inline-block}.headnote{color:var(--muted);font-size:12px}.container{width:min(100% - 36px,900px);margin:25px auto 100px}.intro{background:var(--forest);color:var(--cream);border-radius:26px;padding:clamp(28px,5vw,58px);position:relative;overflow:hidden;box-shadow:var(--shadow)}.intro:after{content:"";position:absolute;width:280px;height:280px;border-radius:50%;border:1px solid rgba(247,243,235,.12);right:-80px;bottom:-160px;box-shadow:0 0 0 28px rgba(247,243,235,.025),0 0 0 58px rgba(247,243,235,.025)}.eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--copper);display:block;margin-bottom:17px}.intro h1{color:var(--cream);font-size:clamp(32px,5.8vw,57px);line-height:1.08;max-width:690px}.intro p{color:#d6dfd5;max-width:620px;margin:22px 0 0;font-size:16px}.intro-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-top:30px;position:relative;z-index:1}.meta-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:550px;width:100%}.field label{display:block;font-size:12px;font-weight:700;margin-bottom:7px;color:#e9e5d9}.field input{width:100%;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.25);border-radius:9px;padding:12px 13px;color:white;min-width:0}.field input::placeholder{color:#c3cbc0}.start-note{font-size:11px;color:#c3cbc0;white-space:nowrap}.progress-meta{display:flex;justify-content:space-between;align-items:center;gap:15px;margin:30px 2px 12px;color:var(--muted);font-size:12px;font-weight:700}.progress-meta strong{color:var(--forest)}.progressline{height:4px;background:var(--line);border-radius:9px;overflow:hidden}.progressline div{height:100%;background:var(--copper);width:20%;transition:width .25s}.step-card{margin-top:20px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(24px,4.4vw,44px);box-shadow:var(--shadow)}.step-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--copper-dark);font-weight:800;margin-bottom:14px}.step-card h2{font-size:clamp(24px,4vw,35px);line-height:1.15;max-width:700px}.step-desc{color:var(--muted);margin:12px 0 30px;max-width:650px;font-size:14px}.question{padding:23px 0;border-top:1px solid var(--line)}.question:first-of-type{border-top:0}.question h3{font-family:Archivo,Arial,sans-serif;font-size:16px;letter-spacing:-.015em;line-height:1.45;color:var(--ink);margin-bottom:7px}.question .hint{font-size:12px;color:var(--muted);margin:0 0 14px}.options{display:grid;gap:9px}.option{display:flex;align-items:flex-start;gap:12px;border:1px solid var(--line);border-radius:11px;padding:13px 15px;background:#fbf8f1;cursor:pointer;transition:border-color .15s,background .15s}.option:hover{border-color:var(--sage)}.option:has(input:checked){border-color:var(--copper);background:#f5e8db;box-shadow:inset 0 0 0 1px var(--copper)}.option input{margin:3px 0 0;accent-color:var(--copper);flex-shrink:0;width:16px;height:16px}.option span{font-size:13.5px;line-height:1.5}.letter{display:inline-grid;place-items:center;background:var(--paper);color:var(--forest);font-size:11px;font-weight:800;border-radius:5px;width:22px;height:22px;flex-shrink:0;margin-top:-3px}.nav{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:25px}.btn{border:0;border-radius:100px;padding:14px 22px;font-size:13px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:9px;transition:transform .15s,background .15s}.btn:hover{transform:translateY(-1px)}.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}.btn-main{background:var(--forest);color:var(--cream)}.btn-main:hover{background:var(--forest2)}.btn-quiet{background:transparent;color:var(--muted)}.btn-copper{background:var(--copper);color:#fff}.smallnote{font-size:11px;color:var(--muted);line-height:1.6;margin-top:20px}.screen[hidden]{display:none}.results{display:none}.results.show{display:block}.result-hero{background:var(--forest);border-radius:24px;padding:clamp(27px,5vw,48px);color:var(--cream);position:relative;overflow:hidden}.result-hero h1{font-size:clamp(29px,5vw,48px);line-height:1.12;color:var(--cream);max-width:730px}.result-hero p{color:#d4ded4;max-width:670px}.profile-chip{display:inline-flex;border:1px solid rgba(255,255,255,.26);border-radius:999px;padding:8px 12px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:#f1b98f;margin-bottom:18px}.result-top{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;margin-top:20px}.panel{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:25px}.section-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.11em;font-weight:800;color:var(--copper-dark);margin-bottom:11px}.score-big{font-family:"Archivo Expanded",Archivo,sans-serif;font-size:55px;color:var(--forest);letter-spacing:-.05em}.score-caption{font-size:12px;color:var(--muted)}.scorebar{height:7px;border-radius:20px;background:var(--paper);overflow:hidden;margin:18px 0 8px}.scorebar span{display:block;height:100%;background:var(--sage);border-radius:20px}.score-qualifier{font-size:12px;font-weight:700;color:var(--forest)}.panel h2{font-size:22px;line-height:1.25;margin-bottom:13px}.dim-row{margin-top:17px}.dim-head{display:flex;justify-content:space-between;gap:12px;font-size:12px;font-weight:700}.dim-head span:first-child{color:var(--ink)}.dim-head span:last-child{color:var(--forest)}.dim-bar{height:5px;background:var(--paper);border-radius:10px;margin-top:7px;overflow:hidden}.dim-bar span{height:100%;display:block;background:var(--sage)}.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.callout{background:#f0e4c3;border:1px solid #dbc98f;border-radius:14px;padding:20px;line-height:1.65;color:var(--forest);font-size:14px}.evidence{margin:0;padding-left:18px}.evidence li{margin:10px 0;font-size:13px;line-height:1.55}.rec{padding:16px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:28px 1fr;gap:12px}.rec:first-child{border-top:0}.rec-num{width:28px;height:28px;border-radius:8px;background:var(--forest);color:var(--cream);display:grid;place-items:center;font-size:12px;font-weight:800}.rec h3{font-family:Archivo,Arial,sans-serif;letter-spacing:0;font-size:14px;margin:0 0 5px}.rec p{font-size:12.5px;color:var(--muted);line-height:1.6;margin:0}.why{font-size:12px;color:var(--ink);margin-top:7px;line-height:1.55}.cta{background:var(--forest);color:var(--cream);border-radius:22px;padding:28px;margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}.cta h2{color:var(--cream);font-size:22px}.cta p{color:#d4ded4;font-size:12.5px;max-width:540px;margin:8px 0 0}.restart{margin-top:20px;text-align:center}.restart button{text-decoration:underline;text-underline-offset:3px}.disclaimer{margin-top:18px;color:var(--muted);font-size:11px;line-height:1.6}.footer{max-width:1120px;margin:0 auto;padding:0 28px 30px;color:var(--muted);font-size:11px;display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:20px}.footer strong{color:var(--forest)}.error{font-size:12px;color:var(--red);margin-top:12px}
+@media(max-width:720px){.sitehead{padding:18px}.headnote{display:none}.container{width:min(100% - 24px,900px);margin-top:10px}.intro-bottom{align-items:stretch;flex-direction:column}.start-note{white-space:normal}.result-top,.content-grid{grid-template-columns:1fr}.footer{padding-left:18px;padding-right:18px;flex-direction:column}.nav .btn{padding:13px 16px}.option span{font-size:13px}.meta-fields{grid-template-columns:1fr}.intro{padding:27px 22px}.step-card{padding:23px 19px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="topline"><span id="topProgress"></span></div>
+<header class="sitehead"><div class="brand"><span class="brand-dot"></span>Ana Donate <span style="font-weight:500;color:var(--muted)">/ Auditoría de marca</span></div><div class="headnote">Diagnóstico orientativo · 3 minutos</div></header>
+<main class="container">
+<section class="intro" id="intro">
+<span class="eyebrow">Diseño gráfico &amp; Branding</span>
+<h1>Tu marca tiene una historia. ¿La está contando bien?</h1>
+<p>Responde a 10 preguntas sencillas y descubre qué está funcionando, qué puede mejorar y por dónde conviene empezar. No necesitas conocimientos de diseño ni preparar documentación.</p>
+<div class="intro-bottom">
+<div class="meta-fields">
+<div class="field"><label for="company">Nombre de la empresa <span style="font-weight:400">(opcional)</span></label><input id="company" maxlength="90" placeholder="Ej. Estudio Norte" autocomplete="organization"></div>
+<div class="field"><label for="sector">Sector o actividad <span style="font-weight:400">(opcional)</span></label><input id="sector" maxlength="90" placeholder="Ej. Alimentación, consultoría…"></div>
+</div>
+<div class="start-note">No hay respuestas correctas o incorrectas.<br>El resultado se basa en tus respuestas.</div>
+</div>
+</section>
+<div class="progress-meta"><span id="stepMeta">ETAPA 1 DE 5</span><strong id="stepPercent">20 %</strong></div><div class="progressline"><div id="stepProgress"></div></div>
+<section id="questionnaire" aria-live="polite">
+<div id="stepScreen" class="step-card"></div>
+</section>
+<section id="results" class="results" aria-live="polite"></section>
+<p class="smallnote" id="privacyNote">Las respuestas se procesan en tu navegador para generar el resultado y el PDF. Esta versión no envía tus respuestas a un servidor.</p>
+</main>
+<footer class="footer"><div><strong>ANA DONATE</strong> — Diseño gráfico &amp; Branding</div><div>Auditoría de marca visual · Herramienta orientativa</div></footer>
+<script>
+(function(){
+'use strict';
+const steps=[
+{title:'Los cimientos de tu marca',desc:'Primero, comprobemos si tienes los elementos básicos y unas reglas que te ayuden a mantener una identidad reconocible.',questions:[
+{id:'q1',text:'¿En qué punto está actualmente la identidad visual de tu empresa?',hint:'Piensa en el logo, los colores, la tipografía y cómo se combinan.',options:[
+['a','Tenemos logo, colores, tipografías y unas reglas claras de aplicación.'],['b','Tenemos logo, colores y tipografías, pero no un sistema bien definido.'],['c','Tenemos algunas piezas, pero falta definir varios elementos importantes.'],['d','La identidad está poco desarrollada o todavía no existe.']]},
+{id:'q2',text:'¿Cómo organizáis las reglas visuales de la marca?',hint:'No importa tanto que exista un documento como que los criterios estén claros y se utilicen.',options:[
+['a','Tenemos una guía actualizada que utilizamos habitualmente.'],['b','Tenemos algunas reglas, pero no están reunidas en una guía clara.'],['c','Cada persona decide cómo aplicar la identidad según la necesidad.'],['d','No lo sé o nunca lo hemos definido.']]}]},
+{title:'Tu negocio y tu público',desc:'Una identidad debe representar la empresa de hoy y tener claro a quién quiere llegar.',questions:[
+{id:'q3',text:'¿Hasta qué punto representa tu imagen actual el negocio que tienes hoy?',hint:'Ten en cuenta los cambios en tus servicios, posicionamiento, clientes u objetivos.',options:[
+['a','Lo representa bien y sigue alineada con nuestros objetivos.'],['b','En general nos representa, pero hay aspectos que han quedado desactualizados.'],['c','El negocio ha evolucionado bastante y la imagen no ha seguido ese cambio.'],['d','La imagen ya no refleja lo que somos ni lo que queremos transmitir.']]},
+{id:'q4',text:'¿Cómo definirías al público al que se dirige tu empresa?',hint:'Piensa si puedes describir con claridad a tus clientes principales y sus necesidades.',options:[
+['a','Tenemos claro a quién nos dirigimos y qué necesita.'],['b','Tenemos un público principal, pero todavía es bastante amplio.'],['c','Nos dirigimos a perfiles muy distintos y no tenemos prioridades claras.'],['d','No tenemos definido un público concreto.']]}]},
+{title:'Coherencia visual',desc:'La marca puede adaptarse a cada canal y, aun así, seguir siendo reconocible.',questions:[
+{id:'q5',text:'Cuando un cliente ve tu web, tus redes y tus materiales comerciales, ¿qué ocurre?',hint:'Valora la impresión general, no pequeñas diferencias que responden a cada formato.',options:[
+['a','Reconoce la misma marca en todos los canales.'],['b','La marca se reconoce, aunque existen algunas diferencias visuales.'],['c','Hay diferencias importantes entre unos canales y otros.'],['d','Cada canal parece tener una identidad diferente.']]},
+{id:'q6',text:'¿Cómo se aplican las fotografías, las tipografías y los recursos gráficos?',hint:'Piensa en las decisiones del día a día al preparar una publicación, una presentación o una propuesta.',options:[
+['a','Siguen criterios reconocibles y se adaptan a cada formato.'],['b','Hay una línea general, pero no siempre se mantiene.'],['c','Se eligen según cada publicación o necesidad puntual.'],['d','No tenemos criterios definidos para estos elementos.']]}]},
+{title:'Personalidad y diferenciación',desc:'Además de verse coherente, una marca necesita transmitir algo propio y relevante para sus clientes.',questions:[
+{id:'q7',text:'Si ocultáramos el nombre y el logotipo, ¿sería fácil distinguir tu marca de otras de tu sector?',hint:'No se trata solo de tener un logo original, sino de construir códigos visuales reconocibles.',options:[
+['a','Sí, tenemos códigos visuales y una personalidad reconocibles.'],['b','En parte, pero compartimos muchos códigos con otras marcas.'],['c','Sería difícil; nuestra imagen se parece a la de muchos competidores.'],['d','No lo hemos evaluado o no sabría decirlo.']]},
+{id:'q8',text:'¿Qué transmite actualmente tu identidad visual?',hint:'Piensa en la impresión que recibe alguien que todavía no conoce tu empresa.',options:[
+['a','La personalidad y los valores que queremos asociar a la marca.'],['b','Algunos de nuestros valores, aunque no de forma consistente.'],['c','Una imagen correcta, pero bastante genérica.'],['d','No tenemos claro qué impresión genera.']]}]},
+{title:'La prioridad para tu marca',desc:'Dos últimas preguntas nos ayudan a adaptar la devolución a lo que más te importa y a las decisiones que han llevado a la situación actual.',questions:[
+{id:'q9',text:'¿Qué te gustaría mejorar principalmente de tu marca?',hint:'Elige la prioridad que más te preocupa ahora. Esta respuesta personaliza el informe, pero no determina por sí sola el diagnóstico.',options:[
+['a','Actualizar la imagen para que represente mejor el negocio actual.'],['b','Conseguir más coherencia en todos los canales.'],['c','Diferenciarnos y tener una personalidad más propia.'],['d','Definir mejor los fundamentos y las reglas de nuestra identidad.'],['e','Ampliar la presencia de una marca que ya funciona bien.']]},
+{id:'q10',text:'¿Cómo se tomaron las principales decisiones visuales de tu marca?',hint:'No es una valoración de las personas que participaron, sino del proceso y los criterios utilizados.',options:[
+['a','Partieron de una estrategia y unos criterios definidos.'],['b','Combinamos decisiones estratégicas con soluciones prácticas.'],['c','Muchas decisiones se tomaron por rapidez, presupuesto o falta de alternativas.'],['d','No conocemos bien el criterio que hay detrás de las decisiones actuales.']]}]}
+];
+const scoreMap={a:100,b:65,c:30,d:0};
+const dimensionDefs=[
+{id:'system',label:'Sistema de identidad',short:'Sistema',weight:25,qs:['q1','q2'],meaning:'mide si existen fundamentos visuales y reglas que permitan aplicar la identidad.'},
+{id:'alignment',label:'Alineación con el negocio',short:'Alineación',weight:20,qs:['q3'],meaning:'mide hasta qué punto la identidad representa la situación actual de la empresa.'},
+{id:'strategy',label:'Definición estratégica',short:'Estrategia',weight:15,qs:['q4'],meaning:'mide la claridad con la que está definido el público principal.'},
+{id:'coherence',label:'Coherencia visual',short:'Coherencia',weight:25,qs:['q5','q6'],meaning:'mide la consistencia visual entre canales y aplicaciones.'},
+{id:'difference',label:'Diferenciación y personalidad',short:'Diferenciación',weight:15,qs:['q7','q8'],meaning:'mide si la marca expresa una personalidad reconocible y distinta.'}
+];
+const profileCopy={
+construction:{name:'Marca en construcción',lead:'Tienes elementos con potencial, pero todavía necesitan una base común que los conecte.',focus:'Definir los fundamentos visuales y convertir decisiones aisladas en un sistema reconocible.',closing:'Antes de añadir más piezas, conviene construir una base de marca clara y consistente.'},
+dispersed:{name:'Marca dispersa',lead:'Tu marca tiene recursos, pero su aplicación cambia demasiado entre canales o materiales.',focus:'Establecer reglas visuales que aporten coherencia sin impedir que la marca se adapte a cada formato.',closing:'El siguiente paso es conseguir que cada punto de contacto se reconozca como parte de la misma marca.'},
+functional:{name:'Marca funcional',lead:'Tu identidad cumple una función, pero puede desarrollar una personalidad más propia.',focus:'Revisar los códigos visuales y la percepción de marca para construir una diferenciación reconocible.',closing:'La oportunidad no consiste solo en mejorar el diseño, sino en construir una identidad más fácil de reconocer y recordar.'},
+consolidated:{name:'Marca consolidada',lead:'Tu marca presenta unas bases sólidas y un sistema visual que parece funcionar.',focus:'Ampliar el reconocimiento y la expresión de la marca en nuevos formatos sin perder consistencia.',closing:'El siguiente paso es ampliar las posibilidades de una identidad que ya tiene una base sólida.'},
+misaligned:{name:'Marca desalineada',lead:'Tu negocio ha evolucionado y su identidad visual necesita acompañar ese cambio.',focus:'Revisar el encaje entre la empresa actual, su público, sus objetivos y la identidad que comunica.',closing:'Antes de rediseñar elementos aislados, conviene revisar qué debe comunicar tu marca hoy.'}
+};
+const answers={};let currentStep=0;let diagnosis=null;
+const stepScreen=document.getElementById('stepScreen');
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function renderStep(){
+const s=steps[currentStep];const answered=s.questions.every(q=>answers[q.id]);const totalAnswered=Object.keys(answers).length;
+document.getElementById('stepMeta').textContent='ETAPA '+(currentStep+1)+' DE '+steps.length;
+document.getElementById('stepPercent').textContent=Math.round((currentStep+1)/steps.length*100)+' %';
+document.getElementById('stepProgress').style.width=((currentStep+1)/steps.length*100)+'%';
+document.getElementById('topProgress').style.width=(totalAnswered/10*100)+'%';
+let html='<div class="step-label">PARADA '+(currentStep+1)+' / '+steps.length+'</div><h2>'+escapeHTML(s.title)+'</h2><p class="step-desc">'+escapeHTML(s.desc)+'</p>';
+s.questions.forEach((q,qi)=>{
+html+='<div class="question"><h3 id="'+q.id+'-label">'+escapeHTML(q.text)+'</h3><p class="hint">'+escapeHTML(q.hint)+'</p><div class="options" role="radiogroup" aria-labelledby="'+q.id+'-label">';
+q.options.forEach(o=>{html+='<label class="option"><input type="radio" name="'+q.id+'" value="'+o[0]+'" '+(answers[q.id]===o[0]?'checked':'')+'><span class="letter">'+o[0].toUpperCase()+'</span><span>'+escapeHTML(o[1])+'</span></label>';});
+html+='</div></div>';
+});
+html+='<div class="nav"><button class="btn btn-quiet" id="prevBtn" '+(currentStep===0?'disabled':'')+'>← Anterior</button><button class="btn btn-main" id="nextBtn" '+(!answered?'disabled':'')+'>'+(currentStep===steps.length-1?'Ver mi diagnóstico':'Siguiente etapa')+' →</button></div><div class="error" id="stepError" role="status"></div>';
+stepScreen.innerHTML=html;
+stepScreen.querySelectorAll('input[type=radio]').forEach(input=>input.addEventListener('change',()=>{answers[input.name]=input.value;const allDone=s.questions.every(q=>answers[q.id]);document.getElementById('nextBtn').disabled=!allDone;document.getElementById('topProgress').style.width=(Object.keys(answers).length/10*100)+'%';}));
+document.getElementById('prevBtn').addEventListener('click',()=>{if(currentStep>0){currentStep--;renderStep();window.scrollTo({top:0,behavior:'smooth'});}});
+document.getElementById('nextBtn').addEventListener('click',()=>{if(!s.questions.every(q=>answers[q.id])){document.getElementById('stepError').textContent='Responde a las dos preguntas para continuar.';return;}if(currentStep<steps.length-1){currentStep++;renderStep();window.scrollTo({top:0,behavior:'smooth'});}else{showResults();}});
+}
+function answerScore(id){return scoreMap[answers[id]]===undefined?0:scoreMap[answers[id]];}
+function calculate(){
+const dimensions={};
+dimensionDefs.forEach(d=>{const values=d.qs.map(answerScore);dimensions[d.id]=Math.round(values.reduce((a,b)=>a+b,0)/values.length);});
+const global=Math.round(dimensionDefs.reduce((sum,d)=>sum+dimensions[d.id]*d.weight/100,0));
+const q3=answers.q3,q1=answers.q1,q2=answers.q2,q5=answers.q5,q6=answers.q6,q7=answers.q7,q8=answers.q8;
+let profileKey,reason;
+if(q3==='c'||q3==='d'){profileKey='misaligned';reason='Has indicado que la identidad no ha acompañado la evolución del negocio.';}
+else if(dimensions.system<50 || (['c','d'].includes(q1)&&['c','d'].includes(q2)) || dimensions.strategy<30){profileKey='construction';reason='Las respuestas apuntan a que conviene reforzar las bases y los criterios de marca.';}
+else if(dimensions.coherence<55 || q5==='d' || (q5==='c'&&q6==='c')){profileKey='dispersed';reason='Las respuestas señalan inconsistencias en cómo se aplica la identidad.';}
+else if(dimensions.difference<55 || q7==='c' || q8==='c'){profileKey='functional';reason='La diferenciación o la personalidad visual aparecen como áreas prioritarias.';}
+else if(global>78 && Object.values(dimensions).every(v=>v>=60) && q3==='a'){profileKey='consolidated';reason='La puntuación general y las dimensiones críticas indican una base sólida sin alertas principales.';}
+else{
+const candidates=[
+{key:'construction',value:Math.min(dimensions.system,dimensions.strategy),rank:1},
+{key:'dispersed',value:dimensions.coherence,rank:2},
+{key:'functional',value:dimensions.difference,rank:3}
+].sort((a,b)=>a.value-b.value||a.rank-b.rank);
+profileKey=candidates[0].key;
+reason='Este perfil refleja el área más débil entre las dimensiones evaluadas. La puntuación por sí sola no sustituye una revisión de los materiales reales.';
+}
+const profile=profileCopy[profileKey];
+const strengths=[];const gaps=[];
+dimensionDefs.forEach(d=>{if(dimensions[d.id]>=75)strengths.push(d.label+' ('+dimensions[d.id]+'/100)');if(dimensions[d.id]<60)gaps.push(d.label+' ('+dimensions[d.id]+'/100)');});
+const recommendations=buildRecommendations(profileKey,dimensions);
+const q9choice=steps[4].questions[0].options.find(o=>o[0]===answers.q9);
+const q10choice=steps[4].questions[1].options.find(o=>o[0]===answers.q10);
+return {global,dimensions,profileKey,profile,reason,strengths,gaps,recommendations,priority:q9choice?q9choice[1]:'',decision:q10choice?q10choice[1]:'',answers:{...answers},company:document.getElementById('company').value.trim(),sector:document.getElementById('sector').value.trim(),date:new Date()};
+}
+const recommendationBank={
+system:{title:'Ordenar los fundamentos visuales',action:'Reúne logo, paleta, tipografías, estilo fotográfico y recursos gráficos en un sistema básico con reglas claras.',why:'Cuando los elementos se deciden de forma aislada, cada nueva pieza exige volver a tomar las mismas decisiones.',proof:['q1','q2']},
+alignment:{title:'Revisar el encaje con el negocio actual',action:'Contrasta la identidad actual con tus servicios, público, posicionamiento y objetivos de los próximos años. Anota qué ya no representa bien a la empresa.',why:'Una marca puede tener una ejecución visual correcta y, aun así, comunicar una realidad que la empresa ya ha superado.',proof:['q3']},
+strategy:{title:'Precisar el público prioritario',action:'Define un público principal, sus necesidades y el motivo por el que elegiría tu empresa frente a otras alternativas.',why:'Un público demasiado amplio dificulta tomar decisiones coherentes sobre mensajes, códigos visuales y experiencia.',proof:['q4']},
+coherence:{title:'Unificar los criterios entre canales',action:'Revisa web, redes, presentaciones y materiales comerciales. Define reglas sencillas para tipografía, color, imagen y composición, y crea ejemplos de aplicación.',why:'La consistencia ayuda a que cada contacto refuerce el reconocimiento de la misma marca sin obligar a que todas las piezas sean idénticas.',proof:['q5','q6']},
+difference:{title:'Construir códigos de marca más propios',action:'Analiza cómo se presentan tres competidores y detecta qué códigos comparten. Define qué rasgos visuales y de personalidad deberían hacer reconocible a tu marca.',why:'La diferenciación no depende únicamente de un logo; se forma con un conjunto de decisiones coherentes y relevantes para el público.',proof:['q7','q8']},
+presence:{title:'Ampliar la expresión de una marca consolidada',action:'Identifica los puntos de contacto donde tu marca tiene menos presencia y adapta el sistema existente a esos formatos antes de crear nuevas soluciones.',why:'Una base sólida puede ganar alcance si se aplica con intención sin perder reconocimiento.',proof:['q9']}
+};
+function priorityRank(key,dimensions){const map={system:dimensions.system,alignment:dimensions.alignment,strategy:dimensions.strategy,coherence:dimensions.coherence,difference:dimensions.difference};return map[key];}
+function buildRecommendations(profileKey,dimensions){
+let preferred;
+if(profileKey==='misaligned')preferred=['alignment','system','strategy','coherence'];
+else if(profileKey==='construction')preferred=['system','strategy','coherence','difference'];
+else if(profileKey==='dispersed')preferred=['coherence','system','difference','strategy'];
+else if(profileKey==='functional')preferred=['difference','strategy','coherence','system'];
+else preferred=['presence','difference','coherence','alignment'];
+let scored=preferred.map((key,index)=>({key,index,score:key==='presence'?(dimensions.coherence+dimensions.difference)/2:(100-(priorityRank(key,dimensions)||0))}));
+const q9=answers.q9;if(q9==='a'&&!scored.some(x=>x.key==='alignment'))scored.push({key:'alignment',score:60,index:5});if(q9==='b'&&!scored.some(x=>x.key==='coherence'))scored.push({key:'coherence',score:60,index:5});if(q9==='c'&&!scored.some(x=>x.key==='difference'))scored.push({key:'difference',score:60,index:5});if(q9==='d'&&!scored.some(x=>x.key==='system'))scored.push({key:'system',score:60,index:5});if(q9==='e'&&!scored.some(x=>x.key==='presence'))scored.push({key:'presence',score:60,index:5});
+scored.sort((a,b)=>b.score-a.score||a.index-b.index);
+const chosen=[];for(const item of scored){if(!chosen.includes(item.key)){chosen.push(item.key);}if(chosen.length===3)break;}
+if(answers.q10==='c'&&!chosen.includes('system')){chosen[2]= 'system';}
+if(answers.q10==='d'&&!chosen.includes('system')&&!chosen.includes('strategy'))chosen[2]='system';
+const unique=[...new Set(chosen)].slice(0,3);
+return unique.map((key,i)=>{const r=recommendationBank[key];let dimension=key==='presence'?'coherence':key;let value=dimensions[dimension];const proof=r.proof.map(id=>{const q=steps.flatMap(s=>s.questions).find(x=>x.id===id);const opt=q.options.find(o=>o[0]===answers[id]);return q.text+' — '+(opt?opt[1]:'');}).join(' ');return {...r,key,priority:i+1,proof,level:value===undefined?'Oportunidad':value<50?'Prioridad alta':value<75?'A mejorar':'Optimización'};});
+}
+function showResults(){
+diagnosis=calculate();document.getElementById('questionnaire').hidden=true;document.getElementById('privacyNote').hidden=true;document.getElementById('results').classList.add('show');document.getElementById('stepMeta').textContent='DIAGNÓSTICO COMPLETADO';document.getElementById('stepPercent').textContent='100 %';document.getElementById('stepProgress').style.width='100%';document.getElementById('topProgress').style.width='100%';renderResults(diagnosis);window.scrollTo({top:0,behavior:'smooth'});
+}
+function renderResults(d){
+const p=d.profile;const company=d.company?'<span style="color:#f1b98f">'+escapeHTML(d.company)+'</span>, ':'';let html='<div class="result-hero"><span class="profile-chip">'+escapeHTML(p.name)+'</span><h1>'+company+escapeHTML(p.lead)+'</h1><p>'+escapeHTML(d.reason)+'</p></div>';
+html+='<div class="result-top"><section class="panel"><div class="section-kicker">Índice de desarrollo de marca</div><div class="score-big">'+d.global+'<span style="font-size:22px">/100</span></div><div class="score-caption">Indicador orientativo calculado a partir de tus respuestas.</div><div class="scorebar"><span style="width:'+d.global+'%"></span></div><div class="score-qualifier">'+scoreLabel(d.global)+'</div><p class="smallnote">No es una auditoría visual directa ni una comparación con competidores. Refleja el estado declarado en tus respuestas.</p></section><section class="panel"><div class="section-kicker">Las cinco dimensiones</div>';
+dimensionDefs.forEach(def=>{let n=d.dimensions[def.id];html+='<div class="dim-row"><div class="dim-head"><span>'+escapeHTML(def.label)+'</span><span>'+n+'/100 · '+levelLabel(n)+'</span></div><div class="dim-bar"><span style="width:'+n+'%"></span></div></div>';});
+html+='</section></div>';
+html+='<div class="content-grid"><section class="panel"><div class="section-kicker">Lectura del diagnóstico</div><h2>'+escapeHTML(p.name)+'</h2><p>'+escapeHTML(p.focus)+'</p><div class="callout">'+escapeHTML(p.closing)+'</div><p class="smallnote">Criterio de asignación: '+escapeHTML(d.reason)+'</p></section><section class="panel"><div class="section-kicker">Fortalezas y atención</div><h2>Qué destaca en tus respuestas</h2><strong style="font-size:12px">Fortalezas declaradas</strong><ul class="evidence">'+(d.strengths.length?d.strengths.map(x=>'<li>'+escapeHTML(x)+'</li>').join(''):'<li>No se detectan dimensiones especialmente fuertes en esta autoevaluación; es una oportunidad para establecer una base.</li>')+'</ul><strong style="font-size:12px;display:block;margin-top:17px">Áreas a revisar</strong><ul class="evidence">'+(d.gaps.length?d.gaps.map(x=>'<li>'+escapeHTML(x)+'</li>').join(''):'<li>No aparecen dimensiones por debajo de 60/100, aunque conviene validar la percepción con materiales reales y clientes.</li>')+'</ul></section></div>';
+html+='<section class="panel" style="margin-top:18px"><div class="section-kicker">Tu hoja de ruta</div><h2>Tres próximos pasos</h2><p class="step-desc" style="margin-bottom:10px">Las acciones se priorizan según el perfil, las dimensiones más débiles y la prioridad que has indicado.</p>';
+d.recommendations.forEach(r=>{html+='<div class="rec"><div class="rec-num">'+r.priority+'</div><div><h3>'+escapeHTML(r.title)+'</h3><p>'+escapeHTML(r.action)+'</p><div class="why"><strong>Por qué importa:</strong> '+escapeHTML(r.why)+'</div><p class="smallnote"><strong>Señal de tus respuestas:</strong> '+escapeHTML(r.proof)+'</p></div></div>';});
+html+='</section>';
+html+='<div class="cta"><div><div class="section-kicker" style="color:#f1b98f">Siguiente paso</div><h2>Convierte el diagnóstico en decisiones de marca.</h2><p>'+escapeHTML(p.closing)+' Una revisión profesional de la identidad y sus aplicaciones permitiría contrastar estas hipótesis con la marca real.</p></div><button class="btn btn-copper" id="pdfBtn">↓ Descargar informe PDF</button></div>';
+html+='<p class="disclaimer">Este resultado es orientativo y se basa exclusivamente en tus respuestas. No sustituye una auditoría de identidad visual, investigación de público ni análisis competitivo. Las conclusiones deberían validarse con los materiales reales de la empresa.</p><div class="restart"><button class="btn btn-quiet" id="restartBtn">Volver a realizar el cuestionario</button></div>';
+document.getElementById('results').innerHTML=html;document.getElementById('pdfBtn').addEventListener('click',downloadPDF);document.getElementById('restartBtn').addEventListener('click',restart);
+}
+function scoreLabel(n){return n>=80?'Base sólida':n>=60?'En desarrollo':n>=40?'Necesita atención':'Prioridad de mejora';}
+function levelLabel(n){return n>=80?'Sólida':n>=60?'En desarrollo':n>=40?'A revisar':'Prioridad';}
+function restart(){Object.keys(answers).forEach(k=>delete answers[k]);currentStep=0;diagnosis=null;document.getElementById('results').classList.remove('show');document.getElementById('results').innerHTML='';document.getElementById('questionnaire').hidden=false;document.getElementById('privacyNote').hidden=false;renderStep();window.scrollTo({top:0,behavior:'smooth'});}
+function downloadPDF(){
+if(!diagnosis||!window.jspdf){alert('No ha sido posible preparar el informe. Actualiza la página e inténtalo de nuevo.');return;}
+const btn=document.getElementById('pdfBtn');const old=btn.textContent;btn.disabled=true;btn.textContent='Generando informe…';
+try{
+const d=diagnosis,p=d.profile,jsPDF=window.jspdf.jsPDF,pdf=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+const W=210,H=297,L=18,R=192,ink=[41,43,40],forest=[32,51,46],cream=[247,243,235],paper=[238,231,217],copper=[201,121,67],muted=[113,111,102],sage=[123,146,125],red=[159,80,66];
+function fill(c){pdf.setFillColor(c[0],c[1],c[2]);}function draw(c){pdf.setDrawColor(c[0],c[1],c[2]);}function text(c){pdf.setTextColor(c[0],c[1],c[2]);}
+function wrap(str,x,y,max,fontSize=10,color=ink,bold=false,lineH=5){pdf.setFont('helvetica',bold?'bold':'normal');pdf.setFontSize(fontSize);text(color);const lines=pdf.splitTextToSize(String(str),max);pdf.text(lines,x,y);return y+lines.length*lineH;}
+function section(title,y){fill(copper);pdf.roundedRect(L,y-4,2.5,6,1,1,'F');pdf.setFont('helvetica','bold');pdf.setFontSize(10);text(forest);pdf.text(title.toUpperCase(),L+6,y);return y+9;}
+function footer(page){draw([217,207,187]);pdf.line(L,280,R,280);pdf.setFont('helvetica','bold');pdf.setFontSize(8);text(forest);pdf.text('ANA DONATE  /  Diseño gráfico & Branding',L,287);pdf.setFont('helvetica','normal');text(muted);pdf.text('AUDITORÍA DE MARCA VISUAL  ·  '+page+' / 3',R,287,{align:'right'});}
+function pageTitle(eyebrow,title,sub){pdf.setFont('helvetica','bold');pdf.setFontSize(8);text(copper);pdf.text(eyebrow.toUpperCase(),L,22);pdf.setFont('helvetica','bold');pdf.setFontSize(23);text(forest);let lines=pdf.splitTextToSize(title,170);pdf.text(lines,L,34);let y=34+lines.length*9;if(sub)y=wrap(sub,L,y+1,170,9,muted,false,5);return y+6;}
+function roundedBox(x,y,w,h,color=paper){fill(color);pdf.roundedRect(x,y,w,h,3,3,'F');}
+function safe(s){return String(s||'').replace(/\s+/g,' ').trim();}
+const company=safe(d.company)||'Tu empresa';const sector=safe(d.sector);
+const date=d.date.toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'});
+// Page 1: executive summary
+fill(forest);pdf.rect(0,0,W,H,'F');fill(copper);pdf.circle(179,37,19,'F');fill([48,71,64]);pdf.circle(179,37,13,'F');
+pdf.setFont('helvetica','bold');pdf.setFontSize(9);text([241,185,143]);pdf.text('ANA DONATE  /  DISEÑO GRÁFICO & BRANDING',L,25);
+pdf.setFont('helvetica','bold');pdf.setFontSize(26);text(cream);pdf.text('Auditoría de',L,60);pdf.text('marca visual',L,71);
+pdf.setFont('helvetica','normal');pdf.setFontSize(11);text([218,225,215]);pdf.text('Un diagnóstico orientativo para entender tu punto de partida y',L,85);pdf.text('priorizar mejoras de identidad visual.',L,91);
+fill([48,71,64]);pdf.roundedRect(L,112,174,70,4,4,'F');pdf.setFont('helvetica','bold');pdf.setFontSize(8);text([241,185,143]);pdf.text('PERFIL IDENTIFICADO',L+9,125);pdf.setFontSize(20);text(cream);pdf.text(pdf.splitTextToSize(p.name,155),L+9,138);wrap(p.lead,L+9,151,153,9,[218,225,215],false,5);
+pdf.setFont('helvetica','bold');pdf.setFontSize(8);text([241,185,143]);pdf.text('ÍNDICE DE DESARROLLO DE MARCA',L,203);
+pdf.setFont('helvetica','bold');pdf.setFontSize(31);text(cream);pdf.text(String(d.global),L,220);pdf.setFontSize(11);pdf.text('/ 100',L+24,220);
+fill([64,83,74]);pdf.roundedRect(L,228,174,4,2,2,'F');fill(copper);pdf.roundedRect(L,228,174*d.global/100,4,2,2,'F');
+pdf.setFont('helvetica','normal');pdf.setFontSize(9);text([218,225,215]);pdf.text(scoreLabel(d.global),L,240);
+pdf.setFontSize(9);text(cream);pdf.text('EMPRESA',L,255);pdf.text('FECHA',109,255);pdf.setFont('helvetica','bold');pdf.text(pdf.splitTextToSize(company,80),L,263);pdf.text(date,109,263);
+if(sector){pdf.setFont('helvetica','normal');pdf.setFontSize(8);text([218,225,215]);pdf.text('SECTOR: '+pdf.splitTextToSize(sector,150)[0],L,272);}
+pdf.setFont('helvetica','normal');pdf.setFontSize(8);text([218,225,215]);pdf.text('Resultado basado en las respuestas declaradas; no es una auditoría visual directa.',L,287);
+// Page 2: dimensions + diagnosis
+pdf.addPage();fill(cream);pdf.rect(0,0,W,H,'F');let y=pageTitle('01 / Estado de la marca','Lectura del diagnóstico','Las puntuaciones describen las respuestas del cuestionario. No sustituyen la revisión de la identidad real.');
+y=section('Dimensiones evaluadas',y+2);
+dimensionDefs.forEach(def=>{const n=d.dimensions[def.id];pdf.setFont('helvetica','bold');pdf.setFontSize(9);text(ink);pdf.text(def.label,L,y);pdf.setFontSize(9);text(forest);pdf.text(n+'/100',R,y,{align:'right'});fill(paper);pdf.roundedRect(L,y+3,174,3,1.5,1.5,'F');fill(n<40?red:n<60?copper:sage);pdf.roundedRect(L,y+3,174*n/100,3,1.5,1.5,'F');y+=15;});
+y=section('Qué significa tu perfil',y+4);y=wrap(p.lead,L,y,174,11,forest,true,5.5);y+=3;y=wrap(p.focus,L,y,174,9,ink,false,4.6);y+=5;roundedBox(L,y,174,25,[240,228,195]);y=wrap(p.closing,L+6,y+8,162,9,forest,true,4.6);y+=9;
+y=section('Evidencias en tus respuestas',y);
+const evidence=[];
+const qMap={q1:'Fundamentos visuales',q2:'Reglas de marca',q3:'Alineación con el negocio',q4:'Definición del público',q5:'Coherencia entre canales',q6:'Aplicación de recursos',q7:'Diferenciación',q8:'Personalidad visual',q9:'Prioridad declarada',q10:'Proceso de decisión'};
+['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10'].forEach(id=>{const q=steps.flatMap(s=>s.questions).find(x=>x.id===id);const opt=q.options.find(o=>o[0]===d.answers[id]);if((['q3','q5','q7','q8','q1','q2'].includes(id)&&['c','d'].includes(d.answers[id]))||(['q4','q6','q10'].includes(id)&&['c','d'].includes(d.answers[id]))||id==='q9'){evidence.push(qMap[id]+': '+(opt?opt[1]:''));}});
+if(!evidence.length)evidence.push('Las respuestas muestran una base relativamente sólida. Contrasta esta percepción con materiales reales y opiniones de clientes.');
+evidence.slice(0,5).forEach(e=>{fill(copper);pdf.circle(L+1.5,y-1.2,1,'F');y=wrap(e,L+6,y,166,8.2,ink,false,4)+2;});
+footer('2');
+// Page 3: action plan
+pdf.addPage();fill(cream);pdf.rect(0,0,W,H,'F');y=pageTitle('02 / Plan de acción','Tus próximos tres pasos','Acciones recomendadas según las dimensiones más débiles, tu perfil y la prioridad que has señalado.');
+d.recommendations.forEach((r,i)=>{const boxY=y;roundedBox(L,boxY,174,54,[238,231,217]);fill(forest);pdf.roundedRect(L+6,boxY+7,10,10,2,2,'F');pdf.setFont('helvetica','bold');pdf.setFontSize(9);text(cream);pdf.text(String(i+1),L+11,boxY+14,{align:'center'});pdf.setFont('helvetica','bold');pdf.setFontSize(11);text(forest);const titleLines=pdf.splitTextToSize(r.title,145);pdf.text(titleLines,L+22,boxY+13);let yy=boxY+13+titleLines.length*4.5;yy=wrap(r.action,L+22,yy+2,144,8.3,ink,false,4.2);yy=wrap('Por qué importa: '+r.why,L+22,yy+2,144,7.8,muted,false,3.9);y=boxY+59;});
+y+=3;y=section('Tu prioridad declarada',y);y=wrap(d.priority,L,y,174,9,ink,true,4.6);y+=7;
+y=section('Cómo se tomaron las decisiones',y);y=wrap(d.decision,L,y,174,9,ink,false,4.6);y+=7;
+roundedBox(L,y,174,31,forest);pdf.setFont('helvetica','bold');pdf.setFontSize(9);text(cream);pdf.text('Una recomendación profesional',L+6,y+9);wrap('Para confirmar estas hipótesis es necesario revisar la identidad visual, sus aplicaciones y el contexto competitivo. Este informe es un punto de partida, no un sustituto de una auditoría completa.',L+6,y+16,161,7.5,[225,231,221],false,3.8);
+footer('3');
+const fileCompany=(company.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'mi-marca');
+pdf.save('auditoria-de-marca-'+fileCompany+'.pdf');
+}catch(e){console.error(e);alert('No se pudo generar el PDF. Inténtalo de nuevo; si persiste, recarga la página.');}finally{btn.disabled=false;btn.textContent=old;}
+}
+renderStep();
+})();
+</script>
+</body>
+</html>
