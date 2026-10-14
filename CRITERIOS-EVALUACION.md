@@ -21,7 +21,7 @@ Las opciones D de Q7 y Q8 describen una carencia explícita: no tener elementos 
 | Coherencia visual | Q5 y Q6 | 25 % |
 | Diferenciación y personalidad | Q7 y Q8 | 15 % |
 
-Cada dimensión se obtiene promediando las puntuaciones de sus preguntas. El índice global parte de la media ponderada de las cinco dimensiones y se expresa sobre 100. Para evitar que una carencia severa quede oculta por la media, se aplican límites explícitos: si alguna dimensión queda por debajo de 20, el índice global no puede superar 54; si alguna dimensión queda por debajo de 40, no puede superar 64; en los demás casos se conserva la media ponderada. Q9 sirve para detectar la prioridad percibida y Q10 para aportar contexto; no se suman al índice.
+Cada dimensión se obtiene promediando las puntuaciones de sus preguntas. El índice global parte de la media ponderada de las cinco dimensiones y se expresa sobre 100. Para evitar que una carencia quede oculta por la media, se aplican límites explícitos: si alguna dimensión queda por debajo de 20, el índice global no puede superar 54; si alguna dimensión queda por debajo de 40, no puede superar 64; si alguna dimensión queda por debajo de 60, no puede superar 74; en los demás casos se conserva la media ponderada. Q9 sirve para detectar la prioridad percibida y Q10 para aportar contexto; no se suman al índice.
 
 ## Prioridad de perfiles
 
