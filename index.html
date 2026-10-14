@@ -202,6 +202,31 @@ body { font-size: 16px; line-height: 1.65; }
   .intro-mark{display:block;right:-54px;bottom:-68px;width:180px;height:180px;opacity:.17}
 }
 
+
+/* Final opening-screen direction: charcoal hero, high contrast controls and subtle brand watermark. */
+.intro{
+  background:#29272A!important;
+  color:#F5F2ED!important;
+  border:1px solid #454146!important;
+  box-shadow:0 20px 52px rgba(41,39,42,.14)!important;
+}
+.intro h1{color:#F5F2ED!important}
+.intro > p{color:#D8D3D0!important}
+.intro .eyebrow{color:#EA5A77!important}
+.intro .field label{color:#F5F2ED!important}
+.intro .field-help,.intro .start-privacy{font-size:14px!important;line-height:1.6!important;color:#D8D3D0!important}
+.intro .field input{background:#FFFEFC!important;color:#29272A!important;border:1px solid #BDB5AF!important}
+.intro .field input::placeholder{color:#716D6D!important}
+.intro .intro-mark{opacity:.2!important}
+.intro .intro-mark .brand-flower{stroke:#D2A158!important}
+#startAudit.btn-start:disabled{background:#FFE6EC!important;color:#29272A!important;border:2px solid #EA5A77!important;opacity:1!important;box-shadow:none!important;cursor:not-allowed}
+#startAudit.btn-start:disabled:hover{background:#FFE6EC!important;transform:none}
+#startAudit.btn-start:not(:disabled){background:#EA5A77!important;color:#29272A!important;border:2px solid #EA5A77!important;opacity:1!important}
+@media(max-width:720px){
+  .intro{background:#29272A!important;border-color:#454146!important}
+  .intro .field-help,.intro .start-privacy{font-size:14px!important;line-height:1.6!important}
+}
+
 </style>
 </head>
 <body>
