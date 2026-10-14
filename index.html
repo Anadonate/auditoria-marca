@@ -15,6 +15,7 @@
 @media(max-width:720px){.sitehead{padding:18px}.headnote{display:none}.container{width:min(100% - 24px,900px);margin-top:10px}.intro-bottom{align-items:stretch;flex-direction:column}.start-note{white-space:normal}.result-top,.content-grid{grid-template-columns:1fr}.footer{padding-left:18px;padding-right:18px;flex-direction:column}.nav .btn{padding:13px 16px}.option span{font-size:13px}.meta-fields{grid-template-columns:1fr}.intro{padding:27px 22px}.step-card{padding:23px 19px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 
 /* UX/UI reading and interaction pass — accessible sizing, rhythm and focus */
+.field-help{display:block;margin-top:7px;font-size:14px;line-height:1.55;color:#E2DED7}.start-actions{margin-top:24px;position:relative;z-index:1;max-width:550px}.btn-start{min-width:220px}.start-privacy{font-size:13px;line-height:1.6;color:#E2DED7;max-width:58ch;margin:12px 0 0}.start-validation{font-size:14px;color:#F1B98F;margin:0 0 10px}.btn:disabled{opacity:.45;cursor:not-allowed}.meta-fields{grid-template-columns:1fr;max-width:520px}.intro[hidden],.sitehead[hidden],#quizProgress[hidden],#questionnaire[hidden],#privacyNote[hidden]{display:none!important;}
 :root { --focus-ring: #B96E4B; --body-copy: 16px; }
 html { scroll-padding-top: 18px; }
 body { font-size: 16px; line-height: 1.65; }
@@ -27,7 +28,9 @@ body { font-size: 16px; line-height: 1.65; }
 .intro .eyebrow { color:#E2A37E; font-size:12px; letter-spacing:.1em; }
 .intro h1 { line-height:1.12; max-width:17ch; }
 .intro p { font-size:18px; line-height:1.7; max-width:62ch; }
-.field label { font-size:14px; line-height:1.45; }
+.field label { font-size:15px; line-height:1.45; }
+.field-help { font-size:14px; }
+.start-actions .btn { min-height:52px; }
 .field input { font-size:16px; line-height:1.4; min-height:48px; }
 .field input::placeholder { color:#DAD5CD; opacity:1; }
 .start-note { font-size:13px; line-height:1.65; white-space:normal; max-width:25ch; }
@@ -118,26 +121,26 @@ body { font-size: 16px; line-height: 1.65; }
 <body>
 <a class="skip-link" href="#questionnaire">Saltar al cuestionario</a>
 <div class="topline" aria-hidden="true"><span id="topProgress"></span></div>
-<header class="sitehead"><div class="brand"><span class="brand-dot"></span>Ana Donate <span style="font-weight:500;color:var(--muted)">/ Auditoría de marca</span></div><div class="headnote">Diagnóstico orientativo · 3 minutos</div></header>
+<header class="sitehead" id="sitehead"><div class="brand"><span class="brand-dot"></span>Ana Donate <span style="font-weight:500;color:var(--muted)">/ Auditoría de marca</span></div><div class="headnote">Diagnóstico orientativo · 3 minutos</div></header>
 <main class="container">
 <section class="intro" id="intro">
 <span class="eyebrow">Diseño gráfico &amp; Branding</span>
 <h1>Tu marca tiene una historia. ¿La está contando bien?</h1>
-<p>Responde a 10 preguntas sencillas y descubre qué está funcionando, qué puede mejorar y por dónde conviene empezar. No necesitas conocimientos de diseño ni preparar documentación.</p>
+<p>Responde a unas preguntas breves y descubre qué está funcionando, qué puede mejorar y por dónde conviene empezar. Recibirás un informe personalizado con los resultados y próximos pasos.</p>
 <div class="intro-bottom">
 <div class="meta-fields">
-<div class="field"><label for="company">Nombre de la empresa <span style="font-weight:400">(opcional)</span></label><input id="company" maxlength="90" placeholder="Ej. Estudio Norte" autocomplete="organization"></div>
-<div class="field"><label for="sector">Sector o actividad <span style="font-weight:400">(opcional)</span></label><input id="sector" maxlength="90" placeholder="Ej. Alimentación, consultoría…"></div>
+<div class="field"><label for="company">Nombre de la empresa</label><input id="company" name="company" maxlength="90" placeholder="Ej. Estudio Norte" autocomplete="organization" aria-describedby="companyHelp" required><span class="field-help" id="companyHelp">El nombre aparecerá en la portada de tu informe personalizado.</span></div>
 </div>
-<div class="start-note">No hay respuestas correctas o incorrectas.<br>El resultado se basa en tus respuestas.</div>
+<div class="start-note">No hay respuestas correctas o incorrectas.<br>El diagnóstico se basa en tus respuestas.</div>
 </div>
+<div class="start-actions"><p class="start-validation" id="companyError" role="status" hidden>Escribe el nombre de la empresa para empezar.</p><button class="btn btn-main btn-start" id="startAudit" type="button" disabled>Comenzar auditoría <span aria-hidden="true">→</span></button><p class="start-privacy">La información se procesa en tu navegador. Tus respuestas no se envían a un servidor.</p></div>
 </section>
-<div class="progress-meta"><span id="stepMeta">ETAPA 1 DE 5</span><strong id="stepPercent">20 %</strong></div><div class="progressline" role="progressbar" aria-label="Progreso del cuestionario" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20"><div id="stepProgress"></div></div>
-<section id="questionnaire">
+<div id="quizProgress" hidden><div class="progress-meta"><span id="stepMeta">ETAPA 1 DE 5</span><strong id="stepPercent">20 %</strong></div><div class="progressline" role="progressbar" aria-label="Progreso del cuestionario" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20"><div id="stepProgress"></div></div></div>
+<section id="questionnaire" hidden>
 <div id="stepScreen" class="step-card"></div>
 </section>
 <section id="results" class="results"></section>
-<p class="smallnote" id="privacyNote">Las respuestas se procesan en tu navegador para generar el resultado y el PDF. Esta versión no envía tus respuestas a un servidor.</p>
+<p class="smallnote" id="privacyNote" hidden>Las respuestas se procesan en tu navegador para generar el resultado y el PDF. Esta versión no envía tus respuestas a un servidor.</p>
 </main>
 <footer class="footer"><div><strong>ANA DONATE</strong> — Diseño gráfico &amp; Branding</div><div>Auditoría de marca visual · Herramienta orientativa</div></footer>
 <script>
@@ -243,7 +246,7 @@ dimensionDefs.forEach(d=>{if(dimensions[d.id]>=75)strengths.push(d.label+' ('+di
 const recommendations=buildRecommendations(profileKey,dimensions);
 const q9choice=steps[4].questions[0].options.find(o=>o[0]===answers.q9);
 const q10choice=steps[4].questions[1].options.find(o=>o[0]===answers.q10);
-return {global,dimensions,profileKey,profile,reason,strengths,gaps,recommendations,priority:q9choice?q9choice[1]:'',decision:q10choice?q10choice[1]:'',answers:{...answers},company:document.getElementById('company').value.trim(),sector:document.getElementById('sector').value.trim(),date:new Date()};
+return {global,dimensions,profileKey,profile,reason,strengths,gaps,recommendations,priority:q9choice?q9choice[1]:'',decision:q10choice?q10choice[1]:'',answers:{...answers},company:document.getElementById('company').value.trim(),date:new Date()};
 }
 const recommendationBank={
 system:{title:'Ordenar los fundamentos visuales',action:'Reúne logo, paleta, tipografías, estilo fotográfico y recursos gráficos en un sistema básico con reglas claras.',why:'Cuando los elementos se deciden de forma aislada, cada nueva pieza exige volver a tomar las mismas decisiones.',proof:['q1','q2']},
@@ -284,7 +287,7 @@ while(unique.length<3){const next=Object.keys(recommendationBank).find(key=>!uni
 return unique.map((key,i)=>{const r=recommendationBank[key];const dimension=key==='presence'?'coherence':key;const value=dimensions[dimension];const proof=r.proof.map(id=>{const q=steps.flatMap(s=>s.questions).find(x=>x.id===id);const opt=q.options.find(o=>o[0]===answers[id]);return q.text+' — '+(opt?opt[1]:'');}).join(' ');return {...r,key,priority:i+1,proof,level:value===undefined?'Oportunidad':value<50?'Prioridad alta':value<75?'A mejorar':'Optimización'};});
 }
 function showResults(){
-diagnosis=calculate();document.getElementById('intro').hidden=true;document.getElementById('questionnaire').hidden=true;document.getElementById('privacyNote').hidden=true;document.getElementById('results').classList.add('show');document.getElementById('stepMeta').textContent='DIAGNÓSTICO COMPLETADO';document.getElementById('stepPercent').textContent='100 %';document.getElementById('stepProgress').style.width='100%';document.querySelector('.progressline').setAttribute('aria-valuenow','100');document.getElementById('topProgress').style.width='100%';renderResults(diagnosis);const resultHeading=document.querySelector('#results h1');if(resultHeading)resultHeading.focus({preventScroll:true});document.getElementById('results').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+diagnosis=calculate();document.getElementById('intro').hidden=true;document.getElementById('sitehead').hidden=true;document.getElementById('quizProgress').hidden=false;document.getElementById('questionnaire').hidden=true;document.getElementById('privacyNote').hidden=true;document.getElementById('results').classList.add('show');document.getElementById('stepMeta').textContent='DIAGNÓSTICO COMPLETADO';document.getElementById('stepPercent').textContent='100 %';document.getElementById('stepProgress').style.width='100%';document.querySelector('.progressline').setAttribute('aria-valuenow','100');document.getElementById('topProgress').style.width='100%';renderResults(diagnosis);const resultHeading=document.querySelector('#results h1');if(resultHeading)resultHeading.focus({preventScroll:true});document.getElementById('results').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
 }
 function renderResults(d){
 const p=d.profile;const company=d.company?'<span style="color:#E2A37E">'+escapeHTML(d.company)+'</span>, ':'';let html='<div class="result-hero"><span class="profile-chip">'+escapeHTML(p.name)+'</span><h1 tabindex="-1">'+company+escapeHTML(p.lead)+'</h1><p>'+escapeHTML(d.reason)+'</p></div>';
@@ -301,7 +304,8 @@ document.getElementById('results').innerHTML=html;document.getElementById('pdfBt
 }
 function scoreLabel(n){return n>=80?'Base sólida':n>=60?'En desarrollo':n>=40?'Necesita atención':'Prioridad de mejora';}
 function levelLabel(n){return n>=80?'Sólida':n>=60?'En desarrollo':n>=40?'A revisar':'Prioridad';}
-function restart(){Object.keys(answers).forEach(k=>delete answers[k]);currentStep=0;diagnosis=null;document.getElementById('intro').hidden=false;document.getElementById('results').classList.remove('show');document.getElementById('results').innerHTML='';document.getElementById('questionnaire').hidden=false;document.getElementById('privacyNote').hidden=false;renderStep();document.getElementById('intro').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});document.getElementById('company').focus({preventScroll:true});}
+function startAudit(){const company=document.getElementById('company');const err=document.getElementById('companyError');if(!company.value.trim()){err.hidden=false;document.getElementById('startAudit').disabled=true;company.focus();return;}err.hidden=true;document.getElementById('sitehead').hidden=true;document.getElementById('intro').hidden=true;document.getElementById('quizProgress').hidden=false;document.getElementById('questionnaire').hidden=false;document.getElementById('privacyNote').hidden=false;renderStep();focusStep();}
+function restart(){Object.keys(answers).forEach(k=>delete answers[k]);currentStep=0;diagnosis=null;document.getElementById('sitehead').hidden=false;document.getElementById('intro').hidden=false;document.getElementById('quizProgress').hidden=true;document.getElementById('results').classList.remove('show');document.getElementById('results').innerHTML='';document.getElementById('questionnaire').hidden=true;document.getElementById('privacyNote').hidden=true;renderStep();document.getElementById('intro').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});document.getElementById('company').focus({preventScroll:true});document.getElementById('startAudit').disabled=!document.getElementById('company').value.trim();}
 function downloadPDF(){
 if(!diagnosis||!window.jspdf){alert('No ha sido posible preparar el informe. Actualiza la página e inténtalo de nuevo.');return;}
 const btn=document.getElementById('pdfBtn');const old=btn.textContent;btn.disabled=true;btn.textContent='Generando informe…';
@@ -315,7 +319,7 @@ function footer(page){draw([217,210,200]);pdf.line(L,280,R,280);pdf.setFont('hel
 function pageTitle(eyebrow,title,sub){pdf.setFont('helvetica','bold');pdf.setFontSize(8);text(copper);pdf.text(eyebrow.toUpperCase(),L,22);pdf.setFont('helvetica','bold');pdf.setFontSize(23);text(forest);let lines=pdf.splitTextToSize(title,170);pdf.text(lines,L,34);let y=34+lines.length*9;if(sub)y=wrap(sub,L,y+1,170,10,muted,false,5.2);return y+6;}
 function roundedBox(x,y,w,h,color=paper){fill(color);pdf.roundedRect(x,y,w,h,3,3,'F');}
 function safe(s){return String(s||'').replace(/\s+/g,' ').trim();}
-const company=safe(d.company)||'Tu empresa';const sector=safe(d.sector);
+const company=safe(d.company)||'Tu empresa';
 const date=d.date.toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'});
 // Page 1: executive summary
 fill(forest);pdf.rect(0,0,W,H,'F');fill(copper);pdf.circle(179,37,19,'F');fill([63,59,63]);pdf.circle(179,37,13,'F');
@@ -327,8 +331,7 @@ pdf.setFont('helvetica','bold');pdf.setFontSize(8);text([226,163,126]);pdf.text(
 pdf.setFont('helvetica','bold');pdf.setFontSize(31);text(cream);pdf.text(String(d.global),L,220);pdf.setFontSize(11);pdf.text('/ 100',L+24,220);
 fill([73,69,73]);pdf.roundedRect(L,228,174,4,2,2,'F');fill(copper);pdf.roundedRect(L,228,174*d.global/100,4,2,2,'F');
 pdf.setFont('helvetica','normal');pdf.setFontSize(9);text([226,222,215]);pdf.text(scoreLabel(d.global),L,240);pdf.setFontSize(7.5);text([226,222,215]);pdf.text('Índice ponderado con límites por dimensión crítica.',L,247);
-pdf.setFontSize(9);text(cream);pdf.text('EMPRESA',L,255);pdf.text('FECHA',109,255);pdf.setFont('helvetica','bold');pdf.text(pdf.splitTextToSize(company,80),L,263);pdf.text(date,109,263);
-if(sector){pdf.setFont('helvetica','normal');pdf.setFontSize(8);text([226,222,215]);pdf.text('SECTOR: '+pdf.splitTextToSize(sector,150)[0],L,272);}
+pdf.setFontSize(9);text(cream);pdf.text('INFORME PARA',L,255);pdf.text('FECHA',109,255);pdf.setFont('helvetica','bold');pdf.text(pdf.splitTextToSize(company,80),L,263);pdf.text(date,109,263);
 pdf.setFont('helvetica','normal');pdf.setFontSize(8);text([226,222,215]);pdf.text('Resultado basado en las respuestas declaradas; no es una auditoría visual directa.',L,287);
 // Page 2: dimensions + diagnosis
 pdf.addPage();fill(cream);pdf.rect(0,0,W,H,'F');let y=pageTitle('01 / Estado de la marca','Lectura del diagnóstico','Las puntuaciones describen las respuestas del cuestionario. No sustituyen la revisión de la identidad real.');
@@ -403,6 +406,8 @@ const fileCompany=(company.toLowerCase().normalize('NFD').replace(/[\u0300-\u036
 pdf.save('auditoria-de-marca-'+fileCompany+'.pdf');
 }catch(e){console.error(e);alert('No se pudo generar el PDF. Inténtalo de nuevo; si persiste, recarga la página.');}finally{btn.disabled=false;btn.textContent=old;}
 }
+document.getElementById('company').addEventListener('input',()=>{document.getElementById('startAudit').disabled=!document.getElementById('company').value.trim();document.getElementById('companyError').hidden=true;});
+document.getElementById('startAudit').addEventListener('click',startAudit);
 renderStep();
 })();
 </script>
