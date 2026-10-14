@@ -38,6 +38,14 @@ Para publicar con GitHub Pages:
 3. Selecciona la rama `main` y la carpeta `/ (root)`, y guarda.
 4. Espera a que termine la publicación. La URL prevista es https://anadonate.github.io/auditoria-marca/.
 
+
+## Informe final y PDF
+
+- Resultado web con cabecera carbón, iconos de EA, puntuación destacada y tarjetas con mayor jerarquía tipográfica.
+- Gráfico radial de cinco dimensiones en pantalla con escala, iconos de marca y leyenda numérica accesible.
+- Recomendaciones, fortalezas y áreas de atención en paneles con fondo claro, borde suave y acentos rosa/dorado/verde.
+- PDF de cinco páginas A4 con portada carbón, marca gráfica, títulos y marcadores coherentes con la paleta EA; las páginas interiores usan fondo marfil y barras de puntuación por nivel.
+
 ## Modelo de evaluación
 
 Consulta [CRITERIOS-EVALUACION.md](./CRITERIOS-EVALUACION.md) para ver la escala, los pesos, las reglas de perfiles y las limitaciones del resultado.
