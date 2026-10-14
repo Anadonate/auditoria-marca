@@ -768,7 +768,7 @@ const checks=[
 'Revisar a los competidores para evaluar la diferenciación dentro del sector.',
 'Validar las prioridades con los objetivos y recursos actuales de la empresa.'
 ];
-checks.forEach((item,i)=>{addBrandIcon(glyphCycle[i%glyphCycle.length],L,y-3.5,4.5);y=wrap(item,L+7,y,167,9.5,ink,false,4.8)+3;});
+checks.forEach((item,i)=>{draw(i%2===0?copper:sage);pdf.setLineWidth(.65);pdf.line(L,y-1.2,L+3,y-1.2);y=wrap(item,L+6,y,168,9.5,ink,false,4.8)+3;});
 y+=4;roundedBox(L,y,174,48,forest);pdf.setFont('helvetica','bold');pdf.setFontSize(10.5);text(cream);pdf.text('Del diagnóstico a un sistema de marca',L+7,y+10);wrap('Una revisión profesional permite convertir estas hipótesis en decisiones visuales y estratégicas ajustadas a la realidad de la empresa. El informe es un punto de partida, no una auditoría completa.',L+7,y+18,160,9.2,[227,224,218],false,4.8);
 footer('5');
 const fileCompany=(company.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'mi-marca');
