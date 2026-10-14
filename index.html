@@ -616,6 +616,7 @@ svg+='</svg>';return svg;
 
 function renderResults(d){
 const p=d.profile;
+const cleanInsight=value=>String(value).replace(/\s*\(\d+\/100\)/g,'').trim();
 const iconRow=brandIconSvg('flower')+brandIconSvg('target')+brandIconSvg('cursor');
 const company=d.company?'<span style="color:#EA5A77">'+escapeHTML(d.company)+'</span>, ':'';
 let html='<div class="result-hero"><div class="result-watermark">'+brandIconSvg('flower')+'</div><div class="result-hero-brand"><span class="result-eyebrow">Informe personalizado · Ana Donate</span><div class="result-brand-icons">'+iconRow+'</div></div><span class="profile-chip">'+escapeHTML(p.name)+'</span><h1 tabindex="-1">'+company+escapeHTML(p.lead)+'</h1><p>'+escapeHTML(d.reason)+'</p></div>';
@@ -623,7 +624,7 @@ html+='<div class="result-top"><section class="panel score-panel"><div class="se
 html+='<section class="panel dimensions-panel"><div class="section-kicker">Las cinco dimensiones</div><h2>Estado de tu marca</h2>';
 dimensionDefs.forEach(def=>{const n=d.dimensions[def.id];const barColor=n<40?'#EA5A77':n<70?'#D2A158':'#46B382';html+='<div class="dim-row"><div class="dim-head"><span>'+escapeHTML(def.label)+'</span><span>'+n+'/100 · '+levelLabel(n)+'</span></div><div class="dim-bar"><span style="width:'+n+'%;background:'+barColor+'"></span></div></div>';});
 html+='</section></div>';
-html+='<section class="panel radar-panel"><div class="section-kicker">Mapa visual</div><h2>Las dimensiones, de un vistazo</h2><p class="radar-intro">Cuanto más se acerca la forma al borde, más sólida es la situación declarada en esa dimensión.</p><div class="radar-layout"><div class="radar-plot">'+renderRadarSVG(d.dimensions)+'</div><section class="radar-insights"><div class="section-kicker">Fortalezas y atención</div><h2>Qué destaca en tus respuestas</h2><h3 class="evidence-heading">Fortalezas declaradas</h3><ul class="insight-list strengths-list">'+(d.strengths.length?d.strengths.map(x=>'<li>'+escapeHTML(x)+'</li>').join(''):'<li>No se detectan dimensiones especialmente fuertes en esta autoevaluación; es una oportunidad para establecer una base.</li>')+'</ul><h3 class="evidence-heading attention-heading">Áreas a revisar</h3><ul class="insight-list gaps-list">'+(d.gaps.length?d.gaps.map(x=>'<li>'+escapeHTML(x)+'</li>').join(''):'<li>No aparecen dimensiones por debajo de 60/100, aunque conviene validar la percepción con materiales reales y clientes.</li>')+'</ul></section></div></section>';
+html+='<section class="panel radar-panel"><div class="section-kicker">Mapa visual</div><h2>Las dimensiones, de un vistazo</h2><p class="radar-intro">Cuanto más se acerca la forma al borde, más sólida es la situación declarada en esa dimensión.</p><div class="radar-layout"><div class="radar-plot">'+renderRadarSVG(d.dimensions)+'</div><section class="radar-insights"><div class="section-kicker">Fortalezas y atención</div><h2>Qué destaca en tus respuestas</h2><h3 class="evidence-heading">Fortalezas declaradas</h3><ul class="insight-list strengths-list">'+(d.strengths.length?d.strengths.map(x=>'<li>'+escapeHTML(cleanInsight(x))+'</li>').join(''):'<li>No se detectan dimensiones especialmente fuertes en esta autoevaluación; es una oportunidad para establecer una base.</li>')+'</ul><h3 class="evidence-heading attention-heading">Áreas a revisar</h3><ul class="insight-list gaps-list">'+(d.gaps.length?d.gaps.map(x=>'<li>'+escapeHTML(cleanInsight(x))+'</li>').join(''):'<li>No aparecen dimensiones por debajo de 60/100, aunque conviene validar la percepción con materiales reales y clientes.</li>')+'</ul></section></div></section>';
 html+='<div class="content-grid diagnosis-only"><section class="panel"><div class="section-kicker">Lectura del diagnóstico</div><h2>'+escapeHTML(p.name)+'</h2><p>'+escapeHTML(p.focus)+'</p><div class="callout">'+escapeHTML(p.closing)+'</div><p class="smallnote">Criterio de asignación: '+escapeHTML(d.reason)+'</p></section></div>';
 html+='<section class="panel roadmap-panel"><div class="section-kicker">Tu hoja de ruta</div><h2>Tres próximos pasos</h2><p class="roadmap-intro">Acciones ordenadas a partir de las dimensiones más débiles y de tus respuestas.</p>';
 d.recommendations.forEach(r=>{html+='<div class="rec"><div class="rec-num">'+r.priority+'</div><div><h3>'+escapeHTML(r.title)+'</h3><p>'+escapeHTML(r.action)+'</p><div class="why"><strong>Por qué importa:</strong> '+escapeHTML(r.why)+'</div><p class="smallnote"><strong>Señal de tus respuestas:</strong> '+escapeHTML(r.proof)+'</p></div></div>';});
@@ -679,6 +680,7 @@ function addBrandIcon(kind,x,y,size){pdf.addImage(brandIconPng[kind],'PNG',x,y,s
 const glyphCycle=['flower','target','cursor'];
 
 function safe(s){return String(s||'').replace(/\s+/g,' ').trim();}
+function cleanScoreSuffix(value){return String(value).replace(/\s*\(\d+\/100\)/g,'').trim();}
 const company=safe(d.company)||'Tu empresa';
 const date=d.date.toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'});
 // Page 1: executive summary
@@ -745,10 +747,10 @@ let insightY=96;insightY=wrap('Qué destaca en tus respuestas',130,insightY,56,1
 draw([217,210,200]);pdf.setLineWidth(.25);pdf.line(130,insightY,186,insightY);insightY+=8;
 pdf.setFont('helvetica','bold');pdf.setFontSize(7.8);text(green);pdf.text('FORTALEZAS DECLARADAS',130,insightY);insightY+=6;
 const pdfStrengths=d.strengths.length?d.strengths:['No se detectan dimensiones especialmente fuertes; hay oportunidad para establecer una base.'];
-pdfStrengths.slice(0,4).forEach(item=>{draw(green);pdf.setLineWidth(.7);pdf.line(130,insightY-1.2,133,insightY-1.2);insightY=wrap(item,136,insightY,50,8.1,ink,false,4.1)+2;});
+pdfStrengths.slice(0,4).forEach(item=>{draw(green);pdf.setLineWidth(.7);pdf.line(130,insightY-1.2,133,insightY-1.2);insightY=wrap(cleanScoreSuffix(item),136,insightY,50,8.1,ink,false,4.1)+2;});
 insightY+=3;pdf.setFont('helvetica','bold');pdf.setFontSize(7.8);text(copper);pdf.text('ÁREAS A REVISAR',130,insightY);insightY+=6;
 const pdfGaps=d.gaps.length?d.gaps:['No aparecen dimensiones especialmente débiles; conviene validar la percepción con materiales reales.'];
-pdfGaps.slice(0,4).forEach(item=>{draw(copper);pdf.setLineWidth(.7);pdf.line(130,insightY-1.2,133,insightY-1.2);insightY=wrap(item,136,insightY,50,8.1,ink,false,4.1)+2;});
+pdfGaps.slice(0,4).forEach(item=>{draw(copper);pdf.setLineWidth(.7);pdf.line(130,insightY-1.2,133,insightY-1.2);insightY=wrap(cleanScoreSuffix(item),136,insightY,50,8.1,ink,false,4.1)+2;});
 pdf.setFont('helvetica','normal');pdf.setFontSize(7.3);text(muted);pdf.text('Autoevaluación orientativa.',130,252);
 footer('3');
 // Page 4: prioritized action plan
