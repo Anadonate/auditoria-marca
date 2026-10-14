@@ -391,6 +391,28 @@ body { font-size: 16px; line-height: 1.65; }
 .result-brand-icons .glyph-target{stroke:#EA5A77}
 .result-brand-icons .glyph-cursor{stroke:#46B382}
 
+
+/* Simplify the report: one score list only, with strengths and attention beside the radar. */
+.radar-layout{grid-template-columns:minmax(250px,.95fr) minmax(300px,1.05fr);align-items:start;gap:28px}
+.radar-insights{min-width:0;border-left:1px solid #E5DFD7;padding-left:24px}
+.radar-insights h2{font-size:clamp(20px,2vw,24px);line-height:1.25;margin:0 0 17px}
+.radar-insights .section-kicker{margin-bottom:8px}
+.radar-insights .evidence-heading{font-size:14px;display:block;margin:0 0 9px;color:#29272A}
+.insight-list{margin:0 0 19px;padding:0;list-style:none}
+.insight-list li{font-size:14px;line-height:1.65;color:#514D50;padding:0 0 0 12px;margin:0 0 10px;border-left:2px solid #46B382}
+.gaps-list li{border-left-color:#EA5A77}
+.dim-head span:first-child{display:block}
+.content-grid.diagnosis-only{grid-template-columns:1fr}
+@media(max-width:820px){
+ .radar-layout{grid-template-columns:1fr;gap:20px}
+ .radar-insights{border-left:0;border-top:1px solid #E5DFD7;padding:20px 0 0}
+ .radar-svg{max-width:330px}
+}
+@media(max-width:520px){
+ .radar-insights h2{font-size:21px}
+ .insight-list li{font-size:14px}
+}
+
 </style>
 </head>
 <body>
@@ -587,7 +609,7 @@ svg+='<title>Perfil visual de la marca</title><desc>Comparación de sistema de i
 [20,40,60,80,100].forEach(v=>{svg+='<polygon class="radar-grid" points="'+ring(v)+'"/>';});
 angles.forEach((a,i)=>{const p=point(i,100);svg+='<line class="radar-axis" x1="'+cx+'" y1="'+cy+'" x2="'+p.x.toFixed(1)+'" y2="'+p.y.toFixed(1)+'"/>';});
 svg+='<polygon class="radar-data" points="'+points.map(p=>p.x.toFixed(1)+','+p.y.toFixed(1)).join(' ')+'"/>';
-points.forEach((p,i)=>{const kind=['flower','target','cursor'][i%3];svg+='<g class="radar-point glyph-'+kind+'" transform="translate('+(p.x-5.5).toFixed(1)+' '+(p.y-5.5).toFixed(1)+') scale(.172)">'+brandIconSvg(kind).replace('<svg class="brand-glyph glyph-'+kind+'" viewBox="0 0 64 64" aria-hidden="true">','').replace('</svg>','')+'</g>';});
+// Sin iconos decorativos en cada vértice para mantener el gráfico limpio.
 svg+='<text class="radar-scale" x="'+(cx+3)+'" y="'+(cy-r+10)+'">100</text><text class="radar-scale" x="'+(cx+3)+'" y="'+(cy-r*.8+10)+'">80</text><text class="radar-scale" x="'+(cx+3)+'" y="'+(cy-r*.6+10)+'">60</text><text class="radar-scale" x="'+(cx+3)+'" y="'+(cy-r*.4+10)+'">40</text><text class="radar-scale" x="'+(cx+3)+'" y="'+(cy-r*.2+10)+'">20</text>';
 svg+='</svg>';return svg;
 }
@@ -599,12 +621,10 @@ const company=d.company?'<span style="color:#EA5A77">'+escapeHTML(d.company)+'</
 let html='<div class="result-hero"><div class="result-watermark">'+brandIconSvg('flower')+'</div><div class="result-hero-brand"><span class="result-eyebrow">Informe personalizado · Ana Donate</span><div class="result-brand-icons">'+iconRow+'</div></div><span class="profile-chip">'+escapeHTML(p.name)+'</span><h1 tabindex="-1">'+company+escapeHTML(p.lead)+'</h1><p>'+escapeHTML(d.reason)+'</p></div>';
 html+='<div class="result-top"><section class="panel score-panel"><div class="section-kicker">Índice de desarrollo de marca</div><div class="score-big">'+d.global+'<span style="font-size:22px">/100</span></div><div class="score-caption">Puntuación ponderada, ajustada para que una dimensión crítica no quede oculta por la media.</div><div class="scorebar"><span style="width:'+d.global+'%"></span></div><div class="score-qualifier">'+scoreLabel(d.global)+'</div><p class="smallnote">Resultado orientativo basado en tus respuestas; no es una auditoría visual directa.</p></section>';
 html+='<section class="panel dimensions-panel"><div class="section-kicker">Las cinco dimensiones</div><h2>Estado de tu marca</h2>';
-dimensionDefs.forEach(def=>{const n=d.dimensions[def.id];const kind=n<40?'target':n<70?'flower':'cursor';const barColor=n<40?'#EA5A77':n<70?'#D2A158':'#46B382';html+='<div class="dim-row"><div class="dim-head"><span>'+brandIconSvg(kind)+' '+escapeHTML(def.label)+'</span><span>'+n+'/100 · '+levelLabel(n)+'</span></div><div class="dim-bar"><span style="width:'+n+'%;background:'+barColor+'"></span></div></div>';});
+dimensionDefs.forEach(def=>{const n=d.dimensions[def.id];const barColor=n<40?'#EA5A77':n<70?'#D2A158':'#46B382';html+='<div class="dim-row"><div class="dim-head"><span>'+escapeHTML(def.label)+'</span><span>'+n+'/100 · '+levelLabel(n)+'</span></div><div class="dim-bar"><span style="width:'+n+'%;background:'+barColor+'"></span></div></div>';});
 html+='</section></div>';
-html+='<section class="panel radar-panel"><div class="section-kicker">Mapa visual</div><h2>Las dimensiones, de un vistazo</h2><p class="radar-intro">Cuanto más se acerca cada punto al borde, más sólida es la situación declarada en esa dimensión.</p><div class="radar-layout"><div class="radar-plot">'+renderRadarSVG(d.dimensions)+'</div><div class="radar-legend">';
-dimensionDefs.forEach((def,i)=>{const n=d.dimensions[def.id];const kind=['flower','target','cursor'][i%3];html+='<div class="radar-item">'+brandIconSvg(kind)+'<div class="radar-item-label">'+escapeHTML(def.label)+'<div class="radar-item-bar"><span style="width:'+n+'%"></span></div></div><span class="radar-item-score">'+n+'/100</span></div>';});
-html+='</div></div></section>';
-html+='<div class="content-grid"><section class="panel"><div class="section-kicker">Lectura del diagnóstico</div><h2>'+escapeHTML(p.name)+'</h2><p>'+escapeHTML(p.focus)+'</p><div class="callout">'+escapeHTML(p.closing)+'</div><p class="smallnote">Criterio de asignación: '+escapeHTML(d.reason)+'</p></section><section class="panel"><div class="section-kicker">Fortalezas y atención</div><h2>Qué destaca en tus respuestas</h2><strong class="evidence-heading">Fortalezas declaradas</strong><ul class="evidence">'+(d.strengths.length?d.strengths.map((x,i)=>'<li>'+brandIconSvg(['flower','target','cursor'][i%3])+escapeHTML(x)+'</li>').join(''):'<li>'+brandIconSvg('flower')+'No se detectan dimensiones especialmente fuertes en esta autoevaluación; es una oportunidad para establecer una base.</li>')+'</ul><strong class="evidence-heading">Áreas a revisar</strong><ul class="evidence">'+(d.gaps.length?d.gaps.map((x,i)=>'<li>'+brandIconSvg(['target','flower','cursor'][i%3])+escapeHTML(x)+'</li>').join(''):'<li>'+brandIconSvg('cursor')+'No aparecen dimensiones por debajo de 60/100, aunque conviene validar la percepción con materiales reales y clientes.</li>')+'</ul></section></div>';
+html+='<section class="panel radar-panel"><div class="section-kicker">Mapa visual</div><h2>Las dimensiones, de un vistazo</h2><p class="radar-intro">Cuanto más se acerca la forma al borde, más sólida es la situación declarada en esa dimensión.</p><div class="radar-layout"><div class="radar-plot">'+renderRadarSVG(d.dimensions)+'</div><section class="radar-insights"><div class="section-kicker">Fortalezas y atención</div><h2>Qué destaca en tus respuestas</h2><h3 class="evidence-heading">Fortalezas declaradas</h3><ul class="insight-list strengths-list">'+(d.strengths.length?d.strengths.map(x=>'<li>'+escapeHTML(x)+'</li>').join(''):'<li>No se detectan dimensiones especialmente fuertes en esta autoevaluación; es una oportunidad para establecer una base.</li>')+'</ul><h3 class="evidence-heading attention-heading">Áreas a revisar</h3><ul class="insight-list gaps-list">'+(d.gaps.length?d.gaps.map(x=>'<li>'+escapeHTML(x)+'</li>').join(''):'<li>No aparecen dimensiones por debajo de 60/100, aunque conviene validar la percepción con materiales reales y clientes.</li>')+'</ul></section></div></section>';
+html+='<div class="content-grid diagnosis-only"><section class="panel"><div class="section-kicker">Lectura del diagnóstico</div><h2>'+escapeHTML(p.name)+'</h2><p>'+escapeHTML(p.focus)+'</p><div class="callout">'+escapeHTML(p.closing)+'</div><p class="smallnote">Criterio de asignación: '+escapeHTML(d.reason)+'</p></section></div>';
 html+='<section class="panel roadmap-panel"><div class="section-kicker">Tu hoja de ruta</div><h2>Tres próximos pasos</h2><p class="roadmap-intro">Acciones ordenadas a partir de las dimensiones más débiles y de tus respuestas.</p>';
 d.recommendations.forEach(r=>{html+='<div class="rec"><div class="rec-num">'+r.priority+'</div><div><h3>'+escapeHTML(r.title)+'</h3><p>'+escapeHTML(r.action)+'</p><div class="why"><strong>Por qué importa:</strong> '+escapeHTML(r.why)+'</div><p class="smallnote"><strong>Señal de tus respuestas:</strong> '+escapeHTML(r.proof)+'</p></div></div>';});
 html+='</section>';
