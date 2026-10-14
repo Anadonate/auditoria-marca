@@ -41,6 +41,17 @@ Estos escenarios son regresiones mínimas para comprobar que las reglas de perfi
 - [x] El cuestionario y la barra de progreso permanecen ocultos hasta pulsar «Comenzar auditoría».
 - [x] Al terminar, el informe muestra el nombre de la empresa; al reiniciar, se vuelve a la portada y se conserva el nombre introducido.
 
+## Navegación de una pregunta por pantalla
+
+- [x] Las 10 preguntas originales se conservan sin cambios.
+- [x] Cada pantalla muestra exactamente una pregunta con sus opciones de respuesta.
+- [x] Se mantienen las cinco secciones y su título descriptivo.
+- [x] El indicador muestra la sección actual y la pregunta actual de 10.
+- [x] El progreso avanza en incrementos del 10 % por pregunta.
+- [x] La navegación anterior/siguiente conserva las respuestas y permite volver a una pregunta previa.
+- [x] El diagnóstico y la generación del PDF siguen funcionando tras responder las 10 pantallas.
+- [x] Prueba automatizada de escritorio y móvil: sin errores JavaScript ni desbordamiento horizontal.
+
 ## Revisión UX/UI de legibilidad y navegación
 
 - [x] Texto explicativo de etapa: 17 px en escritorio y 16,5 px en móvil.
