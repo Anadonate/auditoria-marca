@@ -109,7 +109,10 @@ function answerScore(id){return scoreMap[answers[id]]===undefined?0:scoreMap[ans
 function calculate(){
 const dimensions={};
 dimensionDefs.forEach(d=>{const values=d.qs.map(answerScore);dimensions[d.id]=Math.round(values.reduce((a,b)=>a+b,0)/values.length);});
-const weightedScore=Math.round(dimensionDefs.reduce((sum,d)=>sum+dimensions[d.id]*d.weight/100,0));\nconst lowestDimension=Math.min(...Object.values(dimensions));\n// Safety caps stop a severe weakness from being hidden by the weighted average.\nlet global=weightedScore;if(lowestDimension<20)global=Math.min(global,54);else if(lowestDimension<40)global=Math.min(global,64);
+const weightedScore=Math.round(dimensionDefs.reduce((sum,d)=>sum+dimensions[d.id]*d.weight/100,0));
+const lowestDimension=Math.min(...Object.values(dimensions));
+// Safety caps stop a severe weakness from being hidden by the weighted average.
+let global=weightedScore;if(lowestDimension<20)global=Math.min(global,54);else if(lowestDimension<40)global=Math.min(global,64);
 const q3=answers.q3,q1=answers.q1,q2=answers.q2,q5=answers.q5,q6=answers.q6,q7=answers.q7,q8=answers.q8;
 let profileKey,reason;
 if(q3==='c'||q3==='d'){profileKey='misaligned';reason='Has indicado que la identidad no ha acompañado la evolución del negocio.';}
