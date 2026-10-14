@@ -17,7 +17,7 @@ Estos escenarios son regresiones mínimas para comprobar que las reglas de perfi
 - [x] El código JavaScript pasa `node --check`.
 - [x] Los cinco perfiles se activan en escenarios diseñados para ellos.
 - [x] Cada escenario de resultado muestra tres recomendaciones.
-- [x] La descarga genera un PDF de cuatro páginas A4.
+- [x] La descarga genera un PDF de cinco páginas A4 e incluye un gráfico radial con las cinco dimensiones.
 - [x] Navegación de escritorio y flujo completo en móvil verificados con navegador automatizado.
 - [x] No se registraron errores JavaScript durante estas pruebas.
 - [ ] Activar GitHub Pages y comprobar la URL pública una vez publicada.
