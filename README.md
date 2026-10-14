@@ -18,7 +18,7 @@ La cabecera inicial y el campo de nombre solo aparecen antes de comenzar; al ini
 
 ## Qué incluye
 
-- Cuestionario guiado de 10 preguntas cerradas, agrupadas en cinco etapas; el cuestionario permanece oculto hasta pulsar «Comenzar auditoría».
+- Cuestionario guiado de 10 preguntas cerradas, presentadas una por pantalla y agrupadas en cinco secciones. La navegación y el progreso avanzan pregunta a pregunta.
 - Pantalla de inicio independiente con nombre de empresa obligatorio para personalizar la portada del informe; se ha eliminado el campo de sector.
 - Cinco dimensiones con un índice ponderado de desarrollo de marca.
 - Asignación explicada a uno de cinco perfiles: Marca en construcción, Marca dispersa, Marca funcional, Marca consolidada o Marca desalineada.
