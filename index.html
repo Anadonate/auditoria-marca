@@ -47,7 +47,7 @@ const steps=[
 {id:'q1',text:'¿En qué punto está actualmente la identidad visual de tu empresa?',hint:'Piensa en el logo, los colores, la tipografía y cómo se combinan.',options:[
 ['a','Tenemos logo, colores, tipografías y unas reglas claras de aplicación.'],['b','Tenemos logo, colores y tipografías, pero no un sistema bien definido.'],['c','Tenemos algunas piezas, pero falta definir varios elementos importantes.'],['d','La identidad está poco desarrollada o todavía no existe.']]},
 {id:'q2',text:'¿Cómo organizáis las reglas visuales de la marca?',hint:'No importa tanto que exista un documento como que los criterios estén claros y se utilicen.',options:[
-['a','Tenemos una guía actualizada que utilizamos habitualmente.'],['b','Tenemos algunas reglas, pero no están reunidas en una guía clara.'],['c','Cada persona decide cómo aplicar la identidad según la necesidad.'],['d','No lo sé o nunca lo hemos definido.']]}]},
+['a','Tenemos una guía actualizada que utilizamos habitualmente.'],['b','Tenemos algunas reglas, pero no están reunidas en una guía clara.'],['c','Cada persona decide cómo aplicar la identidad según la necesidad.'],['d','No tenemos criterios compartidos o no se han definido.']]}]},
 {title:'Tu negocio y tu público',desc:'Una identidad debe representar la empresa de hoy y tener claro a quién quiere llegar.',questions:[
 {id:'q3',text:'¿Hasta qué punto representa tu imagen actual el negocio que tienes hoy?',hint:'Ten en cuenta los cambios en tus servicios, posicionamiento, clientes u objetivos.',options:[
 ['a','Lo representa bien y sigue alineada con nuestros objetivos.'],['b','En general nos representa, pero hay aspectos que han quedado desactualizados.'],['c','El negocio ha evolucionado bastante y la imagen no ha seguido ese cambio.'],['d','La imagen ya no refleja lo que somos ni lo que queremos transmitir.']]},
@@ -105,7 +105,7 @@ stepScreen.querySelectorAll('input[type=radio]').forEach(input=>input.addEventLi
 document.getElementById('prevBtn').addEventListener('click',()=>{if(currentStep>0){currentStep--;renderStep();window.scrollTo({top:0,behavior:'smooth'});}});
 document.getElementById('nextBtn').addEventListener('click',()=>{if(!s.questions.every(q=>answers[q.id])){document.getElementById('stepError').textContent='Responde a las dos preguntas para continuar.';return;}if(currentStep<steps.length-1){currentStep++;renderStep();window.scrollTo({top:0,behavior:'smooth'});}else{showResults();}});
 }
-function answerScore(id){return scoreMap[answers[id]]===undefined?0:scoreMap[answers[id]];}
+function answerScore(id){if(id==='q7'&&answers[id]==='d')return 50;if(id==='q8'&&answers[id]==='d')return 45;return scoreMap[answers[id]]===undefined?0:scoreMap[answers[id]];}
 function calculate(){
 const dimensions={};
 dimensionDefs.forEach(d=>{const values=d.qs.map(answerScore);dimensions[d.id]=Math.round(values.reduce((a,b)=>a+b,0)/values.length);});
@@ -144,20 +144,33 @@ presence:{title:'Ampliar la expresión de una marca consolidada',action:'Identif
 };
 function priorityRank(key,dimensions){const map={system:dimensions.system,alignment:dimensions.alignment,strategy:dimensions.strategy,coherence:dimensions.coherence,difference:dimensions.difference};return map[key];}
 function buildRecommendations(profileKey,dimensions){
-let preferred;
-if(profileKey==='misaligned')preferred=['alignment','system','strategy','coherence'];
-else if(profileKey==='construction')preferred=['system','strategy','coherence','difference'];
-else if(profileKey==='dispersed')preferred=['coherence','system','difference','strategy'];
-else if(profileKey==='functional')preferred=['difference','strategy','coherence','system'];
-else preferred=['presence','difference','coherence','alignment'];
-let scored=preferred.map((key,index)=>({key,index,score:key==='presence'?(dimensions.coherence+dimensions.difference)/2:(100-(priorityRank(key,dimensions)||0))}));
-const q9=answers.q9;if(q9==='a'&&!scored.some(x=>x.key==='alignment'))scored.push({key:'alignment',score:60,index:5});if(q9==='b'&&!scored.some(x=>x.key==='coherence'))scored.push({key:'coherence',score:60,index:5});if(q9==='c'&&!scored.some(x=>x.key==='difference'))scored.push({key:'difference',score:60,index:5});if(q9==='d'&&!scored.some(x=>x.key==='system'))scored.push({key:'system',score:60,index:5});if(q9==='e'&&!scored.some(x=>x.key==='presence'))scored.push({key:'presence',score:60,index:5});
-scored.sort((a,b)=>b.score-a.score||a.index-b.index);
-const chosen=[];for(const item of scored){if(!chosen.includes(item.key)){chosen.push(item.key);}if(chosen.length===3)break;}
-if(answers.q10==='c'&&!chosen.includes('system')){chosen[2]= 'system';}
-if(answers.q10==='d'&&!chosen.includes('system')&&!chosen.includes('strategy'))chosen[2]='system';
-const unique=[...new Set(chosen)].slice(0,3);
-return unique.map((key,i)=>{const r=recommendationBank[key];let dimension=key==='presence'?'coherence':key;let value=dimensions[dimension];const proof=r.proof.map(id=>{const q=steps.flatMap(s=>s.questions).find(x=>x.id===id);const opt=q.options.find(o=>o[0]===answers[id]);return q.text+' — '+(opt?opt[1]:'');}).join(' ');return {...r,key,priority:i+1,proof,level:value===undefined?'Oportunidad':value<50?'Prioridad alta':value<75?'A mejorar':'Optimización'};});
+const ranked={
+system:100-dimensions.system,
+alignment:100-dimensions.alignment,
+strategy:100-dimensions.strategy,
+coherence:100-dimensions.coherence,
+difference:100-dimensions.difference,
+presence:profileKey==='consolidated'?72:Math.max(10,100-(dimensions.coherence+dimensions.difference)/2)
+};
+const order={
+misaligned:['alignment','system','strategy','coherence','difference','presence'],
+construction:['system','strategy','coherence','difference','alignment','presence'],
+dispersed:['coherence','system','difference','strategy','alignment','presence'],
+functional:['difference','strategy','coherence','system','alignment','presence'],
+consolidated:['presence','difference','coherence','alignment','strategy','system']
+}[profileKey]||['system','coherence','difference','strategy','alignment','presence'];
+if(answers.q9==='a')ranked.alignment+=22;
+if(answers.q9==='b')ranked.coherence+=22;
+if(answers.q9==='c')ranked.difference+=22;
+if(answers.q9==='d')ranked.system+=22;
+if(answers.q9==='e')ranked.presence+=18;
+if(answers.q10==='c')ranked.system+=12;
+if(answers.q10==='d'){ranked.system+=8;ranked.strategy+=8;}
+const chosen=order.map((key,index)=>({key,index,score:ranked[key]})).sort((a,b)=>b.score-a.score||a.index-b.index).map(item=>item.key);
+const unique=[];
+chosen.forEach(key=>{if(!unique.includes(key)&&unique.length<3)unique.push(key);});
+while(unique.length<3){const next=Object.keys(recommendationBank).find(key=>!unique.includes(key));if(!next)break;unique.push(next);}
+return unique.map((key,i)=>{const r=recommendationBank[key];const dimension=key==='presence'?'coherence':key;const value=dimensions[dimension];const proof=r.proof.map(id=>{const q=steps.flatMap(s=>s.questions).find(x=>x.id===id);const opt=q.options.find(o=>o[0]===answers[id]);return q.text+' — '+(opt?opt[1]:'');}).join(' ');return {...r,key,priority:i+1,proof,level:value===undefined?'Oportunidad':value<50?'Prioridad alta':value<75?'A mejorar':'Optimización'};});
 }
 function showResults(){
 diagnosis=calculate();document.getElementById('questionnaire').hidden=true;document.getElementById('privacyNote').hidden=true;document.getElementById('results').classList.add('show');document.getElementById('stepMeta').textContent='DIAGNÓSTICO COMPLETADO';document.getElementById('stepPercent').textContent='100 %';document.getElementById('stepProgress').style.width='100%';document.getElementById('topProgress').style.width='100%';renderResults(diagnosis);window.scrollTo({top:0,behavior:'smooth'});
@@ -218,13 +231,24 @@ const qMap={q1:'Fundamentos visuales',q2:'Reglas de marca',q3:'Alineación con e
 if(!evidence.length)evidence.push('Las respuestas muestran una base relativamente sólida. Contrasta esta percepción con materiales reales y opiniones de clientes.');
 evidence.slice(0,5).forEach(e=>{fill(copper);pdf.circle(L+1.5,y-1.2,1,'F');y=wrap(e,L+6,y,166,8.2,ink,false,4)+2;});
 footer('2');
-// Page 3: action plan
-pdf.addPage();fill(cream);pdf.rect(0,0,W,H,'F');y=pageTitle('02 / Plan de acción','Tus próximos tres pasos','Acciones recomendadas según las dimensiones más débiles, tu perfil y la prioridad que has señalado.');
-d.recommendations.forEach((r,i)=>{const boxY=y;roundedBox(L,boxY,174,54,[238,231,217]);fill(forest);pdf.roundedRect(L+6,boxY+7,10,10,2,2,'F');pdf.setFont('helvetica','bold');pdf.setFontSize(9);text(cream);pdf.text(String(i+1),L+11,boxY+14,{align:'center'});pdf.setFont('helvetica','bold');pdf.setFontSize(11);text(forest);const titleLines=pdf.splitTextToSize(r.title,145);pdf.text(titleLines,L+22,boxY+13);let yy=boxY+13+titleLines.length*4.5;yy=wrap(r.action,L+22,yy+2,144,8.3,ink,false,4.2);yy=wrap('Por qué importa: '+r.why,L+22,yy+2,144,7.8,muted,false,3.9);y=boxY+59;});
-y+=3;y=section('Tu prioridad declarada',y);y=wrap(d.priority,L,y,174,9,ink,true,4.6);y+=7;
-y=section('Cómo se tomaron las decisiones',y);y=wrap(d.decision,L,y,174,9,ink,false,4.6);y+=7;
-roundedBox(L,y,174,31,forest);pdf.setFont('helvetica','bold');pdf.setFontSize(9);text(cream);pdf.text('Una recomendación profesional',L+6,y+9);wrap('Para confirmar estas hipótesis es necesario revisar la identidad visual, sus aplicaciones y el contexto competitivo. Este informe es un punto de partida, no un sustituto de una auditoría completa.',L+6,y+16,161,7.5,[225,231,221],false,3.8);
+// Page 3: prioritized action plan
+pdf.addPage();fill(cream);pdf.rect(0,0,W,H,'F');y=pageTitle('02 / Plan de acción','Tus próximos tres pasos','Acciones ordenadas a partir de las dimensiones más débiles y de tus respuestas.');
+d.recommendations.forEach((r,i)=>{const boxY=y;roundedBox(L,boxY,174,51,[238,231,217]);fill(forest);pdf.roundedRect(L+6,boxY+7,10,10,2,2,'F');pdf.setFont('helvetica','bold');pdf.setFontSize(9);text(cream);pdf.text(String(i+1),L+11,boxY+14,{align:'center'});pdf.setFont('helvetica','bold');pdf.setFontSize(10.5);text(forest);const titleLines=pdf.splitTextToSize(r.title,145);pdf.text(titleLines,L+22,boxY+13);let yy=boxY+13+titleLines.length*4.5;yy=wrap(r.action,L+22,yy+2,144,8,ink,false,4);wrap('Por qué importa: '+r.why,L+22,yy+2,144,7.5,muted,false,3.7);y=boxY+56;});
+y=section('La prioridad que has señalado',y+1);y=wrap(d.priority,L,y,174,9,ink,true,4.5);
 footer('3');
+// Page 4: decision context and professional limitations
+pdf.addPage();fill(cream);pdf.rect(0,0,W,H,'F');y=pageTitle('03 / Contexto y validación','Decisiones que conviene revisar','Estas respuestas sirven para entender el contexto del diagnóstico, pero no modifican por sí solas la puntuación.');
+y=section('Cómo se han tomado las decisiones visuales',y+2);roundedBox(L,y,174,31,[238,231,217]);y=wrap(d.decision,L+6,y+9,162,9,forest,true,4.6);y+=10;
+y=section('Cómo interpretar este informe',y+3);y=wrap('El resultado se basa en la percepción declarada por la persona que ha completado el cuestionario. La puntuación ayuda a ordenar prioridades, pero no verifica por sí misma la calidad visual ni el rendimiento comercial de una marca.',L,y,174,9,ink,false,4.7);y+=7;
+const checks=[
+'Contrastar las respuestas con el logotipo, la web, las redes y los materiales comerciales reales.',
+'Comprobar si los clientes reconocen la marca y qué atributos asocian con ella.',
+'Revisar a los competidores para evaluar la diferenciación dentro del sector.',
+'Validar las prioridades con los objetivos y recursos actuales de la empresa.'
+];
+checks.forEach((item,i)=>{fill(copper);pdf.circle(L+1.5,y-1.2,1,'F');y=wrap(item,L+6,y,168,8.5,ink,false,4.2)+3;});
+y+=4;roundedBox(L,y,174,45,forest);pdf.setFont('helvetica','bold');pdf.setFontSize(10);text(cream);pdf.text('Del diagnóstico a un sistema de marca',L+7,y+10);wrap('Una revisión profesional permite convertir estas hipótesis en decisiones visuales y estratégicas ajustadas a la realidad de la empresa. El informe es un punto de partida, no una auditoría completa.',L+7,y+18,160,8,[225,231,221],false,4.2);
+footer('4');
 const fileCompany=(company.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'mi-marca');
 pdf.save('auditoria-de-marca-'+fileCompany+'.pdf');
 }catch(e){console.error(e);alert('No se pudo generar el PDF. Inténtalo de nuevo; si persiste, recarga la página.');}finally{btn.disabled=false;btn.textContent=old;}
