@@ -677,7 +677,6 @@ cursor:makeBrandIconPng('cursor','#46B382'),
 flowerWatermark:makeBrandIconPng('flower','#D2A158',.2)
 };
 function addBrandIcon(kind,x,y,size){pdf.addImage(brandIconPng[kind],'PNG',x,y,size,size);}
-const glyphCycle=['flower','target','cursor'];
 
 function safe(s){return String(s||'').replace(/\s+/g,' ').trim();}
 function cleanScoreSuffix(value){return String(value).replace(/\s*\(\d+\/100\)/g,'').trim();}
