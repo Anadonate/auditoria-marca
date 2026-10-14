@@ -172,6 +172,36 @@ body { font-size: 16px; line-height: 1.65; }
 /* Enforce same readable size for privacy and field-help copy despite generic intro paragraph rules. */
 .intro .start-privacy{font-size:14px!important;line-height:1.6!important;color:var(--muted);max-width:58ch;margin:12px 0 0}
 @media(max-width:720px){.intro .start-privacy{font-size:14px!important;line-height:1.6!important}}
+
+/* Landing hero refinement: softly tinted surface and single oversized brand-flower watermark. */
+.intro{
+  background:#FFF1F4;
+  border:1px solid #EBC4CD;
+  box-shadow:0 20px 52px rgba(41,39,42,.09);
+}
+.intro-mark{
+  display:block;
+  right:-82px;
+  bottom:-112px;
+  width:315px;
+  height:315px;
+  opacity:.23;
+  z-index:0;
+}
+.intro-mark svg{
+  display:block;
+  width:100%;
+  height:100%;
+  stroke:#D2A158;
+  stroke-width:1.15;
+  fill:none;
+}
+.intro > :not(.intro-mark){position:relative;z-index:1}
+@media(max-width:720px){
+  .intro{background:#FFF1F4;border-color:#EBC4CD}
+  .intro-mark{display:block;right:-54px;bottom:-68px;width:180px;height:180px;opacity:.17}
+}
+
 </style>
 </head>
 <body>
@@ -180,7 +210,7 @@ body { font-size: 16px; line-height: 1.65; }
 <header class="sitehead" id="sitehead"><div class="brand"><span class="brand-mark" aria-hidden="true"><svg class="brand-flower" viewBox="0 0 64 64"><path d="M32 30 C28 17 20 8 10 10 C8 21 17 29 30 32 C17 35 8 43 10 54 C21 56 29 47 32 34 C35 47 43 56 54 54 C56 43 47 35 34 32 C47 29 56 21 54 10 C44 8 36 17 32 30Z"/></svg><svg class="brand-target" viewBox="0 0 64 64"><path d="M43 12 A24 24 0 1 0 55 32"/><path d="M42 25 A12 12 0 1 0 44 36"/><path d="M32 32 L56 8 M45 8 L56 8 L56 19"/></svg><svg class="brand-cursor" viewBox="0 0 64 64"><path d="M12 7 L54 34 L36 38 L43 54 L33 58 L25 42 L13 53 Z"/></svg></span>Ana Donate <span style="font-weight:500;color:var(--muted)">/ Auditoría de marca</span></div><div class="headnote">Diagnóstico orientativo · 3 minutos</div></header>
 <main class="container">
 <section class="intro" id="intro">
-<div class="intro-mark" aria-hidden="true"><svg class="brand-flower" viewBox="0 0 64 64"><path d="M32 30 C28 17 20 8 10 10 C8 21 17 29 30 32 C17 35 8 43 10 54 C21 56 29 47 32 34 C35 47 43 56 54 54 C56 43 47 35 34 32 C47 29 56 21 54 10 C44 8 36 17 32 30Z"/></svg><svg class="brand-target" viewBox="0 0 64 64"><path d="M43 12 A24 24 0 1 0 55 32"/><path d="M42 25 A12 12 0 1 0 44 36"/><path d="M32 32 L56 8 M45 8 L56 8 L56 19"/></svg><svg class="brand-cursor" viewBox="0 0 64 64"><path d="M12 7 L54 34 L36 38 L43 54 L33 58 L25 42 L13 53 Z"/></svg></div>
+<div class="intro-mark" aria-hidden="true"><svg class="brand-flower" viewBox="0 0 64 64"><path d="M32 30 C28 17 20 8 10 10 C8 21 17 29 30 32 C17 35 8 43 10 54 C21 56 29 47 32 34 C35 47 43 56 54 54 C56 43 47 35 34 32 C47 29 56 21 54 10 C44 8 36 17 32 30Z"/></svg></div>
 <span class="eyebrow">Diseño gráfico &amp; Branding</span>
 <h1>Tu marca tiene una historia. ¿La está contando bien?</h1>
 <p>Responde a 10 preguntas y descubre cómo mejorar tu marca. Al final recibirás un informe personalizado con tus resultados y recomendaciones.</p>
