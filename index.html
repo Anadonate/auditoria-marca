@@ -416,6 +416,12 @@ body { font-size: 16px; line-height: 1.65; }
 
 /* Match the final report's top gap to the 20px spacing used before each question card. */
 #results.show{margin-top:20px}
+
+/* Final layout polish: warm beige outer canvas, EA pink question rail and consistent gap under progress. */
+body{background:#F5F0E8!important}
+.step-label{border-left-color:#EA5A77!important}
+#quizProgress:not([hidden])~#results.show{margin-top:20px!important}
+
 </style>
 </head>
 <body>
