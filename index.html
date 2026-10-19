@@ -834,8 +834,8 @@ d.recommendations.forEach((r,i)=>{
  box(24,y+8,9,9,pink,null,2);
  pdf.setFont('helvetica','bold');pdf.setFontSize(9);text(ink);pdf.text(String(i+1),28.5,y+14,{align:'center'});
  pdf.setFont('helvetica','bold');pdf.setFontSize(7.8);text(pink);pdf.text('PASO '+(i+1),38,y+9);
- pdf.setFont('helvetica','bold');pdf.setFontSize(10.6);text(ink);const titleLines=pdf.splitTextToSize(r.title,147);pdf.text(titleLines,38,y+15);
- let ya=wrap(r.action,38,y+15+titleLines.length*4.4+4.5,147,9.0,body,false,4.2);
+ pdf.setFont('helvetica','bold');pdf.setFontSize(10.6);text(ink);const titleLines=pdf.splitTextToSize(r.title,147);pdf.text(titleLines,38,y+13);
+ let ya=wrap(r.action,38,y+13+titleLines.length*4.4+5.5,147,9.0,body,false,4.2);
  wrap('Por qué importa: '+r.why,38,ya+1,147,8.2,muted,false,3.9);
 });
 box(18,243,174,24,forest,null,4);
