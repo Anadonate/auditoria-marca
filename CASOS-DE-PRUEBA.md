@@ -4,7 +4,7 @@ Estos escenarios son regresiones mínimas para comprobar que las reglas de perfi
 
 | Caso | Respuestas relevantes | Resultado esperado |
 |---|---|---|
-| Marca consolidada | Todas A; Q9 = E | Marca consolidada, puntuación 100/100 y tres recomendaciones de optimización. |
+| Marca consolidada | Todas A; Q9 = A | Marca consolidada, puntuación 100/100 y tres recomendaciones de optimización. |
 | Marca desalineada | Q3 = D; resto A | Marca desalineada; el índice global se limita por la debilidad crítica. |
 | Marca en construcción | Q1 = D y Q2 = D; resto A | Marca en construcción; no se oculta la falta de fundamentos con una media alta. |
 | Marca dispersa | Q5 = D y Q6 = D; resto A | Marca dispersa; coherencia es la dimensión crítica. |
@@ -34,6 +34,18 @@ Estos escenarios son regresiones mínimas para comprobar que las reglas de perfi
 - [x] No se registraron errores JavaScript durante estas pruebas.
 - [x] GitHub Pages está publicado y la URL pública se ha probado directamente.
 - [ ] Revisar el diseño visual del PDF y validarlo con empresas reales antes del lanzamiento comercial.
+
+
+## Actualización del cuestionario y refinamiento editorial del PDF
+
+- [x] La pregunta 9 mantiene la décima posición dentro del cuestionario, pero ofrece cuatro opciones, como las otras preguntas.
+- [x] El criterio de desempate de perfiles solo usa opciones existentes de Q9 (A-D).
+- [x] Portada PDF renovada con panel rosa pálido, tarjeta blanca para la puntuación y acentos corporativos.
+- [x] Gráfico radial PDF calculado con las cinco puntuaciones reales, con polígono cerrado, relleno rosa, marcadores y cinco etiquetas dentro de los márgenes.
+- [x] Página de acciones con badges numerados grandes, etiqueta «PASO» y título compactos, y bandas suaves para «Por qué importa».
+- [x] Las listas de validación usan badges numerados alineados con su texto; el cierre oscuro incorpora acentos rosa y dorado.
+- [x] Prueba de navegador con respuestas variadas: 4 opciones en cada una de las 10 preguntas, puntuaciones diversas, 3 recomendaciones y PDF A4 de 5 páginas.
+- [x] Extracción de texto y límites: el contenido permanece dentro de la zona imprimible; el cuestionario no presenta desbordamiento horizontal en móvil.
 
 ## Revisión de paleta visual
 
