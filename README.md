@@ -17,6 +17,14 @@ La interfaz y el PDF utilizan una paleta alineada con la identidad visual de Ana
 
 La cabecera inicial y el campo de nombre solo aparecen antes de comenzar; al iniciar, la cabecera desaparece y el cuestionario pasa a primer plano. La tipografía explicativa se ha ampliado y la navegación mueve el foco al encabezado de la etapa activa. Los estados hover de las respuestas usan el dorado EA, y los símbolos flor, diana y cursor sustituyen los puntos decorativos en la web y el informe. Los controles tienen áreas táctiles más cómodas, se conserva la preferencia de movimiento reducido y el formulario no debe provocar desplazamiento horizontal en móvil.
 
+
+## Cuestionario y PDF
+
+- La pregunta 9 tiene cuatro opciones, alineadas con las demás preguntas; el cuestionario mantiene sus 10 preguntas.
+- El PDF personalizado consta de cinco páginas A4. La portada usa paneles rosa pálido y blanco cálido sobre carbón; las páginas interiores comparten la paleta EA.
+- El gráfico radial se dibuja a partir de las cinco puntuaciones calculadas para cada respuesta, de modo que la forma cambia en cada diagnóstico.
+- Las recomendaciones y las listas de validación usan una numeración más clara, con texto legible, mayor contraste y acentos rosa, dorado y verde.
+
 ## Qué incluye
 
 - Cuestionario guiado de 10 preguntas cerradas, presentadas una por pantalla y agrupadas en cinco secciones. La navegación y el progreso avanzan pregunta a pregunta.
