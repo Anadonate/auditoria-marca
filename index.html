@@ -678,11 +678,11 @@ function footer(page,dark=false){
 function pageTitle(kicker,title,sub){
  draw(pink);pdf.setLineWidth(.9);pdf.line(L,16,L,23);
  pdf.setFont('helvetica','bold');pdf.setFontSize(8.2);text(pink);pdf.text(kicker.toUpperCase(),L+4,20);
- addBrandIcon('flower',155,12,6);addBrandIcon('target',164,12,6);addBrandIcon('cursor',173,12,6);
+ addBrandIcon('flower',168,12,6);addBrandIcon('target',177,12,6);addBrandIcon('cursor',186,12,6);
  pdf.setFont('helvetica','bold');pdf.setFontSize(22);text(forest);
  const titleLines=pdf.splitTextToSize(title,160);pdf.text(titleLines,L,35);
  let y=35+titleLines.length*8.2;
- if(sub)y=wrap(sub,L,y+3,174,9.2,muted,false,4.2);
+ if(sub)y=wrap(sub,L,y+3,174,10,muted,false,4.7);
  return y+3;
 }
 function makeBrandIconPng(kind,color,opacity=1){
@@ -721,16 +721,16 @@ function progressBar(x,y,w,h,value,color){box(x,y,w,h,paper,null,h/2);if(value>0
 // PÁGINA 1 · Portada editorial
 pageBg(forest);
 addBrandIcon('flowerWatermark',148,207,90);
-addBrandIcon('flower',153,17,9);addBrandIcon('target',164,17,9);addBrandIcon('cursor',175,17,9);
+addBrandIcon('flower',161,17,9);addBrandIcon('target',172,17,9);addBrandIcon('cursor',183,17,9);
 pdf.setFont('helvetica','bold');pdf.setFontSize(8.4);text(gold);pdf.text('ANA DONATE  /  DISEÑO GRÁFICO & BRANDING',L,23);
 draw(pink);pdf.setLineWidth(1.1);pdf.line(L,48,L,83);
 pdf.setFont('helvetica','bold');pdf.setFontSize(32);text(cream);pdf.text('Auditoría de',L+5,61);pdf.text('marca visual',L+5,75);
 wrap('Un diagnóstico orientativo para entender tu punto de partida y priorizar mejoras de identidad visual.',L+5,91,135,10,[216,211,208],false,4.6);
-box(L,108,174,42,[54,51,56],[80,74,81],4);
+box(L,108,174,47,[54,51,56],[80,74,81],4);
 section('Perfil identificado',L+6,119,gold);
 box(L+6,125,62,8,[72,43,53],pink,4);
 pdf.setFont('helvetica','bold');pdf.setFontSize(7.6);text([255,128,148]);pdf.text(p.name.toUpperCase(),L+9,130.2);
-wrap(p.lead,L+6,141,161,8.8,[227,222,224],false,4.0);
+wrap(p.lead,L+6,141,161,9.5,[227,222,224],false,4.4);
 section('Índice de desarrollo de marca',L,165,gold);
 pdf.setFont('helvetica','bold');pdf.setFontSize(43);text(cream);pdf.text(String(d.global),L,188);
 pdf.setFontSize(11);pdf.text('/ 100',L+26,186);
@@ -741,7 +741,7 @@ draw([79,74,81]);pdf.setLineWidth(.3);pdf.line(L,232,R,232);
 pdf.setFont('helvetica','bold');pdf.setFontSize(7.4);text([216,211,208]);pdf.text('INFORME PARA',L,245);pdf.text('FECHA',108,245);
 pdf.setFont('helvetica','bold');pdf.setFontSize(10.5);text(cream);pdf.text(pdf.splitTextToSize(company,75),L,257);
 pdf.setFont('helvetica','normal');pdf.setFontSize(8.6);pdf.text(date,108,257);
-wrap('Resultado basado en las respuestas declaradas; no es una auditoría visual directa.',L,270,158,7.5,[199,193,198],false,3.5);
+wrap('Resultado basado en las respuestas declaradas; no es una auditoría visual directa.',L,270,158,8.2,[199,193,198],false,3.9);
 footer(1,true);
  
 // PÁGINA 2 · Estado de la marca y puntuaciones (los porcentajes aparecen aquí una sola vez)
@@ -757,10 +757,10 @@ dimensionDefs.forEach((def,i)=>{
 });
 box(15,169,180,35,palePink,[235,196,205],4);
 section('Qué significa tu perfil',21,180,pink);
-let yy=wrap(p.lead,21,189,168,9.4,ink,true,4.3);
-wrap(p.focus,21,yy+1,168,8.1,body,false,3.7);
+let yy=wrap(p.lead,21,189,168,10.2,ink,true,4.8);
+wrap(p.focus,21,yy+1,168,9.2,body,false,4.3);
 box(15,209,180,13,forest,null,3);
-wrap(p.closing,21,217.5,168,7.8,cream,true,3.8,2);
+wrap(p.closing,21,217.5,168,8.6,cream,true,4.1,2);
 section('Evidencias en tus respuestas',L,233,forest);
 const evidence=[];
 const qMap={q1:'Fundamentos visuales',q2:'Reglas de marca',q3:'Alineación con el negocio',q4:'Definición del público',q5:'Coherencia entre canales',q6:'Aplicación de recursos',q7:'Diferenciación',q8:'Personalidad visual',q9:'Prioridad declarada',q10:'Proceso de decisión'};
@@ -775,7 +775,7 @@ if(!evidence.length)evidence.push('Las respuestas muestran una base relativament
 let ey=243;
 evidence.slice(0,5).forEach((item,i)=>{
  draw(i%2===0?pink:gold);pdf.setLineWidth(.6);pdf.line(L,ey-1,L,ey+3);
- ey=wrap(item,L+5,ey,169,7.6,body,false,3.5)+2.1;
+ ey=wrap(item,L+5,ey,169,8.5,body,false,4.0)+2.0;
 });
 footer(2);
 
@@ -803,26 +803,26 @@ labels.forEach(it=>{pdf.setFont('helvetica','bold');pdf.setFontSize(6.8);text(fo
 // strengths / gaps column, compact with clean line markers
 box(116,66,78,162,white,line,4);
 section('Fortalezas y atención',121,78,forest);
-wrap('Qué destaca en tus respuestas',121,91,67,10,ink,true,4.4);
+wrap('Qué destaca en tus respuestas',121,91,67,10.5,ink,true,4.8);
 let iy=108;
 section('Fortalezas declaradas',121,iy,green);iy+=8;
 const cleanStrengths=d.strengths.map(cleanInsight);
 const cleanGaps=d.gaps.map(cleanInsight);
 const showList=(items,color,max=3)=>{
  const subset=items.slice(0,max);
- subset.forEach(item=>{draw(color);pdf.setLineWidth(.6);pdf.line(122,iy-1,124,iy-1);iy=wrap(item,127,iy,62,8,body,false,3.7)+2.2;});
+ subset.forEach(item=>{draw(color);pdf.setLineWidth(.6);pdf.line(122,iy-1,124,iy-1);iy=wrap(item,127,iy,62,9,body,false,4.2)+2.0;});
  if(items.length>max){pdf.setFont('helvetica','italic');pdf.setFontSize(7.2);text(muted);pdf.text('Y '+(items.length-max)+' más',127,iy);iy+=4;}
 };
-if(cleanStrengths.length)showList(cleanStrengths,green,3);else{iy=wrap('No se detectan dimensiones especialmente fuertes en esta autoevaluación.',127,iy,62,7.8,body,false,3.7)+2;}
+if(cleanStrengths.length)showList(cleanStrengths,green,3);else{iy=wrap('No se detectan dimensiones especialmente fuertes en esta autoevaluación.',127,iy,62,8.7,body,false,4.1)+2;}
 iy+=2;section('Áreas a revisar',121,iy,pink);iy+=8;
-if(cleanGaps.length)showList(cleanGaps,pink,3);else{iy=wrap('No aparecen dimensiones por debajo de 60/100; conviene validar la percepción con materiales reales.',127,iy,62,7.8,body,false,3.7)+2;}
+if(cleanGaps.length)showList(cleanGaps,pink,3);else{iy=wrap('No aparecen dimensiones por debajo de 60/100; conviene validar la percepción con materiales reales.',127,iy,62,8.7,body,false,4.1)+2;}
 box(121,193,68,26,paleGreen,[184,225,204],3);
 section('Lectura del mapa',125,202,green);
 const sortedDims=dimensionDefs.slice().sort((a,b)=>d.dimensions[b.id]-d.dimensions[a.id]);
 const best=sortedDims[0],lowest=sortedDims[sortedDims.length-1];
-wrap(best.label+' es el punto más sólido; conviene priorizar '+lowest.label.toLowerCase()+'.',125,211,60,7.1,body,false,3.4);
+wrap(best.label+' es el punto más sólido; conviene priorizar '+lowest.label.toLowerCase()+'.',125,211,60,8.1,body,false,3.9);
 box(15,240,180,24,paleGreen,[184,225,204],4);
-wrap('Lectura orientativa basada en tus respuestas; contrasta el resultado con la identidad real, los materiales comerciales y la percepción de los clientes.',21,250,168,8.1,body,false,3.8);
+wrap('Lectura orientativa basada en tus respuestas; contrasta el resultado con la identidad real, los materiales comerciales y la percepción de los clientes.',21,250,168,9,body,false,4.2);
 footer(3);
 
 // PÁGINA 4 · Plan de acción
@@ -833,10 +833,10 @@ d.recommendations.forEach((r,i)=>{
  const y=actionY[i];box(18,y,174,cardH,white,line,4);
  box(24,y+8,9,9,pink,null,2);
  pdf.setFont('helvetica','bold');pdf.setFontSize(9);text(ink);pdf.text(String(i+1),28.5,y+14,{align:'center'});
- pdf.setFont('helvetica','bold');pdf.setFontSize(7.3);text(pink);pdf.text('PASO '+(i+1),38,y+9);
- pdf.setFont('helvetica','bold');pdf.setFontSize(10.4);text(ink);pdf.text(pdf.splitTextToSize(r.title,147),38,y+18);
- let ya=wrap(r.action,38,y+27,147,8.0,body,false,3.8);
- wrap('Por qué importa: '+r.why,38,ya+1,147,7.2,muted,false,3.4);
+ pdf.setFont('helvetica','bold');pdf.setFontSize(7.8);text(pink);pdf.text('PASO '+(i+1),38,y+9);
+ pdf.setFont('helvetica','bold');pdf.setFontSize(10.6);text(ink);const titleLines=pdf.splitTextToSize(r.title,147);pdf.text(titleLines,38,y+15);
+ let ya=wrap(r.action,38,y+15+titleLines.length*4.4+4.5,147,9.0,body,false,4.2);
+ wrap('Por qué importa: '+r.why,38,ya+1,147,8.2,muted,false,3.9);
 });
 box(18,243,174,24,forest,null,4);
 section('La prioridad que has señalado',24,252,gold);
@@ -848,9 +848,9 @@ pdf.addPage();pageBg(beige);
 pageTitle('03 / Contexto y validación','Decisiones que conviene revisar','Estas respuestas ayudan a entender el contexto del diagnóstico, pero no modifican por sí solas la puntuación.');
 box(15,66,180,32,white,line,4);
 section('Cómo se han tomado las decisiones visuales',21,78,forest);
-wrap(d.decision,21,89,168,9.4,ink,true,4.2,2);
+wrap(d.decision,21,89,168,10.2,ink,true,4.7,2);
 section('Cómo interpretar este informe',L,113,forest);
-let ly=wrap('El resultado se basa en la percepción declarada por la persona que ha completado el cuestionario. La puntuación ayuda a ordenar prioridades, pero no verifica por sí misma la calidad visual ni el rendimiento comercial de una marca.',L,126,174,8.9,body,false,4.1);
+let ly=wrap('El resultado se basa en la percepción declarada por la persona que ha completado el cuestionario. La puntuación ayuda a ordenar prioridades, pero no verifica por sí misma la calidad visual ni el rendimiento comercial de una marca.',L,126,174,9.6,body,false,4.5);
 section('Cómo validar las prioridades',L,ly+8,forest);
 let vy=ly+20;
 const checks=[
@@ -861,12 +861,12 @@ const checks=[
 ];
 checks.forEach((item,i)=>{
  box(L,vy-5,6,6,palePink,null,1.2);pdf.setFont('helvetica','bold');pdf.setFontSize(7);text(pink);pdf.text(String(i+1),L+3,vy-.8,{align:'center'});
- vy=wrap(item,L+10,vy,164,8.3,body,false,3.8)+3.2;
+ vy=wrap(item,L+10,vy,164,9.1,body,false,4.2)+3.0;
 });
 box(15,224,180,45,forest,null,4);
 addBrandIcon('flowerWatermark',163,231,34);
 section('Del diagnóstico a un sistema de marca',21,237,pink);
-wrap('Una revisión profesional permite convertir estas hipótesis en decisiones visuales y estratégicas ajustadas a la realidad de la empresa. El informe es un punto de partida, no una auditoría completa.',21,248,155,8.3,cream,false,3.8);
+wrap('Una revisión profesional permite convertir estas hipótesis en decisiones visuales y estratégicas ajustadas a la realidad de la empresa. El informe es un punto de partida, no una auditoría completa.',21,248,155,9,cream,false,4.2);
 footer(5);
 const fileCompany=(company.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'mi-marca');
 pdf.save('informe-auditoria-marca-'+fileCompany+'.pdf');
