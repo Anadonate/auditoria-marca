@@ -711,9 +711,9 @@ const brandIconPng={
  flowerWatermark:makeBrandIconPng('flower','#D2A158',.17)
 };
 function addBrandIcon(kind,x,y,size){pdf.addImage(brandIconPng[kind],'PNG',x,y,size,size);}
-function cleanInsight(value){return String(value||'').replace(/\\s*\\(\\d+\\/100\\)/g,'').trim();}
+function cleanInsight(value){return String(value||'').replace(/\s*\(\d+\/100\)/g,'').trim();}
 function scoreColor(n){return n<40?pink:n<75?gold:green;}
-function safe(value){return String(value||'').replace(/\\s+/g,' ').trim();}
+function safe(value){return String(value||'').replace(/\s+/g,' ').trim();}
 const company=safe(d.company)||'Tu empresa';
 const date=d.date.toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'});
 function progressBar(x,y,w,h,value,color){box(x,y,w,h,paper,null,h/2);if(value>0)box(x,y,w*value/100,h,color,null,h/2);}
@@ -868,7 +868,7 @@ addBrandIcon('flowerWatermark',163,231,34);
 section('Del diagnóstico a un sistema de marca',21,237,pink);
 wrap('Una revisión profesional permite convertir estas hipótesis en decisiones visuales y estratégicas ajustadas a la realidad de la empresa. El informe es un punto de partida, no una auditoría completa.',21,248,155,8.3,cream,false,3.8);
 footer(5);
-const fileCompany=(company.toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'mi-marca');
+const fileCompany=(company.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'mi-marca');
 pdf.save('informe-auditoria-marca-'+fileCompany+'.pdf');
 }catch(e){console.error(e);alert('No se pudo generar el PDF. Inténtalo de nuevo; si persiste, recarga la página.');}
 finally{btn.disabled=false;btn.textContent=old;}
