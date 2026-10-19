@@ -819,7 +819,7 @@ const labels=[
 {x:101,y:142,w:14,label:'Alineación con el negocio',align:'left'},
 {x:72,y:194,w:37,label:'Definición estratégica',align:'center'},
 {x:18,y:194,w:36,label:'Coherencia visual',align:'center'},
-{x:14,y:126,w:25,label:'Diferenciación y personalidad',align:'right'}
+{x:39,y:126,w:25,label:'Diferenciación y personalidad',align:'right'}
 ];
 labels.forEach(it=>{pdf.setFont('helvetica','bold');pdf.setFontSize(7.2);text(forest);pdf.text(pdf.splitTextToSize(it.label,it.w),it.x,it.y,{align:it.align});});
 
