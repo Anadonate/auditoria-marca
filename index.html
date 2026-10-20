@@ -741,7 +741,6 @@ function progressBar(x,y,w,h,value,color){box(x,y,w,h,paper,null,h/2);if(value>0
 
 // PÁGINA 1 · Portada editorial de alto contraste
 pageBg(forest);
-addBrandIcon('flowerWatermark',150,210,78);
 addBrandIcon('flower',161,12,9);addBrandIcon('target',172,12,9);addBrandIcon('cursor',183,12,9);
 pdf.setFont('helvetica','bold');pdf.setFontSize(8.4);text(gold);pdf.text('ANA DONATE  /  DISEÑO GRÁFICO & BRANDING',L,15.5);
 draw(pink);pdf.setLineWidth(1.2);pdf.line(L,34,L,72);
@@ -751,7 +750,7 @@ wrap('Un diagnóstico orientativo para entender tu punto de partida y priorizar 
 // Perfil identificado · tarjeta rosa pálido con etiqueta corporativa protagonista
 box(L,105,174,56,palePink,[245,213,221],4);
 section('Se ha identificado una:',L+6,115,forest);
-box(L+6,126,112,18,pink,null,9);
+box(L+6,126,90,18,pink,null,9);
 pdf.setFont('helvetica','bold');pdf.setFontSize(14.2);text(cream);
 pdf.text(pdf.splitTextToSize(p.name.toUpperCase(),104),L+12,137.5);
 wrap(p.lead,L+6,151,161,8.6,ink,false,3.9);
@@ -824,7 +823,7 @@ pageTitle('02 / Mapa visual','Tus dimensiones, de un vistazo','Cada vértice rep
 
 // Marco blanco del gráfico
 box(15,55,180,103,white,line,4);
-const cx=105,cy=108,rad=29.5,angles=[-90,-18,54,126,198];
+const cx=105,cy=110.1,rad=39,angles=[-90,-18,54,126,198];
 function rPoint(i,v){const a=angles[i]*Math.PI/180,rr=rad*v/100;return{x:cx+Math.cos(a)*rr,y:cy+Math.sin(a)*rr};}
 function ringPoints(v){return dimensionDefs.map((def,i)=>rPoint(i,v));}
 draw(line);pdf.setLineWidth(.28);
@@ -846,11 +845,11 @@ dataPoints.forEach((pt,i)=>{const colors=[pink,gold,green,pink,gold];fill(colors
 
 // Etiquetas de los cinco ejes: abreviadas solo donde mejora la lectura, sin cambiar las dimensiones evaluadas
 const labels=[
-{x:81,y:65,w:48,lines:['Sistema de identidad'],align:'center'},
-{x:145,y:99,w:43,lines:['Alineación','con el negocio'],align:'left'},
-{x:112,y:147,w:37,lines:['Estrategia'],align:'center'},
-{x:49,y:147,w:37,lines:['Coherencia visual'],align:'center'},
-{x:17,y:99,w:43,lines:['Diferenciación','y personalidad'],align:'right'}
+{x:105,y:65,w:48,lines:['Sistema de identidad'],align:'center'},
+{x:148,y:96.7,w:43,lines:['Alineación','con el negocio'],align:'left'},
+{x:132,y:149,w:37,lines:['Estrategia'],align:'center'},
+{x:76,y:149,w:37,lines:['Coherencia visual'],align:'center'},
+{x:61.5,y:96.7,w:43,lines:['Diferenciación','estratégica'],align:'right'}
 ];
 labels.forEach(it=>{pdf.setFont('helvetica','bold');pdf.setFontSize(7.1);text(forest);pdf.text(it.lines,it.x,it.y,{align:it.align});});
 
