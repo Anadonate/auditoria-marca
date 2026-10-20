@@ -724,8 +724,8 @@ async function svgToPng(src,width,height,opacity=1){
  return canvas.toDataURL('image/png');
 }
 const [brandStripPng,flowerWatermarkPng,baseLinePng]=await Promise.all([
- svgToPng('./assets/iconos-auditoria.svg?v=20261020',1732,443,1),
- svgToPng('./assets/flor.svg?v=20261020',606,605,.23),
+ svgToPng('./assets/iconos-auditoria.svg?v=20261020',433,111,1),
+ svgToPng('./assets/flor.svg?v=20261020',404,403,.23),
  svgToPng('./assets/linea.svg?v=20261020',1100,13,1)
 ]);
 function addBrandStrip(x=169,y=12,width=23){
