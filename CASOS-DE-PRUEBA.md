@@ -93,6 +93,20 @@ Estos escenarios son regresiones mínimas para comprobar que las reglas de perfi
 - [x] El cuestionario y la barra de progreso permanecen ocultos hasta pulsar «Comenzar auditoría».
 - [x] Al terminar, el informe muestra el nombre de la empresa; al reiniciar, se vuelve a la portada y se conserva el nombre introducido.
 
+## Ajustes de iconografía y composición según SVG originales
+
+- [x] Se incorporan los tres archivos originales en `assets/iconos-auditoria.svg`, `assets/flor.svg` y `assets/linea.svg`.
+- [x] La cabecera web y las cinco cabeceras del PDF usan `iconos-auditoria.svg`, sin reconstruir sus trazados a mano.
+- [x] La flor de cierre de la página 5 procede de `flor.svg`.
+- [x] La línea bicolor de la base del panel final procede de `linea.svg`.
+- [x] El trazo junto al título de portada tiene una altura próxima al bloque tipográfico y está centrado verticalmente.
+- [x] Los trazos de los subtítulos de sección son más cortos y se alinean con el texto.
+- [x] Las etiquetas, puntuaciones y barras de las cinco dimensiones tienen más margen a ambos lados.
+- [x] La lista de evidencias tiene más margen lateral sin eliminar elementos.
+- [x] Los cuatro pasos de validación mantienen más separación vertical entre sus recuadros y sus frases.
+- [x] La rasterización de SVG está optimizada para que el PDF de cinco páginas A4 pese menos de 1 MB.
+- [x] Prueba real sobre GitHub Pages: SVG cargados, PDF de cinco páginas descargado, copyright y numeración presentes en todas las páginas y sin errores JavaScript ni desbordamiento móvil.
+
 ## Navegación de una pregunta por pantalla
 
 - [x] Las 10 preguntas originales se conservan sin cambios.
