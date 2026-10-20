@@ -25,6 +25,11 @@ La cabecera inicial y el campo de nombre solo aparecen antes de comenzar; al ini
 - El gráfico radial se dibuja a partir de las cinco puntuaciones calculadas para cada respuesta, de modo que la forma cambia en cada diagnóstico.
 - Las recomendaciones y las listas de validación usan una numeración más clara, con texto legible, mayor contraste y acentos rosa, dorado y verde.
 
+
+## Legibilidad del cuestionario
+
+El formulario conserva 10 preguntas, presentadas una por pantalla, con cuatro respuestas cerradas cada una. Se han retirado las frases auxiliares bajo cada pregunta para reducir la carga de lectura, manteniendo las descripciones introductorias de las cinco secciones. En móvil, el aviso de privacidad queda a 28 px del borde superior del pie de página y el bloque de recomendaciones del informe conserva 20 px de separación respecto al diagnóstico.
+
 ## Qué incluye
 
 - Cuestionario guiado de 10 preguntas cerradas, presentadas una por pantalla y agrupadas en cinco secciones. La navegación y el progreso avanzan pregunta a pregunta.
