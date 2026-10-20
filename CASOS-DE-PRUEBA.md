@@ -119,6 +119,19 @@ Estos escenarios son regresiones mínimas para comprobar que las reglas de perfi
 - [x] Prueba móvil a 390 px de ancho: sin desbordamiento horizontal.
 - [ ] Revisión manual visual con diferentes dispositivos y una prueba con usuarios reales.
 
+## Regresión visual del PDF rasterizado de referencia
+
+Escenario de regresión utilizado para contrastar la distribución del PDF proporcionado:
+
+- Q1=A, Q2=C, Q3=C, Q4=D, Q5=A, Q6=C, Q7=A, Q8=D, Q9=B, Q10=D.
+- [x] El informe generado mantiene cinco páginas en formato A4.
+- [x] La cabecera contiene el trío de iconos de marca en la portada y en las páginas 2 a 5, alineados en la misma posición.
+- [x] Los círculos de los puntos del gráfico radial se conservan, tal como aparecen en la referencia.
+- [x] Se conservan los paneles, barras de puntuación, cajas de recomendaciones, bandas de color, marca de agua y pies de página.
+- [x] Las cinco páginas conservan el copyright y la numeración.
+- [x] El texto extraído mantiene los títulos, párrafos y saltos de línea del plan de acción, sin texto que desborde el área de página.
+- [x] Prueba automatizada sobre la web publicada: sin errores JavaScript.
+
 ## Aviso
 
 Las pruebas automatizadas verifican la lógica implementada, no validan científicamente los perfiles. Los umbrales y los mensajes deben contrastarse con casos reales y ajustarse según los resultados de esa validación.
