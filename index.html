@@ -676,7 +676,7 @@ function scoreLabel(n){return n>=80?'Base sólida':n>=60?'En desarrollo':n>=40?'
 function levelLabel(n){return n>=80?'Sólida':n>=60?'En desarrollo':n>=40?'A revisar':'Prioridad';}
 function startAudit(){const company=document.getElementById('company');const err=document.getElementById('companyError');if(!company.value.trim()){err.hidden=false;document.getElementById('startAudit').disabled=true;company.focus();return;}err.hidden=true;document.getElementById('sitehead').hidden=true;document.getElementById('intro').hidden=true;document.getElementById('quizProgress').hidden=false;document.getElementById('questionnaire').hidden=false;document.getElementById('privacyNote').hidden=false;renderStep();focusStep();}
 function restart(){Object.keys(answers).forEach(k=>delete answers[k]);currentStep=0;diagnosis=null;document.getElementById('sitehead').hidden=false;document.getElementById('intro').hidden=false;document.getElementById('quizProgress').hidden=true;document.getElementById('results').classList.remove('show');document.getElementById('results').innerHTML='';document.getElementById('questionnaire').hidden=true;document.getElementById('privacyNote').hidden=true;renderStep();document.getElementById('intro').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});document.getElementById('company').focus({preventScroll:true});syncStartButton();}
-function downloadPDF(){
+async function downloadPDF(){
 if(!diagnosis||!window.jspdf){alert('No ha sido posible preparar el informe. Actualiza la página e inténtalo de nuevo.');return;}
 const btn=document.getElementById('pdfBtn');const old=btn.textContent;btn.disabled=true;btn.textContent='Generando informe…';
 try{
