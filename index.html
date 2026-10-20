@@ -78,6 +78,7 @@ body { font-size: 16px; line-height: 1.65; }
 .cta p { font-size:16px; line-height:1.7; }
 .disclaimer { font-size:13px; line-height:1.7; }
 .footer { font-size:12.5px; line-height:1.6; }
+.footer .copyright { color:var(--muted); font-weight:400; }
 @media (max-width:720px) {
   .sitehead { padding:16px 18px; }
   .brand { font-size:12px; gap:8px; }
@@ -458,7 +459,7 @@ body{background:#F5F0E8!important}
 <section id="results" class="results"></section>
 <p class="smallnote" id="privacyNote" hidden>Las respuestas se procesan en tu navegador para generar el resultado y el PDF. Esta versión no envía tus respuestas a un servidor.</p>
 </main>
-<footer class="footer"><div><strong>ANA DONATE</strong> — Diseño gráfico &amp; Branding</div><div>Auditoría de marca visual · Herramienta orientativa</div></footer>
+<footer class="footer"><div class="copyright">© 2026 Ana Donate. Todos los derechos reservados.</div><div>Auditoría de marca visual · Herramienta orientativa</div></footer>
 <script>
 (function(){
 'use strict';
@@ -694,7 +695,7 @@ function pageBg(color=beige){fill(color);pdf.rect(0,0,W,H,'F');}
 function footer(page,dark=false){
  const lineColor=dark?[89,84,91]:line, main=dark?cream:forest, secondary=dark?[199,193,198]:muted;
  draw(lineColor);pdf.setLineWidth(.25);pdf.line(L,280,R,280);
- pdf.setFont('helvetica','bold');pdf.setFontSize(7.3);text(main);pdf.text('ANA DONATE  /  Diseño gráfico & Branding',L,287);
+ pdf.setFont('helvetica','normal');pdf.setFontSize(7.3);text(main);pdf.text('© 2026 Ana Donate. Todos los derechos reservados.',L,287);
  pdf.setFont('helvetica','normal');text(secondary);pdf.text('AUDITORÍA DE MARCA VISUAL  ·  '+page+' / 5',R,287,{align:'right'});
 }
 function pageTitle(kicker,title,sub){
