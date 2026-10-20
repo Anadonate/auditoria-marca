@@ -36,6 +36,15 @@ Estos escenarios son regresiones mínimas para comprobar que las reglas de perfi
 - [ ] Revisar el diseño visual del PDF y validarlo con empresas reales antes del lanzamiento comercial.
 
 
+
+## Simplificación de lectura del formulario (octubre 2026)
+
+- [x] Se eliminan los 10 textos auxiliares situados bajo las preguntas; se conserva la descripción principal de cada sección.
+- [x] La pregunta 9 sigue en la posición 9 de 10 y ofrece cuatro respuestas (A–D), igual que las demás.
+- [x] En móvil, el aviso de privacidad queda a 28 px de la línea superior del pie de página.
+- [x] La tarjeta «Tres próximos pasos» queda separada 20 px de la tarjeta del perfil.
+- [x] Flujo completo: 10 preguntas, tres recomendaciones, PDF de cinco páginas A4, sin errores JavaScript ni desbordamiento horizontal a 390 px.
+
 ## Actualización del cuestionario y refinamiento editorial del PDF
 
 - [x] La pregunta 9 mantiene la décima posición dentro del cuestionario, pero ofrece cuatro opciones, como las otras preguntas.
