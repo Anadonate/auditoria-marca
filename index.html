@@ -463,33 +463,45 @@ body{background:#F5F0E8!important}
 (function(){
 'use strict';
 const steps=[
-{title:'Los cimientos de tu marca',desc:'Veamos si tu identidad visual tiene una base clara y coherente.',questions:[
+{title:'Los cimientos de tu marca',questions:[
 {id:'q1',text:'¿En qué punto está actualmente la identidad visual de tu empresa?',options:[
 ['a','Tenemos logo, colores, tipografías y unas reglas claras de aplicación.'],['b','Tenemos logo, colores y tipografías, pero no un sistema bien definido.'],['c','Tenemos algunas piezas, pero falta definir varios elementos importantes.'],['d','La identidad está poco desarrollada o todavía no existe.']]},
 {id:'q2',text:'¿Cómo organizáis las reglas visuales de la marca?',options:[
 ['a','Tenemos una guía actualizada que utilizamos habitualmente.'],['b','Tenemos algunas reglas, pero no están reunidas en una guía clara.'],['c','Cada persona decide cómo aplicar la identidad según la necesidad.'],['d','No tenemos criterios compartidos o no se han definido.']]}]},
-{title:'Tu negocio y tu público',desc:'Comprobemos si tu imagen refleja el negocio actual y a quién se dirige.',questions:[
+{title:'Tu negocio y tu público',questions:[
 {id:'q3',text:'¿Hasta qué punto representa tu imagen actual el negocio que tienes hoy?',options:[
 ['a','Lo representa bien y sigue alineada con nuestros objetivos.'],['b','En general nos representa, pero hay aspectos que han quedado desactualizados.'],['c','El negocio ha evolucionado bastante y la imagen no ha seguido ese cambio.'],['d','La imagen ya no refleja lo que somos ni lo que queremos transmitir.']]},
 {id:'q4',text:'¿Cómo definirías al público al que se dirige tu empresa?',options:[
 ['a','Tenemos claro a quién nos dirigimos y qué necesita.'],['b','Tenemos un público principal, pero todavía es bastante amplio.'],['c','Nos dirigimos a perfiles muy distintos y no tenemos prioridades claras.'],['d','No tenemos definido un público concreto.']]}]},
-{title:'Coherencia visual',desc:'Revisemos si tu marca mantiene una misma línea en todos los canales.',questions:[
+{title:'Coherencia visual',questions:[
 {id:'q5',text:'Cuando un cliente ve tu web, tus redes y tus materiales comerciales, ¿qué ocurre?',options:[
 ['a','Reconoce la misma marca en todos los canales.'],['b','La marca se reconoce, aunque existen algunas diferencias visuales.'],['c','Hay diferencias importantes entre unos canales y otros.'],['d','Cada canal parece tener una identidad diferente.']]},
 {id:'q6',text:'¿Cómo se aplican las fotografías, las tipografías y los recursos gráficos?',options:[
 ['a','Siguen criterios reconocibles y se adaptan a cada formato.'],['b','Hay una línea general, pero no siempre se mantiene.'],['c','Se eligen según cada publicación o necesidad puntual.'],['d','No tenemos criterios definidos para estos elementos.']]}]},
-{title:'Personalidad y diferenciación',desc:'Veamos si tu marca se reconoce y se diferencia de las demás.',questions:[
+{title:'Personalidad y diferenciación',questions:[
 {id:'q7',text:'Si ocultáramos el nombre y el logotipo, ¿sería fácil distinguir tu marca de otras de tu sector?',options:[
 ['a','Sí, tenemos códigos visuales y una personalidad reconocibles.'],['b','En parte, pero compartimos muchos códigos con otras marcas.'],['c','Sería difícil; nuestra imagen se parece a la de muchos competidores.'],['d','No hemos definido elementos propios que nos ayuden a diferenciarnos de otras marcas.']]},
 {id:'q8',text:'¿Qué transmite actualmente tu identidad visual?',options:[
 ['a','La personalidad y los valores que queremos asociar a la marca.'],['b','Algunos de nuestros valores, aunque no de forma consistente.'],['c','Una imagen correcta, pero bastante genérica.'],['d','No hemos definido qué impresión queremos generar.']]}]},
-{title:'La prioridad para tu marca',desc:'Estas dos preguntas nos ayudarán a entender tus prioridades y cómo se definió tu identidad actual.',questions:[
+{title:'La prioridad para tu marca',questions:[
 {id:'q9',text:'¿Qué te gustaría mejorar principalmente de tu marca?',options:[
 ['a','Actualizar la imagen para que represente mejor el negocio actual.'],['b','Conseguir más coherencia en todos los canales.'],['c','Diferenciarnos y tener una personalidad más propia.'],['d','Definir mejor los fundamentos y las reglas de nuestra identidad.']]},
 {id:'q10',text:'¿Cómo se tomaron las principales decisiones visuales de tu marca?',options:[
 ['a','Partieron de una estrategia y unos criterios definidos.'],['b','Combinamos decisiones estratégicas con soluciones prácticas.'],['c','Muchas decisiones se tomaron por rapidez, presupuesto o falta de alternativas.'],['d','No conocemos bien el criterio que hay detrás de las decisiones actuales.']]}]}
 ];
-const questionScreens=steps.flatMap((section,sectionIndex)=>section.questions.map((question,questionIndex)=>({...question,sectionTitle:section.title,sectionDesc:section.desc,sectionIndex,questionIndex})));
+const questionIntros={
+q1:'Identifiquemos qué elementos visuales tiene ya tu empresa y cómo están definidos.',
+q2:'Ahora, fijémonos en las pautas que seguís para aplicar esos elementos de forma consistente.',
+q3:'Valoremos si la imagen que muestras sigue representando la empresa que eres hoy.',
+q4:'Para tomar decisiones de marca, también importa tener claro a quién quieres llegar y qué necesita.',
+q5:'Comparemos cómo se percibe tu marca cuando aparece en distintos puntos de contacto.',
+q6:'Revisemos si las fotografías, tipografías y recursos gráficos siguen criterios compartidos.',
+q7:'Comprobemos si tu marca tiene códigos visuales que permitan distinguirla de otras.',
+q8:'Más allá de destacar, importa qué personalidad y valores comunica tu identidad.',
+q9:'Identifiquemos qué aspecto de tu marca te gustaría mejorar antes que los demás.',
+q10:'Por último, revisemos qué criterios guiaron las decisiones visuales que tienes hoy.'
+};
+const questionScreens=steps.flatMap((section,sectionIndex)=>section.questions.map((question,questionIndex)=>({...question,sectionTitle:section.title,screenDesc:questionIntros[question.id],sectionIndex,questionIndex})));
 const scoreMap={a:100,b:65,c:30,d:0};
 const dimensionDefs=[
 {id:'system',label:'Sistema de identidad',short:'Sistema',weight:25,qs:['q1','q2'],meaning:'mide si existen fundamentos visuales y reglas que permitan aplicar la identidad.'},
@@ -518,7 +530,7 @@ document.getElementById('stepPercent').textContent=progress+' %';
 document.getElementById('stepProgress').style.width=progress+'%';
 document.querySelector('.progressline').setAttribute('aria-valuenow',String(progress));
 document.getElementById('topProgress').style.width=(totalAnswered/questionScreens.length*100)+'%';
-let html='<div class="step-label">PREGUNTA '+(currentStep+1)+' DE '+questionScreens.length+' · SECCIÓN '+(q.sectionIndex+1)+' DE '+steps.length+'</div><h2 tabindex="-1">'+escapeHTML(q.sectionTitle)+'</h2><p class="step-desc">'+escapeHTML(q.sectionDesc)+'</p>';
+let html='<div class="step-label">PREGUNTA '+(currentStep+1)+' DE '+questionScreens.length+' · SECCIÓN '+(q.sectionIndex+1)+' DE '+steps.length+'</div><h2 tabindex="-1">'+escapeHTML(q.sectionTitle)+'</h2><p class="step-desc">'+escapeHTML(q.screenDesc)+'</p>';
 html+='<div class="question"><h3 id="'+q.id+'-label">'+escapeHTML(q.text)+'</h3><div class="options" role="radiogroup" aria-labelledby="'+q.id+'-label">';
 q.options.forEach(o=>{html+='<label class="option"><input type="radio" name="'+q.id+'" value="'+o[0]+'" '+(answers[q.id]===o[0]?'checked':'')+'><span class="letter">'+o[0].toUpperCase()+'</span><span>'+escapeHTML(o[1])+'</span></label>';});
 html+='</div></div>';
