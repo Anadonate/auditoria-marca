@@ -780,6 +780,7 @@ fill(pink);pdf.rect(0,293,W,4,'F');fill(gold);pdf.rect(153,293,57,4,'F');
 
 // PÁGINA 2 · Estado de la marca y puntuaciones (valores numéricos en un único lugar)
 pdf.addPage();pageBg(beige);
+addBrandIcon('flower',161,12,9);addBrandIcon('target',172,12,9);addBrandIcon('cursor',183,12,9);
 pageTitle('01 / Estado de la marca','Lectura del diagnóstico','Las puntuaciones describen las respuestas del cuestionario. No sustituyen la revisión de la identidad real.');
 box(15,64,180,100,white,line,5);
 section('Dimensiones evaluadas',21,76,forest);
@@ -818,6 +819,7 @@ footer(2);
 
 // PÁGINA 3 · Gráfico radial centrado y fortalezas debajo
 pdf.addPage();pageBg(beige);
+addBrandIcon('flower',161,12,9);addBrandIcon('target',172,12,9);addBrandIcon('cursor',183,12,9);
 pageTitle('02 / Mapa visual','Tus dimensiones, de un vistazo','Cada vértice representa una dimensión; la forma cambia según las puntuaciones de esta auditoría.');
 
 // Marco blanco del gráfico
@@ -891,6 +893,7 @@ footer(3);
 
 // PÁGINA 4 · Plan de acción, siguiendo la referencia editorial
 pdf.addPage();pageBg(beige);
+addBrandIcon('flower',161,12,9);addBrandIcon('target',172,12,9);addBrandIcon('cursor',183,12,9);
 pageTitle('03 / Plan de acción','Tus próximos tres pasos','Acciones ordenadas a partir de las dimensiones más débiles y de tus respuestas.');
 const actionY=[55,113,171],cardH=53;
 const actionColors=[pink,gold,green],actionTints=[palePink,[255,245,219],paleGreen];
@@ -922,6 +925,7 @@ footer(4);
 
 // PÁGINA 5 · Validación y siguiente paso profesional
 pdf.addPage();pageBg(beige);
+addBrandIcon('flower',161,12,9);addBrandIcon('target',172,12,9);addBrandIcon('cursor',183,12,9);
 pageTitle('04 / Validación y siguientes pasos','Cómo validar las prioridades','Estas recomendaciones te ayudarán a contrastar el diagnóstico con la realidad de tu marca.');
 box(15,66,180,32,white,line,4);
 section('Cómo se han tomado las decisiones visuales',21,78,pink);
