@@ -489,9 +489,13 @@ body{background:#F5F0E8!important}
 }
 
 
-/* Privacy note must wrap naturally and remain fully visible below the start button. */
-.start-actions{width:100%;max-width:620px;min-width:0;overflow:visible}
-.start-privacy{display:block;width:100%;max-width:620px;white-space:normal;overflow-wrap:normal;word-break:normal;position:relative;z-index:2}
+/* Privacy note: one line on desktop, natural wrapping on small screens. */
+.start-actions{width:100%;max-width:none;min-width:0;overflow:visible}
+.start-privacy{display:block;width:max-content;max-width:none;white-space:nowrap;overflow-wrap:normal;word-break:normal;position:relative;z-index:2}
+@media(max-width:720px){
+  .start-actions{max-width:100%;width:100%}
+  .start-privacy{width:100%;max-width:100%;white-space:normal;overflow-wrap:normal;word-break:normal}
+}
 </style>
 </head>
 <body>
