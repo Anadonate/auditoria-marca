@@ -448,6 +448,47 @@ body{background:#F5F0E8!important}
 .result-hero .profile-reason{color:#D4CDD1!important;font-size:14px!important;line-height:1.6;max-width:690px;margin:0}
 .result-hero .profile-chip{display:inline-flex;align-items:center;border:1px solid #EA5A77!important;border-radius:999px;background:transparent;color:#FF8096;padding:9px 17px;margin:0 0 18px;text-transform:uppercase;letter-spacing:.06em;font-size:16px;font-weight:800}
 .score-big span{display:inline-block;margin-left:8px;letter-spacing:0;vertical-align:baseline;font-weight:400}
+
+/* Opening screen final polish: highlight only the brand question and restore the oversized flower watermark. */
+.intro h1 .intro-highlight{
+  color:#FFFEFC;
+  font-weight:800;
+  text-decoration-line:underline;
+  text-decoration-color:#EA5A77;
+  text-decoration-thickness:4px;
+  text-underline-offset:8px;
+  text-decoration-skip-ink:none;
+  text-decoration-style:solid;
+}
+.intro .intro-mark{
+  display:block!important;
+  position:absolute;
+  right:-82px!important;
+  bottom:-112px!important;
+  width:315px!important;
+  height:315px!important;
+  opacity:.23!important;
+  pointer-events:none!important;
+  z-index:0!important;
+}
+.intro .intro-mark img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+}
+@media(max-width:720px){
+  .intro h1 .intro-highlight{text-decoration-thickness:3px;text-underline-offset:5px}
+  .intro .intro-mark{
+    display:block!important;
+    right:-54px!important;
+    bottom:-68px!important;
+    width:180px!important;
+    height:180px!important;
+    opacity:.17!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -458,7 +499,7 @@ body{background:#F5F0E8!important}
 <section class="intro" id="intro">
 <div class="intro-mark" aria-hidden="true"><img src="./assets/flor.svg?v=20261020" alt=""></div>
 <span class="eyebrow">Diseño gráfico &amp; Branding</span>
-<h1>Tu marca tiene una historia. ¿La está contando bien?</h1>
+<h1>Tu marca tiene una historia. ¿La está <span class="intro-highlight">contando bien?</span></h1>
 <p>Responde a 10 preguntas y descubre cómo mejorar tu marca. Al final recibirás un informe personalizado con tus resultados y recomendaciones.</p>
 <div class="intro-bottom">
 <div class="meta-fields">
