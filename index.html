@@ -451,14 +451,13 @@ body{background:#F5F0E8!important}
 
 /* Opening screen final polish: highlight only the brand question and restore the oversized flower watermark. */
 .intro h1 .intro-highlight{
-  color:#FFFEFC;
+  color:#29272A;
+  background:#EA5A77;
   font-weight:800;
-  text-decoration-line:underline;
-  text-decoration-color:#EA5A77;
-  text-decoration-thickness:4px;
-  text-underline-offset:8px;
-  text-decoration-skip-ink:none;
-  text-decoration-style:solid;
+  padding:0 .12em .035em;
+  box-decoration-break:clone;
+  -webkit-box-decoration-break:clone;
+  text-decoration:none;
 }
 .intro .intro-mark{
   display:block!important;
@@ -478,7 +477,7 @@ body{background:#F5F0E8!important}
   object-fit:contain!important;
 }
 @media(max-width:720px){
-  .intro h1 .intro-highlight{text-decoration-thickness:3px;text-underline-offset:5px}
+  .intro h1 .intro-highlight{padding:0 .09em .025em}
   .intro .intro-mark{
     display:block!important;
     right:-54px!important;
