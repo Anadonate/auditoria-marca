@@ -667,21 +667,21 @@ function buildHeroSummary(d){
  const lowest=dimensionDefs.reduce((best,def)=>score(def.id)<score(best.id)?def:best,dimensionDefs[0]);
  switch(d.profileKey){
   case 'misaligned':
-   return 'La alineación con el negocio es la prioridad ('+scoreText('alignment')+'): revisa qué debe comunicar la marca para responder a la empresa actual.';
+   return 'Antes de cambiar piezas, revisa qué debe comunicar la identidad para reflejar la empresa actual (Alineación con el negocio: '+scoreText('alignment')+').' ;
   case 'construction':
    if(score('system')<=score('strategy')){
     return 'El sistema de identidad es el primer foco ('+scoreText('system')+'): define los elementos esenciales y las reglas para aplicarlos.';
    }
    return 'La definición estratégica es el primer foco ('+scoreText('strategy')+'): concreta el público prioritario para orientar las decisiones de marca.';
   case 'dispersed':
-   return 'La coherencia visual es el punto a reforzar ('+scoreText('coherence')+'): unifica criterios de color, tipografía e imagen entre canales.';
+   return 'Empieza por acordar criterios de color, tipografía e imagen (Coherencia visual: '+scoreText('coherence')+'); así cada pieza podrá adaptarse sin perder reconocimiento.';
   case 'functional':
-   return 'La oportunidad está en la diferenciación ('+scoreText('difference')+'): define qué rasgos propios quieres que el público recuerde.';
+   return 'Define qué dos o tres rasgos quieres que el público asocie a tu marca (Diferenciación y personalidad: '+scoreText('difference')+').' ;
   case 'consolidated':
    if(score(lowest.id)>=90){
-    return 'Las cinco dimensiones muestran una base sólida. El reto es conservar esa coherencia al crecer y llegar a nuevos canales.';
+    return 'El siguiente reto es ampliar la marca a nuevos formatos sin perder los códigos visuales que ya la hacen reconocible.';
    }
-   return 'La base es sólida; al ampliar la marca, conviene cuidar especialmente '+lowest.label.toLowerCase()+' ('+scoreText(lowest.id)+').';
+   return 'Al ampliar la marca, presta especial atención a '+lowest.label.toLowerCase()+' ('+scoreText(lowest.id)+'), para que los nuevos formatos mantengan criterios consistentes.';
   default:
    return 'La dimensión con mayor margen de mejora es '+lowest.label.toLowerCase()+' ('+scoreText(lowest.id)+'). Es el primer punto que conviene reforzar.';
  }
