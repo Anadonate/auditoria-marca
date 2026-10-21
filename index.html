@@ -286,8 +286,8 @@ body { font-size: 16px; line-height: 1.65; }
 .result-hero p{position:relative;z-index:1;color:#E3DEE0;max-width:690px;font-size:16px;line-height:1.7}
 .result-hero-brand{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:22px}
 .result-eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:#EA5A77}
-.result-brand-icons{display:flex;align-items:center;gap:9px}
-.result-brand-icons .brand-glyph{width:23px;height:23px;display:block;object-fit:contain;flex:0 0 23px}
+.result-brand-icons{display:flex;align-items:center;justify-content:flex-end;gap:0;flex:0 0 auto}
+.result-brand-icons .brand-icons-original{display:block;width:90px;max-width:100%;height:auto;object-fit:contain;flex:0 0 auto}
 .result-watermark{position:absolute;right:-64px;bottom:-100px;width:260px;height:260px;opacity:.16;pointer-events:none;z-index:0}
 .result-watermark .brand-glyph{width:100%;height:100%;display:block;object-fit:contain}
 .profile-chip{position:relative;z-index:1;background:rgba(234,90,119,.1);border:1px solid rgba(234,90,119,.6);border-radius:999px;padding:8px 13px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:#FF8096;margin-bottom:18px}
@@ -360,8 +360,8 @@ body { font-size: 16px; line-height: 1.65; }
   .result-hero{padding:24px 21px;border-radius:19px}
   .result-hero-brand{align-items:flex-start;gap:12px}
   .result-eyebrow{font-size:10px;max-width:150px}
-  .result-brand-icons{gap:5px}
-  .result-brand-icons .brand-glyph{width:19px;height:19px;flex-basis:19px}
+  .result-brand-icons{gap:0}
+  .result-brand-icons .brand-icons-original{width:74px;max-width:100%;height:auto;flex:0 0 auto}
   .result-watermark{width:165px;height:165px;right:-45px;bottom:-60px}
   .panel{padding:21px 18px}
   .score-caption{font-size:14px}
@@ -735,7 +735,7 @@ function buildHeroSummary(d){
 function renderResults(d){
 const p=d.profile;
 const cleanInsight=value=>String(value).replace(/\s*\(\d+\/100\)/g,'').trim();
-const iconRow=brandFlowerImage()+brandIconSvg('target')+brandIconSvg('cursor');
+const iconRow='<img class="brand-icons-original" src="./assets/iconos-auditoria.svg?v=20261021-original" alt="" aria-hidden="true">';
 const company=d.company?'<span style="color:#EA5A77">'+escapeHTML(d.company)+'</span>, ':'';
 let html='<div class="result-hero"><div class="result-watermark">'+brandFlowerImage()+'</div><div class="result-hero-brand"><span class="result-eyebrow">Informe personalizado · Ana Donate</span><div class="result-brand-icons">'+iconRow+'</div></div><p class="result-company">Informe para: '+(d.company?escapeHTML(d.company):'tu empresa')+'</p><span class="profile-chip">'+escapeHTML(p.name)+'</span><h1 tabindex="-1">'+escapeHTML(p.lead)+'</h1><p class="profile-reason">'+escapeHTML(buildHeroSummary(d))+'</p></div>';
 html+='<div class="result-top"><section class="panel score-panel"><div class="section-kicker">Índice de desarrollo de marca</div><div class="score-big">'+d.global+'<span style="font-size:22px">/100</span></div><div class="score-caption">Puntuación ponderada, ajustada para que una dimensión crítica no quede oculta por la media.</div><div class="scorebar"><span style="width:'+d.global+'%"></span></div><div class="score-qualifier">'+scoreLabel(d.global)+'</div><p class="smallnote">Resultado orientativo basado en tus respuestas; no es una auditoría visual directa.</p></section>';
