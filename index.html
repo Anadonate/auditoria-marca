@@ -488,6 +488,10 @@ body{background:#F5F0E8!important}
   }
 }
 
+
+/* Privacy note must wrap naturally and remain fully visible below the start button. */
+.start-actions{width:100%;max-width:620px;min-width:0;overflow:visible}
+.start-privacy{display:block;width:100%;max-width:620px;white-space:normal;overflow-wrap:normal;word-break:normal;position:relative;z-index:2}
 </style>
 </head>
 <body>
@@ -706,27 +710,26 @@ svg+='</svg>';return svg;
 
 function buildHeroSummary(d){
  const score=id=>d.dimensions[id];
- const scoreText=id=>String(score(id))+'/100';
  const lowest=dimensionDefs.reduce((best,def)=>score(def.id)<score(best.id)?def:best,dimensionDefs[0]);
  switch(d.profileKey){
   case 'misaligned':
    return 'Antes de cambiar piezas, revisa qué debe comunicar la identidad para reflejar la empresa actual.';
   case 'construction':
    if(score('system')<=score('strategy')){
-    return 'El sistema de identidad es el primer foco ('+scoreText('system')+'): define los elementos esenciales y las reglas para aplicarlos.';
+    return 'El sistema de identidad es el primer foco: define los elementos esenciales y las reglas para aplicarlos.';
    }
-   return 'La definición estratégica es el primer foco ('+scoreText('strategy')+'): concreta el público prioritario para orientar las decisiones de marca.';
+   return 'La definición estratégica es el primer foco: concreta el público prioritario para orientar las decisiones de marca.';
   case 'dispersed':
-   return 'Empieza por acordar criterios de color, tipografía e imagen (Coherencia visual: '+scoreText('coherence')+'); así cada pieza podrá adaptarse sin perder reconocimiento.';
+   return 'Empieza por acordar criterios de color, tipografía e imagen; así cada pieza podrá adaptarse sin perder reconocimiento.';
   case 'functional':
-   return 'Define qué dos o tres rasgos quieres que el público asocie a tu marca (Diferenciación y personalidad: '+scoreText('difference')+').' ;
+   return 'Define qué dos o tres rasgos quieres que el público asocie a tu marca.';
   case 'consolidated':
    if(score(lowest.id)>=90){
     return 'El siguiente reto es ampliar la marca a nuevos formatos sin perder los códigos visuales que ya la hacen reconocible.';
    }
-   return 'Al ampliar la marca, presta especial atención a '+lowest.label.toLowerCase()+' ('+scoreText(lowest.id)+'), para que los nuevos formatos mantengan criterios consistentes.';
+   return 'Al ampliar la marca, presta especial atención a '+lowest.label.toLowerCase()+', para que los nuevos formatos mantengan criterios consistentes.';
   default:
-   return 'La dimensión con mayor margen de mejora es '+lowest.label.toLowerCase()+' ('+scoreText(lowest.id)+'). Es el primer punto que conviene reforzar.';
+   return 'La dimensión con mayor margen de mejora es '+lowest.label.toLowerCase()+'. Es el primer punto que conviene reforzar.';
  }
 }
 function renderResults(d){
@@ -932,8 +935,8 @@ pdf.setFont('helvetica','normal');pdf.setFontSize(6.2);text(muted);
 // Polígono personalizado a partir de las puntuaciones reales
 const dataPoints=dimensionDefs.map((def,i)=>rPoint(i,d.dimensions[def.id]));
 const deltas=[];for(let i=1;i<dataPoints.length;i++)deltas.push([dataPoints[i].x-dataPoints[i-1].x,dataPoints[i].y-dataPoints[i-1].y]);
-fill(palePink);draw(pink);pdf.setLineWidth(1.35);pdf.lines(deltas,dataPoints[0].x,dataPoints[0].y,[1,1],'FD',true);
-dataPoints.forEach((pt,i)=>{const colors=[pink,gold,green,pink,gold];fill(colors[i]);draw(white);pdf.setLineWidth(.45);pdf.circle(pt.x,pt.y,1.5,'FD');});
+// Mismo código visual que el radar web: verde salvia, relleno translúcido y sin puntos añadidos.
+fill([227,243,234]);draw(green);pdf.setLineWidth(1.05);pdf.lines(deltas,dataPoints[0].x,dataPoints[0].y,[1,1],'FD',true);
 
 // Etiquetas de los cinco ejes: abreviadas solo donde mejora la lectura, sin cambiar las dimensiones evaluadas
 const labels=[
