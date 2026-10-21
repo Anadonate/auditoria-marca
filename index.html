@@ -935,8 +935,11 @@ pdf.setFont('helvetica','normal');pdf.setFontSize(6.2);text(muted);
 // Polígono personalizado a partir de las puntuaciones reales
 const dataPoints=dimensionDefs.map((def,i)=>rPoint(i,d.dimensions[def.id]));
 const deltas=[];for(let i=1;i<dataPoints.length;i++)deltas.push([dataPoints[i].x-dataPoints[i-1].x,dataPoints[i].y-dataPoints[i-1].y]);
-// Mismo código visual que el radar web: verde salvia, relleno translúcido y sin puntos añadidos.
-fill([227,243,234]);draw(green);pdf.setLineWidth(1.05);pdf.lines(deltas,dataPoints[0].x,dataPoints[0].y,[1,1],'FD',true);
+// Igual que el radar web: verde corporativo al 15 % de opacidad para que la retícula se vea a través del relleno.
+pdf.setGState(new pdf.GState({opacity:.15}));
+fill(green);pdf.lines(deltas,dataPoints[0].x,dataPoints[0].y,[1,1],'F',true);
+pdf.setGState(new pdf.GState({opacity:1}));
+draw(green);pdf.setLineWidth(1.05);pdf.lines(deltas,dataPoints[0].x,dataPoints[0].y,[1,1],'S',true);
 
 // Etiquetas de los cinco ejes: abreviadas solo donde mejora la lectura, sin cambiar las dimensiones evaluadas
 const labels=[
