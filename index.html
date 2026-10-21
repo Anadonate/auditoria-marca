@@ -499,12 +499,12 @@ body{background:#F5F0E8!important}
 </style>
 </head>
 <body>
-<a class="skip-link" href="#questionnaire">Saltar al cuestionario</a>
+<a class="skip-link" href="#main-content">Saltar al contenido principal</a>
 <div class="topline" aria-hidden="true"><span id="topProgress"></span></div>
-<header class="sitehead" id="sitehead"><div class="brand"><span class="brand-mark" aria-hidden="true"><img src="./assets/iconos-auditoria.svg?v=20261020" alt=""></span>Ana Donate <span style="font-weight:500;color:var(--muted)">/ Auditoría de marca</span></div><div class="headnote">Diagnóstico orientativo · 3 minutos</div></header>
-<main class="container">
+<header class="sitehead" id="sitehead"><div class="brand"><span class="brand-mark" aria-hidden="true"><img src="./assets/iconos-auditoria.svg?v=20261021-original" alt=""></span>Ana Donate <span style="font-weight:500;color:var(--muted)">/ Auditoría de marca</span></div><div class="headnote">Diagnóstico orientativo · 3 minutos</div></header>
+<main id="main-content" class="container" tabindex="-1">
 <section class="intro" id="intro">
-<div class="intro-mark" aria-hidden="true"><img src="./assets/flor.svg?v=20261020" alt=""></div>
+<div class="intro-mark" aria-hidden="true"><img src="./assets/flor.svg?v=20261021-original" alt=""></div>
 <span class="eyebrow">Estrategia de marca &amp; identidad visual</span>
 <h1>Tu marca tiene una historia. ¿La está <span class="intro-highlight">contando bien?</span></h1>
 <p>Responde a 10 preguntas y descubre cómo mejorar tu marca. Al final recibirás un informe personalizado con tus resultados y recomendaciones.</p>
@@ -809,9 +809,9 @@ async function svgToPng(src,width,height,opacity=1){
  return canvas.toDataURL('image/png');
 }
 const [brandStripPng,flowerWatermarkPng,baseLinePng]=await Promise.all([
- svgToPng('./assets/iconos-auditoria.svg?v=20261020',433,111,1),
- svgToPng('./assets/flor.svg?v=20261020',404,403,.23),
- svgToPng('./assets/linea.svg?v=20261020',1100,13,1)
+ svgToPng('./assets/iconos-auditoria.svg?v=20261021-original',433,111,1),
+ svgToPng('./assets/flor.svg?v=20261021-original',404,403,.23),
+ svgToPng('./assets/linea.svg?v=20261021-original',1100,13,1)
 ]);
 function addBrandStrip(x=169,y=12,width=23){
  pdf.addImage(brandStripPng,'PNG',x,y,width,width*(22.15/86.62));
@@ -832,7 +832,7 @@ function progressBar(x,y,w,h,value,color){box(x,y,w,h,paper,null,h/2);if(value>0
 // PÁGINA 1 · Portada editorial de alto contraste
 pageBg(forest);
 addBrandStrip(169,12,23);
-pdf.setFont('helvetica','bold');pdf.setFontSize(8.4);text(gold);pdf.text('ANA DONATE  /  DISEÑO GRÁFICO & BRANDING',L,15.5);
+pdf.setFont('helvetica','bold');pdf.setFontSize(8.4);text(gold);pdf.text('ANA DONATE  /  ESTRATEGIA DE MARCA & IDENTIDAD VISUAL',L,15.5);
 draw(pink);pdf.setLineWidth(1.2);pdf.line(L,34,L,53.5);
 pdf.setFont('helvetica','bold');pdf.setFontSize(28);text(cream);pdf.text('Auditoría de',L+5,41);text(pink);pdf.text('marca visual',L+5,51);
 wrap('Un diagnóstico orientativo para entender tu punto de partida y priorizar mejoras de identidad visual.',L+5,91,142,9.8,[216,211,208],false,4.5);
