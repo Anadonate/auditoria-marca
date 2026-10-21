@@ -107,6 +107,16 @@ Estos escenarios son regresiones mínimas para comprobar que las reglas de perfi
 - [x] La rasterización de SVG está optimizada para que el PDF de cinco páginas A4 pese menos de 1 MB.
 - [x] Prueba real sobre GitHub Pages: SVG cargados, PDF de cinco páginas descargado, copyright y numeración presentes en todas las páginas y sin errores JavaScript ni desbordamiento móvil.
 
+## Ajustes de jerarquía y composición del informe
+
+- [x] La puntuación global coloca `/ 100` junto al número calculando la anchura real del resultado.
+- [x] El conjunto del indicador «Necesita atención» (punto y texto) queda centrado dentro de la pastilla.
+- [x] Los títulos PDF con línea lateral aumentan ligeramente de tamaño; la línea es más corta y se centra verticalmente con el texto.
+- [x] «Fortalezas declaradas» y «Áreas a revisar» comparten una misma línea superior y se distribuyen en dos columnas.
+- [x] Los tres pasos de la página 4 usan cajas numéricas rosa corporativo, etiquetas rosa legible y fondos rosa pálido coherentes.
+- [x] Los títulos pequeños de la web usan la variante de rosa legible `#B64A65` (contraste 5.05:1 sobre blanco); el rosa corporativo `#EA5A77` se conserva para acentos principales.
+- [x] El test real de producción genera 5 páginas A4, mantiene los pies y numeración, descarga el PDF sin errores y conserva los apartados de recomendaciones.
+
 ## Navegación de una pregunta por pantalla
 
 - [x] Las 10 preguntas originales se conservan sin cambios.
