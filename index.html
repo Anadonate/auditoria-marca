@@ -567,11 +567,11 @@ const lowestDimension=Math.min(...Object.values(dimensions));
 let global=weightedScore;if(lowestDimension<20)global=Math.min(global,54);else if(lowestDimension<40)global=Math.min(global,64);else if(lowestDimension<60)global=Math.min(global,74);
 const q3=answers.q3,q1=answers.q1,q2=answers.q2,q5=answers.q5,q6=answers.q6,q7=answers.q7,q8=answers.q8;
 let profileKey,reason;
-if(q3==='c'||q3==='d'){profileKey='misaligned';reason='Has indicado que la identidad no ha acompañado la evolución del negocio.';}
-else if(dimensions.system<50 || (['c','d'].includes(q1)&&['c','d'].includes(q2)) || dimensions.strategy<30){profileKey='construction';reason='Las respuestas apuntan a que conviene reforzar las bases y los criterios de marca.';}
-else if(dimensions.coherence<55 || q5==='d' || (q5==='c'&&q6==='c')){profileKey='dispersed';reason='Las respuestas señalan inconsistencias en cómo se aplica la identidad.';}
-else if(dimensions.difference<55 || q7==='c' || q8==='c'){profileKey='functional';reason='La diferenciación o la personalidad visual aparecen como áreas prioritarias.';}
-else if(global>78 && Object.values(dimensions).every(v=>v>=60) && q3!=='c' && q3!=='d'){profileKey='consolidated';reason='La puntuación general y las dimensiones críticas indican una base sólida sin alertas principales.';}
+if(q3==='c'||q3==='d'){profileKey='misaligned';reason='La respuesta sobre la evolución del negocio sitúa la alineación de la identidad como prioridad.';}
+else if(dimensions.system<50 || (['c','d'].includes(q1)&&['c','d'].includes(q2)) || dimensions.strategy<30){profileKey='construction';reason='Las puntuaciones del sistema de identidad o de la definición estratégica quedan por debajo del umbral esperado.';}
+else if(dimensions.coherence<55 || q5==='d' || (q5==='c'&&q6==='c')){profileKey='dispersed';reason='La coherencia entre canales no alcanza el nivel esperado en las respuestas.';}
+else if(dimensions.difference<55 || q7==='c' || q8==='c'){profileKey='functional';reason='Las respuestas sobre diferenciación o personalidad muestran margen para definir códigos más propios.';}
+else if(global>78 && Object.values(dimensions).every(v=>v>=60) && q3!=='c' && q3!=='d'){profileKey='consolidated';reason='Las cinco dimensiones se mantienen fuera de los rangos de prioridad crítica.';}
 else{
 const candidates=[
 {key:'construction',value:Math.min(dimensions.system,dimensions.strategy),rank:1},
@@ -584,8 +584,8 @@ const priorityTieBreak={a:'construction',b:'dispersed',c:'functional',d:'constru
 const preferred=priorityTieBreak[answers.q9];
 profileKey=tied.length>1&&tied.some(item=>item.key===preferred)?preferred:candidates[0].key;
 reason=tied.length>1
-?'Las dimensiones principales tienen resultados similares. El perfil usa tu prioridad declarada como criterio secundario, sin sustituir las puntuaciones.'
-:'Este perfil refleja el área más débil entre las dimensiones evaluadas. La puntuación por sí sola no sustituye una revisión de los materiales reales.';
+?'Las dimensiones principales tienen resultados similares. Tu prioridad declarada se ha usado como criterio secundario, sin sustituir las puntuaciones.'
+:'El perfil toma como referencia la dimensión con menor puntuación. Las conclusiones deben contrastarse con los materiales reales de la marca.';
 }
 const profile=profileCopy[profileKey];
 const strengths=[];const gaps=[];
@@ -661,12 +661,37 @@ svg+='<text class="radar-scale" x="'+(cx+3)+'" y="'+(cy-r+10)+'">100</text><text
 svg+='</svg>';return svg;
 }
 
+function buildHeroSummary(d){
+ const score=id=>d.dimensions[id];
+ const scoreText=id=>String(score(id))+'/100';
+ const lowest=dimensionDefs.reduce((best,def)=>score(def.id)<score(best.id)?def:best,dimensionDefs[0]);
+ switch(d.profileKey){
+  case 'misaligned':
+   return 'La alineación con el negocio es la prioridad ('+scoreText('alignment')+'): revisa qué debe comunicar la marca para responder a la empresa actual.';
+  case 'construction':
+   if(score('system')<=score('strategy')){
+    return 'El sistema de identidad es el primer foco ('+scoreText('system')+'): define los elementos esenciales y las reglas para aplicarlos.';
+   }
+   return 'La definición estratégica es el primer foco ('+scoreText('strategy')+'): concreta el público prioritario para orientar las decisiones de marca.';
+  case 'dispersed':
+   return 'La coherencia visual es el punto a reforzar ('+scoreText('coherence')+'): unifica criterios de color, tipografía e imagen entre canales.';
+  case 'functional':
+   return 'La oportunidad está en la diferenciación ('+scoreText('difference')+'): define qué rasgos propios quieres que el público recuerde.';
+  case 'consolidated':
+   if(score(lowest.id)>=90){
+    return 'Las cinco dimensiones muestran una base sólida. El reto es conservar esa coherencia al crecer y llegar a nuevos canales.';
+   }
+   return 'La base es sólida; al ampliar la marca, conviene cuidar especialmente '+lowest.label.toLowerCase()+' ('+scoreText(lowest.id)+').';
+  default:
+   return 'La dimensión con mayor margen de mejora es '+lowest.label.toLowerCase()+' ('+scoreText(lowest.id)+'). Es el primer punto que conviene reforzar.';
+ }
+}
 function renderResults(d){
 const p=d.profile;
 const cleanInsight=value=>String(value).replace(/\s*\(\d+\/100\)/g,'').trim();
 const iconRow=brandIconSvg('flower')+brandIconSvg('target')+brandIconSvg('cursor');
 const company=d.company?'<span style="color:#EA5A77">'+escapeHTML(d.company)+'</span>, ':'';
-let html='<div class="result-hero"><div class="result-watermark">'+brandIconSvg('flower')+'</div><div class="result-hero-brand"><span class="result-eyebrow">Informe personalizado · Ana Donate</span><div class="result-brand-icons">'+iconRow+'</div></div><p class="result-company">Informe para: '+(d.company?escapeHTML(d.company):'tu empresa')+'</p><span class="profile-chip">'+escapeHTML(p.name)+'</span><h1 tabindex="-1">'+escapeHTML(p.lead)+'</h1><p class="profile-reason">'+escapeHTML(d.reason)+'</p></div>';
+let html='<div class="result-hero"><div class="result-watermark">'+brandIconSvg('flower')+'</div><div class="result-hero-brand"><span class="result-eyebrow">Informe personalizado · Ana Donate</span><div class="result-brand-icons">'+iconRow+'</div></div><p class="result-company">Informe para: '+(d.company?escapeHTML(d.company):'tu empresa')+'</p><span class="profile-chip">'+escapeHTML(p.name)+'</span><h1 tabindex="-1">'+escapeHTML(p.lead)+'</h1><p class="profile-reason">'+escapeHTML(buildHeroSummary(d))+'</p></div>';
 html+='<div class="result-top"><section class="panel score-panel"><div class="section-kicker">Índice de desarrollo de marca</div><div class="score-big">'+d.global+'<span style="font-size:22px">/100</span></div><div class="score-caption">Puntuación ponderada, ajustada para que una dimensión crítica no quede oculta por la media.</div><div class="scorebar"><span style="width:'+d.global+'%"></span></div><div class="score-qualifier">'+scoreLabel(d.global)+'</div><p class="smallnote">Resultado orientativo basado en tus respuestas; no es una auditoría visual directa.</p></section>';
 html+='<section class="panel dimensions-panel"><div class="section-kicker">Las cinco dimensiones</div><h2>Estado de tu marca</h2>';
 dimensionDefs.forEach(def=>{const n=d.dimensions[def.id];const barColor=n<40?'#EA5A77':n<70?'#D2A158':'#46B382';html+='<div class="dim-row"><div class="dim-head"><span>'+escapeHTML(def.label)+'</span><span>'+n+'/100 · '+levelLabel(n)+'</span></div><div class="dim-bar"><span style="width:'+n+'%;background:'+barColor+'"></span></div></div>';});
@@ -676,7 +701,7 @@ html+='<div class="content-grid diagnosis-only"><section class="panel"><div clas
 html+='<section class="panel roadmap-panel"><div class="section-kicker">Tu hoja de ruta</div><h2>Tres próximos pasos</h2><p class="roadmap-intro">Acciones ordenadas a partir de las dimensiones más débiles y de tus respuestas.</p>';
 d.recommendations.forEach(r=>{html+='<div class="rec"><div class="rec-num">'+r.priority+'</div><div><h3>'+escapeHTML(r.title)+'</h3><p>'+escapeHTML(r.action)+'</p><div class="why"><strong>Por qué importa:</strong> '+escapeHTML(r.why)+'</div><p class="smallnote"><strong>Señal de tus respuestas:</strong> '+escapeHTML(r.proof)+'</p></div></div>';});
 html+='</section>';
-html+='<div class="cta"><div><div class="section-kicker">Siguiente paso</div><h2>Convierte el diagnóstico en decisiones de marca.</h2><p>'+escapeHTML(p.closing)+' Una revisión profesional de la identidad y sus aplicaciones permitiría contrastar estas hipótesis con la marca real.</p></div><button class="btn btn-copper" id="pdfBtn">Descargar informe PDF <span aria-hidden="true">→</span></button></div>';
+html+='<div class="cta"><div><div class="section-kicker">Siguiente paso</div><h2>Convierte el diagnóstico en decisiones de marca.</h2><p>Contrasta estas prioridades con la identidad visual, los materiales reales y los objetivos actuales de tu empresa antes de decidir qué cambiar.</p></div><button class="btn btn-copper" id="pdfBtn">Descargar informe PDF <span aria-hidden="true">→</span></button></div>';
 html+='<p class="disclaimer">Este resultado es orientativo y se basa exclusivamente en tus respuestas. No sustituye una auditoría de identidad visual, investigación de público ni análisis competitivo. Las conclusiones deberían validarse con los materiales reales de la empresa.</p><div class="restart"><button class="btn btn-quiet" id="restartBtn">Volver a realizar el cuestionario</button></div>';
 document.getElementById('results').innerHTML=html;
 document.getElementById('pdfBtn').addEventListener('click',downloadPDF);
