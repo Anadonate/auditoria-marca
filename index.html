@@ -708,7 +708,7 @@ function buildHeroSummary(d){
  const lowest=dimensionDefs.reduce((best,def)=>score(def.id)<score(best.id)?def:best,dimensionDefs[0]);
  switch(d.profileKey){
   case 'misaligned':
-   return 'Antes de cambiar piezas, revisa qué debe comunicar la identidad para reflejar la empresa actual (Alineación con el negocio: '+scoreText('alignment')+').' ;
+   return 'Antes de cambiar piezas, revisa qué debe comunicar la identidad para reflejar la empresa actual.';
   case 'construction':
    if(score('system')<=score('strategy')){
     return 'El sistema de identidad es el primer foco ('+scoreText('system')+'): define los elementos esenciales y las reglas para aplicarlos.';
