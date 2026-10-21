@@ -446,7 +446,7 @@ body{background:#F5F0E8!important}
 .result-hero .result-company{position:relative;z-index:1;color:#D4CDD1;font-size:13px;font-weight:700;line-height:1.4;margin:0 0 9px;max-width:700px}
 .result-hero .profile-lead{color:#FFFEFC!important;font-size:19px!important;font-weight:600;line-height:1.5;max-width:720px;margin:0 0 10px}
 .result-hero .profile-reason{color:#D4CDD1!important;font-size:14px!important;line-height:1.6;max-width:690px;margin:0}
-.result-hero .profile-chip{display:inline-flex;align-items:center;border:1px solid #EA5A77!important;border-radius:999px;background:rgba(234,90,119,.08);color:#FF8096;padding:8px 14px;margin:0 0 18px}
+.result-hero .profile-chip{display:inline-flex;align-items:center;border:1px solid #EA5A77!important;border-radius:999px;background:transparent;color:#FF8096;padding:8px 14px;margin:0 0 18px;text-transform:uppercase;letter-spacing:.08em;font-size:11px;font-weight:800}
 .score-big span{display:inline-block;margin-left:8px;letter-spacing:0;vertical-align:baseline;font-weight:400}
 </style>
 </head>
@@ -666,7 +666,7 @@ const p=d.profile;
 const cleanInsight=value=>String(value).replace(/\s*\(\d+\/100\)/g,'').trim();
 const iconRow=brandIconSvg('flower')+brandIconSvg('target')+brandIconSvg('cursor');
 const company=d.company?'<span style="color:#EA5A77">'+escapeHTML(d.company)+'</span>, ':'';
-let html='<div class="result-hero"><div class="result-watermark">'+brandIconSvg('flower')+'</div><div class="result-hero-brand"><span class="result-eyebrow">Informe personalizado · Ana Donate</span><div class="result-brand-icons">'+iconRow+'</div></div><p class="result-company">Informe para: '+(d.company?escapeHTML(d.company):'tu empresa')+'</p><h1 tabindex="-1">'+escapeHTML(p.name)+'</h1><p class="profile-lead">'+escapeHTML(p.lead)+'</p><p class="profile-reason">'+escapeHTML(d.reason)+'</p></div>';
+let html='<div class="result-hero"><div class="result-watermark">'+brandIconSvg('flower')+'</div><div class="result-hero-brand"><span class="result-eyebrow">Informe personalizado · Ana Donate</span><div class="result-brand-icons">'+iconRow+'</div></div><p class="result-company">Informe para: '+(d.company?escapeHTML(d.company):'tu empresa')+'</p><span class="profile-chip">'+escapeHTML(p.name)+'</span><h1 tabindex="-1">'+escapeHTML(p.lead)+'</h1><p class="profile-reason">'+escapeHTML(d.reason)+'</p></div>';
 html+='<div class="result-top"><section class="panel score-panel"><div class="section-kicker">Índice de desarrollo de marca</div><div class="score-big">'+d.global+'<span style="font-size:22px">/100</span></div><div class="score-caption">Puntuación ponderada, ajustada para que una dimensión crítica no quede oculta por la media.</div><div class="scorebar"><span style="width:'+d.global+'%"></span></div><div class="score-qualifier">'+scoreLabel(d.global)+'</div><p class="smallnote">Resultado orientativo basado en tus respuestas; no es una auditoría visual directa.</p></section>';
 html+='<section class="panel dimensions-panel"><div class="section-kicker">Las cinco dimensiones</div><h2>Estado de tu marca</h2>';
 dimensionDefs.forEach(def=>{const n=d.dimensions[def.id];const barColor=n<40?'#EA5A77':n<70?'#D2A158':'#46B382';html+='<div class="dim-row"><div class="dim-head"><span>'+escapeHTML(def.label)+'</span><span>'+n+'/100 · '+levelLabel(n)+'</span></div><div class="dim-bar"><span style="width:'+n+'%;background:'+barColor+'"></span></div></div>';});
@@ -921,7 +921,7 @@ d.recommendations.forEach((r,i)=>{
  box(18,y,174,cardH,white,line,4);
  box(24,y+7,12,12,pink,null,3);
  pdf.setFont('helvetica','bold');pdf.setFontSize(10.5);text(ink);pdf.text(String(i+1),30,y+15.2,{align:'center'});
- pdf.setFont('helvetica','bold');pdf.setFontSize(8.4);text(pink);pdf.text(stepNames[i],42,y+9);
+ pdf.setFont('helvetica','bold');pdf.setFontSize(8.4);text(pink);pdf.text(stepNames[i],42,y+11);
  pdf.setFont('helvetica','bold');pdf.setFontSize(10.4);text(ink);
  const titleLines=pdf.splitTextToSize(r.title,143);pdf.text(titleLines,42,y+15);
  const actionYText=y+15+titleLines.length*4.3+4;
