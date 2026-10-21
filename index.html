@@ -293,7 +293,8 @@ body { font-size: 16px; line-height: 1.65; }
 .profile-chip{position:relative;z-index:1;background:rgba(234,90,119,.1);border:1px solid rgba(234,90,119,.6);border-radius:999px;padding:8px 13px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:#FF8096;margin-bottom:18px}
 .result-top{display:grid;grid-template-columns:.84fr 1.16fr;gap:18px;margin-top:20px;align-items:stretch}
 .panel{background:#FFFEFC;border:1px solid #D9D2C8;border-radius:20px;padding:clamp(22px,3vw,30px);box-shadow:0 5px 18px rgba(41,39,42,.025)}
-.section-kicker{font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:800;color:#B64A65;margin-bottom:12px;line-height:1.5}
+/* Accessible rose for small uppercase labels: #B64A65 has stronger contrast than the bright accent #EA5A77. */
+.section-kicker{font-size:12px;text-transform:uppercase;letter-spacing:.09em;font-weight:800;color:#B64A65;margin-bottom:12px;line-height:1.5}
 .score-big{font-family:"Archivo Expanded",Archivo,sans-serif;font-size:clamp(48px,5vw,60px);color:#29272A;letter-spacing:-.05em;line-height:1.08;margin:8px 0}
 .score-caption{font-size:14px;color:#716D6D;line-height:1.7}
 .scorebar{height:8px;border-radius:20px;background:#EAE6DF;overflow:hidden;margin:19px 0 10px}
@@ -693,8 +694,8 @@ function wrap(str,x,y,max,fontSize=9,color=body,bold=false,lineH=4.2){
  pdf.text(lines,x,y);return y+lines.length*lineH;
 }
 function section(label,x,y,color=pink){
- draw(color);pdf.setLineWidth(.8);pdf.line(x,y-2.5,x,y+.7);
- pdf.setFont('helvetica','bold');pdf.setFontSize(8.2);text(color);pdf.text(String(label).toUpperCase(),x+4,y);
+ draw(color);pdf.setLineWidth(.8);pdf.line(x,y-2.35,x,y-.05);
+ pdf.setFont('helvetica','bold');pdf.setFontSize(9.1);text(color);pdf.text(String(label).toUpperCase(),x+5,y);
 }
 function pageBg(color=beige){fill(color);pdf.rect(0,0,W,H,'F');}
 function footer(page,dark=false){
@@ -763,13 +764,22 @@ wrap(p.lead,L+6,151,161,8.6,ink,false,3.9);
 // Puntuación global en una tarjeta amplia de lectura inmediata
 box(L,168,174,63,white,[245,213,221],4);
 section('Tu marca tiene un desarrollo de:',L+6,179,forest);
-pdf.setFont('helvetica','bold');pdf.setFontSize(39);text(ink);pdf.text(String(d.global),L+6,202);
-pdf.setFont('helvetica','normal');pdf.setFontSize(10.5);text(muted);pdf.text('/ 100',L+31,200);
+pdf.setFont('helvetica','bold');pdf.setFontSize(39);text(ink);
+const globalScoreText=String(d.global);
+pdf.text(globalScoreText,L+6,202);
+const globalScoreWidth=pdf.getTextWidth(globalScoreText);
+pdf.setFont('helvetica','normal');pdf.setFontSize(10.5);text(muted);
+pdf.text('/ 100',L+6+globalScoreWidth+2.5,200);
 progressBar(L+6,207,162,3.2,d.global,pink);
-box(L+6,216,67,8,palePink,null,4);
-fill(pink);pdf.circle(L+10.8,220,1.1,'F');
-pdf.setFont('helvetica','bold');pdf.setFontSize(7.5);text(pink);pdf.text(scoreLabel(d.global),L+15,222.5);
-pdf.setFont('helvetica','normal');pdf.setFontSize(7.2);text(muted);pdf.text('Puntuación ponderada de las cinco dimensiones.',L+78,222.5);
+const qualifierX=L+6,qualifierY=216,qualifierW=67,qualifierH=8,qualifierText=scoreLabel(d.global);
+box(qualifierX,qualifierY,qualifierW,qualifierH,palePink,null,4);
+pdf.setFont('helvetica','bold');pdf.setFontSize(7.5);text(pink);
+const qualifierTextW=pdf.getTextWidth(qualifierText),qualifierGroupW=2.2+2.2+qualifierTextW;
+const qualifierGroupX=qualifierX+(qualifierW-qualifierGroupW)/2;
+fill(pink);pdf.circle(qualifierGroupX+1.1,qualifierY+4,1.1,'F');
+pdf.text(qualifierText,qualifierGroupX+3.4,qualifierY+5.15);
+pdf.setFont('helvetica','normal');pdf.setFontSize(7.2);text(muted);
+pdf.text('Puntuación ponderada de las cinco dimensiones.',L+78,222.5);
 
 // Datos del informe en dos filas y nota al margen derecho
 draw(pink);pdf.setLineWidth(1);pdf.line(L,247,L,253);
@@ -861,29 +871,27 @@ labels.forEach(it=>{pdf.setFont('helvetica','bold');pdf.setFontSize(7.1);text(fo
 // Panel de lectura: sin subtítulo redundante ni iconos repetidos
 box(15,163,180,72,white,line,4);
 section('Fortalezas y atención',21,175,forest);
-pdf.setFont('helvetica','bold');pdf.setFontSize(9.4);text(green);pdf.text('Fortalezas declaradas',25,189);
 const cleanStrengths=d.strengths.map(cleanInsight);
 const cleanGaps=d.gaps.map(cleanInsight);
-let iy=197;
-const drawList=(items,color,max=3)=>{
+pdf.setFont('helvetica','bold');pdf.setFontSize(9.4);text(green);pdf.text('Fortalezas declaradas',25,189);
+pdf.setFont('helvetica','bold');pdf.setFontSize(9.4);text(pink);pdf.text('Áreas a revisar',112,189);
+const drawColumn=(items,color,x,startY,width,max=3)=>{
+ let y=startY;
  const visible=items.slice(0,max);
  visible.forEach(item=>{
-  draw(color);pdf.setLineWidth(.65);pdf.line(25,iy-1.2,28,iy-1.2);
-  iy=wrap(item,30,iy,158,8.4,body,false,3.8)+1.0;
+  draw(color);pdf.setLineWidth(.65);pdf.line(x,y-1.2,x+3,y-1.2);
+  y=wrap(item,x+6,y,width-6,8.4,body,false,3.8)+2.0;
  });
  if(items.length>max){
   pdf.setFont('helvetica','italic');pdf.setFontSize(7.4);text(muted);
-  pdf.text('Y '+(items.length-max)+' más',30,iy);iy+=4;
+  pdf.text('Y '+(items.length-max)+' más',x+6,y);y+=4;
  }
+ return y;
 };
-if(cleanStrengths.length)drawList(cleanStrengths,green,3);
-else iy=wrap('No se detectan dimensiones especialmente fuertes en esta autoevaluación.',30,iy,158,8.4,body,false,3.8)+1.0;
-
-iy=Math.max(211,iy+2);
-pdf.setFont('helvetica','bold');pdf.setFontSize(9.4);text(pink);pdf.text('Áreas a revisar',25,iy);
-iy+=8;
-if(cleanGaps.length)drawList(cleanGaps,pink,3);
-else drawList(['No aparecen dimensiones especialmente débiles; conviene validar la percepción con materiales reales.'],pink,1);
+if(cleanStrengths.length)drawColumn(cleanStrengths,green,25,198,73,3);
+else drawColumn(['No se detectan dimensiones especialmente fuertes en esta autoevaluación.'],green,25,198,73,1);
+if(cleanGaps.length)drawColumn(cleanGaps,pink,112,198,73,3);
+else drawColumn(['No aparecen dimensiones especialmente débiles; conviene validar la percepción con materiales reales.'],pink,112,198,73,1);
 
 // Lectura breve del mapa en una banda verde pálido
 box(15,240,180,26,paleGreen,[184,225,204],4);
@@ -900,14 +908,14 @@ pdf.addPage();pageBg(beige);
 addBrandStrip(169,12,23);
 pageTitle('03 / Plan de acción','Tus próximos tres pasos','Acciones ordenadas a partir de las dimensiones más débiles y de tus respuestas.');
 const actionY=[55,113,171],cardH=53;
-const actionColors=[pink,gold,green],actionTints=[palePink,[255,245,219],paleGreen];
+const actionColors=[pink,pink,pink],actionTints=[palePink,palePink,palePink];
 const stepNames=['PRIMER PASO','SEGUNDO PASO','TERCER PASO'];
 d.recommendations.forEach((r,i)=>{
  const y=actionY[i],accent=actionColors[i],tint=actionTints[i];
  box(18,y,174,cardH,white,line,4);
- box(24,y+7,12,12,accent,null,3);
- pdf.setFont('helvetica','bold');pdf.setFontSize(10.5);text(cream);pdf.text(String(i+1),30,y+15.2,{align:'center'});
- pdf.setFont('helvetica','bold');pdf.setFontSize(7.8);text(accent);pdf.text(stepNames[i],42,y+9);
+ box(24,y+7,12,12,pink,null,3);
+ pdf.setFont('helvetica','bold');pdf.setFontSize(10.5);text(ink);pdf.text(String(i+1),30,y+15.2,{align:'center'});
+ pdf.setFont('helvetica','bold');pdf.setFontSize(8.4);text([182,74,101]);pdf.text(stepNames[i],42,y+9);
  pdf.setFont('helvetica','bold');pdf.setFontSize(10.4);text(ink);
  const titleLines=pdf.splitTextToSize(r.title,143);pdf.text(titleLines,42,y+15);
  const actionYText=y+15+titleLines.length*4.3+4;
