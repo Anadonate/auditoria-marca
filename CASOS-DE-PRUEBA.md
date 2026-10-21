@@ -93,6 +93,19 @@ Estos escenarios son regresiones mínimas para comprobar que las reglas de perfi
 - [x] El cuestionario y la barra de progreso permanecen ocultos hasta pulsar «Comenzar auditoría».
 - [x] Al terminar, el informe muestra el nombre de la empresa; al reiniciar, se vuelve a la portada y se conserva el nombre introducido.
 
+## Jerarquía del perfil web y cierre de diagnóstico en PDF
+
+- [x] En resultados web, el perfil (por ejemplo, «Marca en construcción») es el H1 en blanco; ya no se concatena el nombre de empresa con el texto descriptivo.
+- [x] El nombre de empresa aparece por separado como metadato «Informe para», y el lead/reason mantienen su propia jerarquía.
+- [x] La tarjeta «Se ha identificado una» y los bloques inferiores de la página 1 del PDF se desplazan 4 mm hacia arriba para reducir el espacio vacío.
+- [x] «/ 100» se posiciona según la anchura real del valor.
+- [x] La pastilla de estado usa una composición alineada a la izquierda; «Puntuación global de las cinco dimensiones» está simplificada, alineada a la derecha y centrada verticalmente con la pastilla.
+- [x] La función `section()` da 10 pt a los encabezados de apartado y mantiene una línea lateral corta.
+- [x] Las fortalezas y todas las áreas a revisar se muestran en dos columnas; no existe truncado con «Y 1 más».
+- [x] En cada una de las tres recomendaciones, «Por qué importa:» se imprime en negrita y la explicación se conserva en peso normal.
+- [x] Prueba de caso «Marca en construcción» con cuatro áreas a revisar: título blanco en web, cuatro áreas visibles en el PDF, cinco páginas A4 y texto sin errores JavaScript.
+- [x] Prueba de caso «Marca desalineada»: PDF completo, cinco pies de página con copyright/numeración, tres etiquetas «Por qué importa» y sin desbordamiento móvil.
+
 ## Ajustes de iconografía y composición según SVG originales
 
 - [x] Se incorporan los tres archivos originales en `assets/iconos-auditoria.svg`, `assets/flor.svg` y `assets/linea.svg`.
