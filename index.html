@@ -446,6 +446,8 @@ body{background:#F5F0E8!important}
 .result-hero .result-company{position:relative;z-index:1;color:#D4CDD1;font-size:13px;font-weight:700;line-height:1.4;margin:0 0 9px;max-width:700px}
 .result-hero .profile-lead{color:#FFFEFC!important;font-size:19px!important;font-weight:600;line-height:1.5;max-width:720px;margin:0 0 10px}
 .result-hero .profile-reason{color:#D4CDD1!important;font-size:14px!important;line-height:1.6;max-width:690px;margin:0}
+.result-hero .profile-chip{display:inline-flex;align-items:center;border:1px solid #EA5A77!important;border-radius:999px;background:rgba(234,90,119,.08);color:#FF8096;padding:8px 14px;margin:0 0 18px}
+.score-big span{display:inline-block;margin-left:8px;letter-spacing:0;vertical-align:baseline;font-weight:400}
 </style>
 </head>
 <body>
@@ -786,7 +788,7 @@ const qualifierGroupX=qualifierX+5;
 fill(pink);pdf.circle(qualifierGroupX+1.1,qualifierY+4,1.1,'F');
 pdf.text(qualifierText,qualifierGroupX+3.4,qualifierY+5.15);
 pdf.setFont('helvetica','normal');pdf.setFontSize(7.2);text(muted);
-pdf.text('Puntuación global de las cinco dimensiones.',R,217.7,{align:'right'});
+pdf.text('Puntuación global',116,217.15);
 
 // Datos del informe en dos filas y nota al margen derecho
 draw(pink);pdf.setLineWidth(1);pdf.line(L,243,L,249);
@@ -794,7 +796,7 @@ draw(gold);pdf.line(L,254,L,260);
 pdf.setFont('helvetica','normal');pdf.setFontSize(7.4);text([216,211,208]);pdf.text('Informe para:',L+3,247);
 pdf.setFont('helvetica','bold');pdf.setFontSize(9.3);text(cream);pdf.text(pdf.splitTextToSize(company,67),L+22,247);
 pdf.setFont('helvetica','normal');pdf.setFontSize(7.4);text([216,211,208]);pdf.text('Fecha:',L+3,258);
-pdf.setFont('helvetica','normal');pdf.setFontSize(8.4);text(cream);pdf.text(date,L+16,262);
+pdf.setFont('helvetica','normal');pdf.setFontSize(8.4);text(cream);pdf.text(date,L+16,258);
 wrap('Resultado basado en las respuestas declaradas; no es una auditoría visual directa.',123,251,69,7.4,[199,193,198],false,3.5);
 footer(1,true);
 fill(pink);pdf.rect(0,293,W,4,'F');fill(gold);pdf.rect(153,293,57,4,'F');
@@ -919,7 +921,7 @@ d.recommendations.forEach((r,i)=>{
  box(18,y,174,cardH,white,line,4);
  box(24,y+7,12,12,pink,null,3);
  pdf.setFont('helvetica','bold');pdf.setFontSize(10.5);text(ink);pdf.text(String(i+1),30,y+15.2,{align:'center'});
- pdf.setFont('helvetica','bold');pdf.setFontSize(8.4);text([182,74,101]);pdf.text(stepNames[i],42,y+9);
+ pdf.setFont('helvetica','bold');pdf.setFontSize(8.4);text(pink);pdf.text(stepNames[i],42,y+9);
  pdf.setFont('helvetica','bold');pdf.setFontSize(10.4);text(ink);
  const titleLines=pdf.splitTextToSize(r.title,143);pdf.text(titleLines,42,y+15);
  const actionYText=y+15+titleLines.length*4.3+4;
