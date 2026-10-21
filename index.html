@@ -439,6 +439,13 @@ body{background:#F5F0E8!important}
 .intro-mark{opacity:.22}
 .intro-mark img{display:block;width:46px;height:46px;object-fit:contain}
 @media(max-width:720px){.intro-mark{display:none}}
+
+/* Final hierarchy: make the diagnosis profile the main heading, not concatenated company/lead text. */
+.result-hero h1{color:#FFFEFC!important;font-size:clamp(36px,4.8vw,52px);line-height:1.08;max-width:760px;margin:0 0 12px}
+.result-hero .result-hero-brand{margin-bottom:20px}
+.result-hero .result-company{position:relative;z-index:1;color:#D4CDD1;font-size:13px;font-weight:700;line-height:1.4;margin:0 0 9px;max-width:700px}
+.result-hero .profile-lead{color:#FFFEFC!important;font-size:19px!important;font-weight:600;line-height:1.5;max-width:720px;margin:0 0 10px}
+.result-hero .profile-reason{color:#D4CDD1!important;font-size:14px!important;line-height:1.6;max-width:690px;margin:0}
 </style>
 </head>
 <body>
@@ -657,7 +664,7 @@ const p=d.profile;
 const cleanInsight=value=>String(value).replace(/\s*\(\d+\/100\)/g,'').trim();
 const iconRow=brandIconSvg('flower')+brandIconSvg('target')+brandIconSvg('cursor');
 const company=d.company?'<span style="color:#EA5A77">'+escapeHTML(d.company)+'</span>, ':'';
-let html='<div class="result-hero"><div class="result-watermark">'+brandIconSvg('flower')+'</div><div class="result-hero-brand"><span class="result-eyebrow">Informe personalizado · Ana Donate</span><div class="result-brand-icons">'+iconRow+'</div></div><span class="profile-chip">'+escapeHTML(p.name)+'</span><h1 tabindex="-1">'+company+escapeHTML(p.lead)+'</h1><p>'+escapeHTML(d.reason)+'</p></div>';
+let html='<div class="result-hero"><div class="result-watermark">'+brandIconSvg('flower')+'</div><div class="result-hero-brand"><span class="result-eyebrow">Informe personalizado · Ana Donate</span><div class="result-brand-icons">'+iconRow+'</div></div><p class="result-company">Informe para: '+(d.company?escapeHTML(d.company):'tu empresa')+'</p><h1 tabindex="-1">'+escapeHTML(p.name)+'</h1><p class="profile-lead">'+escapeHTML(p.lead)+'</p><p class="profile-reason">'+escapeHTML(d.reason)+'</p></div>';
 html+='<div class="result-top"><section class="panel score-panel"><div class="section-kicker">Índice de desarrollo de marca</div><div class="score-big">'+d.global+'<span style="font-size:22px">/100</span></div><div class="score-caption">Puntuación ponderada, ajustada para que una dimensión crítica no quede oculta por la media.</div><div class="scorebar"><span style="width:'+d.global+'%"></span></div><div class="score-qualifier">'+scoreLabel(d.global)+'</div><p class="smallnote">Resultado orientativo basado en tus respuestas; no es una auditoría visual directa.</p></section>';
 html+='<section class="panel dimensions-panel"><div class="section-kicker">Las cinco dimensiones</div><h2>Estado de tu marca</h2>';
 dimensionDefs.forEach(def=>{const n=d.dimensions[def.id];const barColor=n<40?'#EA5A77':n<70?'#D2A158':'#46B382';html+='<div class="dim-row"><div class="dim-head"><span>'+escapeHTML(def.label)+'</span><span>'+n+'/100 · '+levelLabel(n)+'</span></div><div class="dim-bar"><span style="width:'+n+'%;background:'+barColor+'"></span></div></div>';});
@@ -694,8 +701,8 @@ function wrap(str,x,y,max,fontSize=9,color=body,bold=false,lineH=4.2){
  pdf.text(lines,x,y);return y+lines.length*lineH;
 }
 function section(label,x,y,color=pink){
- draw(color);pdf.setLineWidth(.8);pdf.line(x,y-2.35,x,y-.05);
- pdf.setFont('helvetica','bold');pdf.setFontSize(9.1);text(color);pdf.text(String(label).toUpperCase(),x+5,y);
+ draw(color);pdf.setLineWidth(.8);pdf.line(x,y-2.85,x,y-.55);
+ pdf.setFont('helvetica','bold');pdf.setFontSize(10.0);text(color);pdf.text(String(label).toUpperCase(),x+5,y);
 }
 function pageBg(color=beige){fill(color);pdf.rect(0,0,W,H,'F');}
 function footer(page,dark=false){
@@ -754,41 +761,41 @@ pdf.setFont('helvetica','bold');pdf.setFontSize(28);text(cream);pdf.text('Audito
 wrap('Un diagnóstico orientativo para entender tu punto de partida y priorizar mejoras de identidad visual.',L+5,91,142,9.8,[216,211,208],false,4.5);
 
 // Perfil identificado · tarjeta rosa pálido con etiqueta corporativa protagonista
-box(L,105,174,56,palePink,[245,213,221],4);
-section('Se ha identificado una:',L+6,115,forest);
-box(L+6,126,90,18,pink,null,9);
+box(L,101,174,56,palePink,[245,213,221],4);
+section('Se ha identificado una:',L+6,111,forest);
+box(L+6,122,90,18,pink,null,9);
 pdf.setFont('helvetica','bold');pdf.setFontSize(14.2);text(cream);
-pdf.text(pdf.splitTextToSize(p.name.toUpperCase(),104),L+12,137.5);
-wrap(p.lead,L+6,151,161,8.6,ink,false,3.9);
+pdf.text(pdf.splitTextToSize(p.name.toUpperCase(),104),L+12,133.5);
+wrap(p.lead,L+6,147,161,8.6,ink,false,3.9);
 
 // Puntuación global en una tarjeta amplia de lectura inmediata
-box(L,168,174,63,white,[245,213,221],4);
-section('Tu marca tiene un desarrollo de:',L+6,179,forest);
+box(L,164,174,63,white,[245,213,221],4);
+section('Tu marca tiene un desarrollo de:',L+6,175,forest);
 pdf.setFont('helvetica','bold');pdf.setFontSize(39);text(ink);
 const globalScoreText=String(d.global);
-pdf.text(globalScoreText,L+6,202);
+pdf.text(globalScoreText,L+6,198);
 const globalScoreWidth=pdf.getTextWidth(globalScoreText);
 pdf.setFont('helvetica','normal');pdf.setFontSize(10.5);text(muted);
-pdf.text('/ 100',L+6+globalScoreWidth+2.5,200);
-progressBar(L+6,207,162,3.2,d.global,pink);
-const qualifierX=L+6,qualifierY=216,qualifierW=67,qualifierH=8,qualifierText=scoreLabel(d.global);
+pdf.text('/ 100',L+6+globalScoreWidth+2.5,196);
+progressBar(L+6,203,162,3.2,d.global,pink);
+const qualifierX=L+6,qualifierY=212,qualifierW=84,qualifierH=8,qualifierText=scoreLabel(d.global);
 box(qualifierX,qualifierY,qualifierW,qualifierH,palePink,null,4);
 pdf.setFont('helvetica','bold');pdf.setFontSize(7.5);text(pink);
 const qualifierTextW=pdf.getTextWidth(qualifierText),qualifierGroupW=2.2+2.2+qualifierTextW;
-const qualifierGroupX=qualifierX+(qualifierW-qualifierGroupW)/2;
+const qualifierGroupX=qualifierX+5;
 fill(pink);pdf.circle(qualifierGroupX+1.1,qualifierY+4,1.1,'F');
 pdf.text(qualifierText,qualifierGroupX+3.4,qualifierY+5.15);
 pdf.setFont('helvetica','normal');pdf.setFontSize(7.2);text(muted);
-pdf.text('Puntuación ponderada de las cinco dimensiones.',L+78,222.5);
+pdf.text('Puntuación global de las cinco dimensiones.',R,217.7,{align:'right'});
 
 // Datos del informe en dos filas y nota al margen derecho
-draw(pink);pdf.setLineWidth(1);pdf.line(L,247,L,253);
-draw(gold);pdf.line(L,258,L,264);
-pdf.setFont('helvetica','normal');pdf.setFontSize(7.4);text([216,211,208]);pdf.text('Informe para:',L+3,251);
-pdf.setFont('helvetica','bold');pdf.setFontSize(9.3);text(cream);pdf.text(pdf.splitTextToSize(company,67),L+22,251);
-pdf.setFont('helvetica','normal');pdf.setFontSize(7.4);text([216,211,208]);pdf.text('Fecha:',L+3,262);
+draw(pink);pdf.setLineWidth(1);pdf.line(L,243,L,249);
+draw(gold);pdf.line(L,254,L,260);
+pdf.setFont('helvetica','normal');pdf.setFontSize(7.4);text([216,211,208]);pdf.text('Informe para:',L+3,247);
+pdf.setFont('helvetica','bold');pdf.setFontSize(9.3);text(cream);pdf.text(pdf.splitTextToSize(company,67),L+22,247);
+pdf.setFont('helvetica','normal');pdf.setFontSize(7.4);text([216,211,208]);pdf.text('Fecha:',L+3,258);
 pdf.setFont('helvetica','normal');pdf.setFontSize(8.4);text(cream);pdf.text(date,L+16,262);
-wrap('Resultado basado en las respuestas declaradas; no es una auditoría visual directa.',123,255,69,7.4,[199,193,198],false,3.5);
+wrap('Resultado basado en las respuestas declaradas; no es una auditoría visual directa.',123,251,69,7.4,[199,193,198],false,3.5);
 footer(1,true);
 fill(pink);pdf.rect(0,293,W,4,'F');fill(gold);pdf.rect(153,293,57,4,'F');
 
@@ -875,23 +882,20 @@ const cleanStrengths=d.strengths.map(cleanInsight);
 const cleanGaps=d.gaps.map(cleanInsight);
 pdf.setFont('helvetica','bold');pdf.setFontSize(9.4);text(green);pdf.text('Fortalezas declaradas',25,189);
 pdf.setFont('helvetica','bold');pdf.setFontSize(9.4);text(pink);pdf.text('Áreas a revisar',112,189);
-const drawColumn=(items,color,x,startY,width,max=3)=>{
+const drawColumn=(items,color,x,startY,width)=>{
  let y=startY;
- const visible=items.slice(0,max);
- visible.forEach(item=>{
+ const compact=items.length>=4,fontSize=compact?7.9:8.4,lineH=compact?3.4:3.8,gap=compact?1.1:2.0;
+ // Nunca ocultar áreas a revisar: compactar tipografía y separación si hay cuatro o más elementos.
+ items.forEach(item=>{
   draw(color);pdf.setLineWidth(.65);pdf.line(x,y-1.2,x+3,y-1.2);
-  y=wrap(item,x+6,y,width-6,8.4,body,false,3.8)+2.0;
+  y=wrap(item,x+6,y,width-6,fontSize,body,false,lineH)+gap;
  });
- if(items.length>max){
-  pdf.setFont('helvetica','italic');pdf.setFontSize(7.4);text(muted);
-  pdf.text('Y '+(items.length-max)+' más',x+6,y);y+=4;
- }
  return y;
 };
-if(cleanStrengths.length)drawColumn(cleanStrengths,green,25,198,73,3);
-else drawColumn(['No se detectan dimensiones especialmente fuertes en esta autoevaluación.'],green,25,198,73,1);
-if(cleanGaps.length)drawColumn(cleanGaps,pink,112,198,73,3);
-else drawColumn(['No aparecen dimensiones especialmente débiles; conviene validar la percepción con materiales reales.'],pink,112,198,73,1);
+if(cleanStrengths.length)drawColumn(cleanStrengths,green,25,198,73);
+else drawColumn(['No se detectan dimensiones especialmente fuertes en esta autoevaluación.'],green,25,198,73);
+if(cleanGaps.length)drawColumn(cleanGaps,pink,112,198,73);
+else drawColumn(['No aparecen dimensiones especialmente débiles; conviene validar la percepción con materiales reales.'],pink,112,198,73);
 
 // Lectura breve del mapa en una banda verde pálido
 box(15,240,180,26,paleGreen,[184,225,204],4);
@@ -921,13 +925,18 @@ d.recommendations.forEach((r,i)=>{
  const actionYText=y+15+titleLines.length*4.3+4;
  const actionLines=pdf.splitTextToSize(r.action,143);
  pdf.setFont('helvetica','normal');pdf.setFontSize(8.6);text(body);pdf.text(actionLines,42,actionYText);
- const whyText='Por qué importa: '+r.why;
+ const whyLabel='Por qué importa:',whyBody=String(r.why||'');
+ pdf.setFont('helvetica','bold');pdf.setFontSize(7.7);text(body);
+ const whyLabelWidth=pdf.getTextWidth(whyLabel+' ');
  pdf.setFont('helvetica','normal');pdf.setFontSize(7.7);
- const whyLines=pdf.splitTextToSize(whyText,137);
+ const whyFirstLines=pdf.splitTextToSize(whyBody,137-whyLabelWidth);
  const whyY=actionYText+actionLines.length*3.8+2.5;
- const whyH=Math.min(12,Math.max(7.5,whyLines.length*3.5+2.3));
+ const whyLineCount=Math.max(1,whyFirstLines.length);
+ const whyH=Math.max(7.5,whyLineCount*3.5+2.3);
  box(42,whyY-2.4,143,whyH,tint,null,2);
- text(body);pdf.text(whyLines,45,whyY+1);
+ pdf.setFont('helvetica','bold');pdf.setFontSize(7.7);text(body);pdf.text(whyLabel,45,whyY+1);
+ pdf.setFont('helvetica','normal');pdf.setFontSize(7.7);text(body);
+ if(whyFirstLines.length){pdf.text(whyFirstLines[0],45+whyLabelWidth,whyY+1);if(whyFirstLines.length>1)pdf.text(whyFirstLines.slice(1),45,whyY+1+3.5);}
 });
 box(18,239,174,27,forest,null,4);
 pdf.setFont('helvetica','bold');pdf.setFontSize(7.8);text(gold);pdf.text('LA PRIORIDAD QUE HAS SEÑALADO',105,248.5,{align:'center'});
