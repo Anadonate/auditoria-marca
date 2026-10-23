@@ -1084,6 +1084,8 @@ pdf.text(pdf.splitTextToSize(closingText,136),105,248,{align:'center'});
 addSplitLine(15,269-(180*(8.04/680.31)),180);
 footer(5);
 const fileCompany=(company.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'mi-marca');
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({event: 'pdf_download', pdf_name: 'informe-auditoria-marca'});
 pdf.save('informe-auditoria-marca-'+fileCompany+'.pdf');
 }catch(e){console.error(e);alert('No se pudo generar el PDF. Inténtalo de nuevo; si persiste, recarga la página.');}
 finally{btn.disabled=false;btn.textContent=old;}
