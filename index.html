@@ -779,6 +779,8 @@ html+='</section>';
 html+='<div class="cta"><div><div class="section-kicker">Siguiente paso</div><h2>Convierte el diagnóstico en decisiones de marca.</h2><p>Contrasta estas prioridades con la identidad visual, los materiales reales y los objetivos actuales de tu empresa antes de decidir qué cambiar.</p></div><button class="btn btn-copper" id="pdfBtn">Descargar informe PDF <span aria-hidden="true">→</span></button></div>';
 html+='<p class="disclaimer">Este resultado es orientativo y se basa exclusivamente en tus respuestas. No sustituye una auditoría de identidad visual, investigación de público ni análisis competitivo. Las conclusiones deberían validarse con los materiales reales de la empresa.</p><div class="restart"><button class="btn btn-quiet" id="restartBtn">Volver a realizar el cuestionario</button></div>';
 document.getElementById('results').innerHTML=html;
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({event: 'diagnostico_completado'});
 document.getElementById('pdfBtn').addEventListener('click',downloadPDF);
 document.getElementById('restartBtn').addEventListener('click',restart);
 }
